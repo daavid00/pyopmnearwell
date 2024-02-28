@@ -6,14 +6,16 @@ Script to plot OPM Flow results
 """
 
 import argparse
-import os
 import csv
-import numpy as np
+import os
+
 import matplotlib
 import matplotlib.pyplot as plt
+import numpy as np
 from scipy.interpolate import interp1d
-from pyopmnearwell.visualization.reading import read_simulations
+
 from pyopmnearwell.visualization.additional_plots import final_time_maps
+from pyopmnearwell.visualization.reading import read_simulations
 
 font = {"family": "normal", "weight": "normal", "size": 16}
 matplotlib.rc("font", **font)

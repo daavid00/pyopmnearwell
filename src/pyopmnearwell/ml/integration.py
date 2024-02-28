@@ -15,7 +15,6 @@ from typing import Any, Literal, Optional
 
 from mako import exceptions
 from mako.template import Template
-
 from pyopmnearwell.utils.mako import fill_template
 
 logging.basicConfig(level=logging.INFO)
@@ -28,9 +27,17 @@ def recompile_flow(
     scalingsfile: pathlib.Path,
     opm_path: pathlib.Path,
     StandardWell_impl_template: Literal[
-        "co2_3_inputs", "co2_5_inputs", "h2o_2_inputs", "co2_local_stencil"
+        "co2_3_inputs",
+        "co2_5_inputs",
+        "h2o_2_inputs",
+        "co2_local_stencil",
+        "example_1_h2o",
     ],
-    StandardWell_template: Literal["base", "local_stencil"] = "base",
+    StandardWell_template: Literal[
+        "base",
+        "local_stencil",
+        "example_1_h2o",
+    ] = "base",
     stencil_size: int = 3,
     local_feature_names: Optional[list[str]] = None,
 ) -> None:

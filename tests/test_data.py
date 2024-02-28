@@ -6,6 +6,8 @@ import pytest
 
 from pyopmnearwell.ml.data import BaseDataset
 
+rng: np.random.Generator = np.random.default_rng()
+
 
 @pytest.fixture
 def base_dataset():
@@ -14,10 +16,10 @@ def base_dataset():
 
 @pytest.fixture(
     params=[
-        np.random.rand(10, 20, 30, 40, 5),
-        np.random.rand(5, 1, 15, 20, 5),
-        np.random.rand(5, 10, 15, 1, 5),
-        np.random.rand(3, 1, 15, 1, 20),
+        rng.random((10, 20, 30, 40, 5)),
+        rng.random((5, 1, 15, 20, 5)),
+        rng.random((5, 10, 15, 1, 5)),
+        rng.random((3, 1, 15, 1, 20)),
     ]
 )
 def feature(request) -> np.ndarray:
@@ -42,7 +44,7 @@ def test_reduce_data_size(
 
 
 def test_get_vertically_averaged_values(base_dataset: BaseDataset):
-    features = np.random.rand(10, 20, 30, 40, 5)
+    features = rng.random((10, 20, 30, 40, 5))
     feature_index = 2
     averaged_values = base_dataset.get_vertically_averaged_values(
         features, feature_index
@@ -69,7 +71,7 @@ def test_get_timesteps(base_dataset):
 
 
 def test_get_horizontically_integrated_values(base_dataset: BaseDataset):
-    features = np.random.rand(10, 20, 30, 40, 5)
+    features = rng.random((10, 20, 30, 40, 5))
     radii_file = Path("path/to/radii_file.txt")
     cell_center_radii, cell_boundary_radii = base_dataset.get_radii(radii_file)
     feature_index = 2
@@ -80,19 +82,19 @@ def test_get_horizontically_integrated_values(base_dataset: BaseDataset):
 
 
 def test_get_homogeneous_values(base_dataset: BaseDataset):
-    features = np.random.rand(10, 20, 30, 40, 5)
+    features = rng.random((10, 20, 30, 40, 5))
     feature_index = 2
     homogeneous_values = base_dataset.get_homogeneous_values(features, feature_index)
     assert homogeneous_values.shape == (10, 20, 30, 1)
 
 
 def test_get_analytical_WI(base_dataset: BaseDataset):
-    pressures = np.random.rand(10, 20, 30, 40)
-    saturations = np.random.rand(10, 20, 30, 40)
-    permeabilities = np.random.rand(10, 20, 30, 40)
+    pressures = rng.random((10, 20, 30, 40))
+    saturations = rng.random((10, 20, 30, 40))
+    permeabilities = rng.random((10, 20, 30, 40))
     temperature = 300.0
     surface_density = 0.1
-    radii = np.random.rand(40)
+    radii = rng.random((40))
     OPM = Path("path/to/OPM.txt")
     analytical_WI = base_dataset.get_analytical_WI(
         pressures,
@@ -101,14 +103,15 @@ def test_get_analytical_WI(base_dataset: BaseDataset):
         temperature,
         surface_density,
         radii,
-        OPM,
+        well_radius=0.1,
+        OPM=OPM,
     )
     assert analytical_WI.shape == (10, 20, 30, 40)
 
 
 def test_get_data_WI(base_dataset: BaseDataset):
-    features = np.random.rand(10, 20, 30, 40, 5)
-    pressures = np.random.rand(10, 20, 30, 40)
+    features = rng.random((10, 20, 30, 40, 5))
+    pressures = rng.random((10, 20, 30, 40))
     pressure_index = 2
     inj_rate_index = 3
     angle = math.pi / 3

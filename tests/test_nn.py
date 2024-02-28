@@ -15,6 +15,8 @@ from tensorflow import keras
 from pyopmnearwell.ml.ensemble import store_dataset
 from pyopmnearwell.ml.nn import scale_and_evaluate, scale_and_prepare_dataset
 
+rng: np.random.Generator = np.random.default_rng()
+
 
 @pytest.fixture
 def identity_nn() -> keras.Model:
@@ -78,6 +80,7 @@ def write_scalings(
     return dirname
 
 
+# TODO: Add tests with multidimensional input and output.
 def test_scale_and_evaluate(
     identity_nn: keras.Model,
     feature_batch: tf.Tensor,
@@ -128,8 +131,8 @@ def feature_names(request) -> list[str]:
 def data(request, feature_names: list[str]) -> tuple[np.ndarray, np.ndarray]:
     """Create data with sorted targets. This allows for comparing the different shuffle
     options."""
-    features: np.ndarray = np.random.rand(request.param, len(feature_names))
-    targets: np.ndarray = np.sort(np.random.rand(request.param, 1), axis=0)
+    features: np.ndarray = rng.random((request.param, len(feature_names)))
+    targets: np.ndarray = np.sort(rng.random((request.param, 1)), axis=0)
     return features, targets
 
 
@@ -148,6 +151,8 @@ def target_scaler(data: tuple[np.ndarray, np.ndarray]) -> MinMaxScaler:
     return scaler
 
 
+# TODO: Add tests with multidimensional input and output. Make sure this works correctly
+# with all shuffling.
 @pytest.mark.parametrize("shuffle", ["first", "last", "false"])
 def test_scale_and_prepare_dataset(
     shuffle: Literal["first", "last", "false"],

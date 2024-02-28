@@ -32,8 +32,7 @@ def get_FCNN(
     kernel_initializer: Literal["glorot_normal", "glorot_uniform"] = "glorot_normal",
     normalization: bool = False,
 ) -> keras.Model:
-    """
-    Returns a fully connected neural network with the specified architecture.
+    """Return a fully connected neural network with the specified architecture.
 
     Args:
         ninputs (int): Number of inputs to the model.
@@ -72,6 +71,153 @@ def get_FCNN(
     return model
 
 
+def get_RNN(
+    ninputs: int,
+    noutputs: int,
+    units: int = 20,
+    saved_model: Optional[str] = None,
+    activation: Literal["sigmoid", "relu", "tanh"] = "tanh",
+    kernel_initializer: Literal["glorot_normal", "glorot_uniform"] = "glorot_uniform",
+) -> keras.Model:
+    """Return a recurrent neural network with the specified architecture.
+
+    Args:
+        ninputs (int): Number of inputs to the model.
+        noutputs (int): Number of outputs from the model.
+        units (int, optional): Size of internal model state. Defaults to 20.
+        hidden_dim (int, optional): Number of neurons in each hidden layer. Defaults to
+            10.
+        saved_model (str, optional): Path to a saved model to load weights from.
+            Defaults to None.
+        activation (Literal["sigmoid", "relu", "tanh"], optional): Activation function
+            to use in the hidden layers. Defaults to "sigmoid".
+        kernel_initializer (Literal["glorot_normal", "glorot_uniform"], optional):
+            Weight initialization method to use in the hidden layers. Defaults to
+            "glorot_normal".
+
+    Returns:
+        keras.Model: A fully connected neural network.
+
+    """
+    model: keras.Model = keras.Sequential()
+    # RNN as model head.
+    model.add(
+        keras.layers.SimpleRNN(
+            units,
+            input_shape=(None, ninputs),
+            return_sequences=True,
+            activation=activation,
+            kernel_initializer=kernel_initializer,
+        )
+    )
+    # FCNN to as model tail.
+    model.add(keras.layers.TimeDistributed(keras.layers.Dense(10, activation="relu")))
+    model.add(keras.layers.TimeDistributed(keras.layers.Dense(10, activation="relu")))
+    model.add(keras.layers.TimeDistributed(keras.layers.Dense(10, activation="relu")))
+    model.add(keras.layers.Dense(noutputs))
+    if saved_model is not None:
+        model.load_weights(saved_model)
+    return model
+
+
+def get_GRU(
+    ninputs: int,
+    noutputs: int,
+    units: int = 20,
+    saved_model: Optional[str] = None,
+    activation: Literal["sigmoid", "relu", "tanh"] = "tanh",
+    kernel_initializer: Literal["glorot_normal", "glorot_uniform"] = "glorot_uniform",
+) -> keras.Model:
+    """Return a recurrent neural network with the specified architecture.
+
+    Args:
+        ninputs (int): Number of inputs to the model.
+        noutputs (int): Number of outputs from the model.
+        units (int, optional): Size of internal model state. Defaults to 20.
+        hidden_dim (int, optional): Number of neurons in each hidden layer. Defaults to
+            10.
+        saved_model (str, optional): Path to a saved model to load weights from.
+            Defaults to None.
+        activation (Literal["sigmoid", "relu", "tanh"], optional): Activation function
+            to use in the hidden layers. Defaults to "sigmoid".
+        kernel_initializer (Literal["glorot_normal", "glorot_uniform"], optional):
+            Weight initialization method to use in the hidden layers. Defaults to
+            "glorot_normal".
+
+    Returns:
+        keras.Model: A fully connected neural network.
+
+    """
+    model: keras.Model = keras.Sequential()
+    # RNN as model head.
+    model.add(
+        keras.layers.GRU(
+            units,
+            input_shape=(None, ninputs),
+            return_sequences=True,
+            activation=activation,
+            kernel_initializer=kernel_initializer,
+        )
+    )
+    # FCNN to as model tail.
+    model.add(keras.layers.TimeDistributed(keras.layers.Dense(10, activation="relu")))
+    model.add(keras.layers.TimeDistributed(keras.layers.Dense(10, activation="relu")))
+    model.add(keras.layers.TimeDistributed(keras.layers.Dense(10, activation="relu")))
+    model.add(keras.layers.Dense(noutputs))
+    if saved_model is not None:
+        model.load_weights(saved_model)
+    return model
+
+
+def get_LSTM(
+    ninputs: int,
+    noutputs: int,
+    units: int = 20,
+    saved_model: Optional[str] = None,
+    activation: Literal["sigmoid", "relu", "tanh"] = "tanh",
+    kernel_initializer: Literal["glorot_normal", "glorot_uniform"] = "glorot_uniform",
+) -> keras.Model:
+    """Return a recurrent neural network with the specified architecture.
+
+    Args:
+        ninputs (int): Number of inputs to the model.
+        noutputs (int): Number of outputs from the model.
+        units (int, optional): Size of internal model state. Defaults to 20.
+        hidden_dim (int, optional): Number of neurons in each hidden layer. Defaults to
+            10.
+        saved_model (str, optional): Path to a saved model to load weights from.
+            Defaults to None.
+        activation (Literal["sigmoid", "relu", "tanh"], optional): Activation function
+            to use in the hidden layers. Defaults to "sigmoid".
+        kernel_initializer (Literal["glorot_normal", "glorot_uniform"], optional):
+            Weight initialization method to use in the hidden layers. Defaults to
+            "glorot_normal".
+
+    Returns:
+        keras.Model: A fully connected neural network.
+
+    """
+    model: keras.Model = keras.Sequential()
+    # RNN as model head.
+    model.add(
+        keras.layers.LSTM(
+            units,
+            input_shape=(None, ninputs),
+            return_sequences=True,
+            activation=activation,
+            kernel_initializer=kernel_initializer,
+        )
+    )
+    # FCNN to as model tail.
+    model.add(keras.layers.TimeDistributed(keras.layers.Dense(10, activation="relu")))
+    model.add(keras.layers.TimeDistributed(keras.layers.Dense(10, activation="relu")))
+    model.add(keras.layers.TimeDistributed(keras.layers.Dense(10, activation="relu")))
+    model.add(keras.layers.Dense(noutputs))
+    if saved_model is not None:
+        model.load_weights(saved_model)
+    return model
+
+
 def scale_and_prepare_dataset(
     dsfile: str | pathlib.Path,
     feature_names: list[str],
@@ -79,8 +225,6 @@ def scale_and_prepare_dataset(
     train_split: float = 0.9,
     val_split: Optional[float] = 0.1,
     test_split: Optional[float] = None,
-    conv_input: bool = False,
-    conv_output: bool = False,
     shuffle: Literal["first", "last", "false"] = "first",
     feature_range: tuple[float, float] = (-1, 1),
     target_range: tuple[float, float] = (-1, 1),
@@ -103,10 +247,6 @@ def scale_and_prepare_dataset(
         train_split (float, optional): Train split. Defaults to 0.9.
         val_split (float, optional): Val split. Defaults to 0.1.
         test_split (float, optional): Test split. Defaults to None.
-        conv_input (bool, optional): Whether the input is for a convolutional neural
-            network. Defaults to False.
-        conv_output (bool, optional): Whether the output is for a convolutional neural
-            network. Defaults to False.
         shuffle (Literal["first", "last", "false"], optional): Options for shuffling the
             dataset:
             - "first": The dataset gets shuffled before the split.
@@ -136,12 +276,12 @@ def scale_and_prepare_dataset(
     ds: tf.data.Dataset = tf.data.Dataset.load(str(dsfile))
     features, targets = next(iter(ds.batch(batch_size=len(ds)).as_numpy_iterator()))
 
-    # Reshape features and targets for multidimensional input and output (e.g., for
-    # CNNs).
-    if conv_input:
-        features = features.reshape((-1, features.shape[-1]))
-    if conv_output:
-        targets = targets.reshape((-1, targets.shape[-1]))
+    # Save feature and targets shape, e.g., for multidimensional data.
+    features_shape: tuple = features.shape
+    targets_shape: tuple = targets.shape
+    # Reshape to one-dimensional data for the scalers to work.
+    features = features.reshape(-1, features.shape[-1])
+    targets = targets.reshape(-1, targets.shape[-1])
 
     if len(feature_names) > features.shape[-1]:
         raise ValueError("Too many feature names.")
@@ -284,6 +424,12 @@ def scale_and_prepare_dataset(
             (1, train_targets.shape[-1])
         )
 
+    # Reshape to one-dimensional data.
+    train_features = train_features.reshape(-1, features_shape[-1])
+    train_targets = train_targets.reshape(-1, targets_shape[-1])
+    val_features = val_features.reshape(-1, features_shape[-1])
+    val_targets = val_targets.reshape(-1, targets_shape[-1])
+
     # Scale the features and targets.
     logger.info("Scaling data")
     train_features = feature_scaler.transform(train_features)
@@ -291,14 +437,27 @@ def scale_and_prepare_dataset(
     val_features = feature_scaler.transform(val_features)
     val_targets = target_scaler.transform(val_targets)
 
+    # Reshape to original shape
+    train_features = train_features.reshape(-1, *features_shape[1:])
+    train_targets = train_targets.reshape(-1, *targets_shape[1:])
+    val_features = val_features.reshape(-1, *features_shape[1:])
+    val_targets = val_targets.reshape(-1, *targets_shape[1:])
+
     # Only return test ds if ``test_split > 0``.
     # Ignore mypy complaining that ``test_split`` can be None.
     if test_split > 0:  # type: ignore
         test_features, test_targets = next(
             iter(test_ds.batch(batch_size=len(test_ds)).as_numpy_iterator())
         )
+        test_features = test_features.reshape(-1, features_shape[-1])
+        test_targets = test_targets.reshape(-1, targets_shape[-1])
+
         test_features = feature_scaler.transform(test_features)
         test_targets = target_scaler.transform(test_targets)
+
+        test_features = test_features.reshape(-1, *features_shape[1:])
+        test_targets = test_targets.reshape(-1, *targets_shape[1:])
+
         return (
             (train_features, train_targets),
             (val_features, val_targets),
@@ -323,7 +482,7 @@ def train(
         "mse", "MeanAbsolutePercentageError", "MeanSquaredLogarithmicError"
     ] = "mse",
     recompile_model: bool = True,
-    **train_kwargs,
+    **kwargs,
 ) -> None:
     """Train a tensorflow model on the provided training data and save the best model.
 
@@ -346,8 +505,7 @@ def train(
         recompile_model (bool, optional): Whether to recompile the model before
             training. Can e.g., be set to false, if the model is built and compiled by a
             different function. Defaults to True.
-        **train_kwargs: Additional keyword arguments to be passed to the ``model.fit()``
-            method.
+        **kwargs: Get passed to the ``model.fit()`` method.
 
     Returns:
         None
@@ -412,7 +570,7 @@ def train(
             early_stopping_callback,
             tensorboard_callback,
         ],
-        **train_kwargs,
+        **kwargs,
     )
     model.save_weights(savepath / "finalmodel")
 
@@ -473,10 +631,12 @@ def tune(
     noutputs: int,
     train_data: tuple[tf.Tensor, tf.Tensor],
     val_data: tuple[tf.Tensor, tf.Tensor],
+    savepath: str | pathlib.Path,
     objective: Literal["loss", "val_loss"] = "val_loss",
-    max_trials: int = 20,
-    executions_per_trial: int = 2,
-    **tune_kwargs,
+    max_trials: int = 5,
+    executions_per_trial: int = 1,
+    sample_weight: np.ndarray = np.array([1.0]),
+    **kwargs,
 ) -> tuple[keras.Model, keras_tuner.Tuner]:
     """
     Tune the hyperparameters of a neural network model using random search.
@@ -490,8 +650,7 @@ def tune(
             data.
         objective (Literal["loss", "val_loss"], optional): Objective for search.
             Defaults to ``"val_loss"``.
-        **tune_kwargs: Additional keyword arguments to pass to the tuner's search
-            method.
+        **kwargs: Get passed to the tuner's search method.
 
     Returns:
         tf.Module: The model compiled with the best hyperparameters.
@@ -508,8 +667,9 @@ def tune(
         max_trials=max_trials,
         executions_per_trial=executions_per_trial,
         overwrite=True,
-        directory="my_dir",
-        project_name="helloworld",
+        directory=savepath,
+        project_name="tuner",
+        **kwargs,
     )
     tuner.search_space_summary()
 
@@ -518,8 +678,14 @@ def tune(
     if not isinstance(val_data, tuple) or len(val_data) != 2:
         raise ValueError("val_data must be a tuple of two tensors.")
 
+    # If kwargs contains epochs, this will fail.
     tuner.search(
-        train_data[0], train_data[1], epochs=20, validation_data=val_data, **tune_kwargs
+        train_data[0],
+        train_data[1],
+        epochs=20,
+        validation_data=val_data,
+        sample_weight=sample_weight,
+        **kwargs,
     )
     tuner.results_summary()
 
@@ -620,7 +786,21 @@ def scale_and_evaluate(
         target_range[0] - target_scaler.data_min_ * target_scaler.scale_
     )
 
+    # Save feature and targets shape and reshape to one-dimensional data, e.g., for
+    # multidimensional data. The scaler accepts at most two dimensions.
+    input_shape: tuple = model_input.shape
+    model_input = model_input.reshape(-1, input_shape[-1])
+
+    scaled_input: np.ndarray = feature_scaler.transform(model_input)
+    scaled_input = scaled_input.reshape(input_shape)
+
     # Run model.
-    scaled_input: tf.Tensor = feature_scaler.transform(model_input)
     output: tf.Tensor = model(scaled_input)
-    return target_scaler.inverse_transform(output)
+
+    output_shape: tuple = output.shape
+    output = tf.reshape(output, (-1, output_shape[-1]))
+
+    unscaled_output: tf.Tensor = target_scaler.inverse_transform(output)
+    unscaled_output = tf.reshape(unscaled_output, output_shape)
+
+    return unscaled_output

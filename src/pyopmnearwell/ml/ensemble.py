@@ -42,14 +42,22 @@ FLAGS = (
     + " --min-time-step-before-shutting-problematic-wells-in-days=1e-1"
 )
 
+rng: np.random.Generator = np.random.default_rng()
+
 
 def create_ensemble(
     runspecs: dict[str, Any], efficient_sampling: Optional[list[str]] = None
 ) -> list[dict[str, Any]]:
     """Create an ensemble.
 
-    Note: It is assumed that the user provides the variables in the correct units for
-    pyopmnearwell.
+    Note:
+        - It is assumed that the user provides the variables in the correct units for
+          pyopmnearwell.
+        - If the variable name starts with ``"PERM"`` or ``"LOG"``, the distribution for
+          random sampling is log uniform.
+        - If the variable name starts with ``"INT"``, the distribution for random
+          sampling is uniform on integers.
+        - Else, the distribution for random sampling is uniformly distributed.
 
     Args:
         runspecs (dict[str, Any]): Dictionary with at least the following keys:
@@ -93,14 +101,18 @@ def create_ensemble(
     # Generate random value ranges for all variables.
     logger.info("Generating value ranges for all variables")
     for variable, (min_val, max_val, npoints) in runspecs["variables"].items():
-        if variable.startswith("PERM"):
-            # Generate a log uniform distribution for permeabilities.
+        if variable.startswith("PERM") or variable.startswith("LOG"):
+            # Generate a log uniform distribution for permeabilities and other values
+            # that should be log uniform sampled.
             variables[variable] = np.exp(
-                np.random.uniform(math.log(min_val), math.log(max_val), npoints)
+                rng.uniform(math.log(min_val), math.log(max_val), npoints)
             )
+        elif variable.startswith("INT"):
+            # Generate a uniform distribution on integers.
+            variables[variable] = rng.integers(min_val, max_val, npoints)
         else:
             # Generate a uniform distribution for all other variables.
-            variables[variable] = np.random.uniform(min_val, max_val, npoints)
+            variables[variable] = rng.uniform(min_val, max_val, npoints)
     constants: dict[str, float] = runspecs["constants"]
 
     # Differentiate between variables whose data ranges are sampled memory efficiently
@@ -164,7 +176,7 @@ def create_ensemble(
             "Sample size is larger than ensemble size. Randomly selecting a subset"
         )
 
-        idx = np.random.randint(
+        idx = rng.integers(
             len(ensemble),
             size=runspecs["npoints"],
         )
@@ -193,7 +205,7 @@ def memory_efficient_sample(variables: np.ndarray, num_members: int) -> np.ndarr
         np.ndarray (``shape=()``):
 
     """
-    indices: np.ndarray = np.random.randint(
+    indices: np.ndarray = rng.integers(
         0, variables.shape[-1], size=(variables.shape[0], num_members)
     )
     return variables[np.arange(variables.shape[0])[..., None], indices]
@@ -203,9 +215,7 @@ def setup_ensemble(
     ensemble_path: str | pathlib.Path,
     ensemble: list[dict[str, Any]],
     makofile: str | pathlib.Path,
-    recalc_grid: bool = False,
-    recalc_tables: bool = False,
-    recalc_sections: bool = False,
+    **kwargs,
 ) -> None:
     """Create a deck file for each ensemble member.
 
@@ -216,12 +226,14 @@ def setup_ensemble(
             ``create_ensemble``.
         makofile (str | pathlib.Path): The path to the Mako template file for the
             pyopmnearwell deck for ensemble members.
-        recalc_grid (bool, optional): Whether to recalculate ``GRID.INC`` for each
-            ensemble member. Defaults to False.
-        recalc_tables (bool, optional): Whether to recalculate ``TABLES.INC`` for each
-            ensemble member. Defaults to False.
-        recalc_sections (bool, optional): Whether to recalculate ``GEOLOGY.INC`` and
-            ``REGIONS.INC`` for each ensemble member. Defaults to False.
+        **kwargs: kwargs are passed to ``reservoir_files``. Possible kwargs are:
+            - recalc_grid (bool, optional): Whether to recalculate ``GRID.INC`` for each
+                ensemble member. Defaults to False.
+            - recalc_tables (bool, optional): Whether to recalculate ``TABLES.INC`` for
+                each ensemble member. Defaults to False.
+            - recalc_sections (bool, optional): Whether to recalculate ``GEOLOGY.INC``
+                and ``REGIONS.INC`` for each ensemble member. Defaults to False.
+
     Raises:
         Exception: If there is an error rendering the Mako template.
 
@@ -231,6 +243,12 @@ def setup_ensemble(
     """
     # Ensure ``ensemble_path`` is a ``Path`` object.
     ensemble_path = pathlib.Path(ensemble_path)
+
+    # Update kwargs with the (future) relative path to the first  first ensemble member
+    # from any other ensemble member.
+    kwargs.update(
+        {"inc_folder": pathlib.Path("..") / ".." / "runfiles_0" / "preprocessing"}
+    )
 
     logger.info(f"Filling templates for {len(ensemble)} members")
     mytemplate: Template = Template(filename=str(makofile))
@@ -264,10 +282,11 @@ def setup_ensemble(
         else:
             reservoir_files(
                 dic,
-                recalc_grid=recalc_grid,
-                recalc_tables=recalc_tables,
-                recalc_sections=recalc_sections,
-                inc_folder=pathlib.Path("..") / ".." / "runfiles_0" / "preprocessing",
+                **kwargs
+                # recalc_grid=recalc_grid,
+                # recalc_tables=recalc_tables,
+                # recalc_sections=recalc_sections,
+                # inc_folder=pathlib.Path("..") / ".." / "runfiles_0" / "preprocessing",
             )
     # pyopmnearwell creates these unneeded folders, so we remove them.
     try:
@@ -280,19 +299,22 @@ def setup_ensemble(
 
 def run_ensemble(
     flow_path: str | pathlib.Path,
-    ensemble_path: pathlib.Path,
+    ensemble_path: str | pathlib.Path,
     runspecs: dict[str, Any],
     ecl_keywords: list[str],
     init_keywords: list[str],
     summary_keywords: list[str],
     num_report_steps: Optional[int] = None,
     keep_result_files: bool = False,
+    **kwargs,
 ) -> dict[str, Any]:
     """Run OPM flow for each ensemble member and store data.
 
+    Note: The initial time step (i.e., t=0) is always disregarded.
+
     Args:
-        flow_path (_type_): _description_
-        ensemble_path (pathlib.Path): _description_
+        flow_path (str | pathlib.Path): _description_
+        ensemble_path (str | pathlib.Path): _description_
         runspecs (dict[str, Any]): _description_
         ecl_keywords (list[str]): _description_
         init_keywords (list[str]): _description_
@@ -301,6 +323,11 @@ def run_ensemble(
             it did not run to the last report step. Defaults to None.
         keep_result_files (bool): Keep result files of all ensemble members, not
             only the first one. Defaults to False.
+        **kwargs: Possible parameters are:
+            - step_size_time: Save data only for every ``step_size_time`` report step.
+                Default is 1.
+            - step_size_cell: Save data only for every ``step_size_cell`` grid cell.
+                Default is 1.
 
     Returns:
         dict[str, Any]: _description_
@@ -313,6 +340,11 @@ def run_ensemble(
         keyword: [] for keyword in ecl_keywords + init_keywords + summary_keywords
     }
     num_disregarded_runs: int = 0
+
+    # Get **kwargs that determine how many report steps and cells shall be skipped when
+    # extracting the data.
+    step_size_time: int = kwargs.get("step_size_time", 1)
+    step_size_cell: int = kwargs.get("step_size_cell", 1)
 
     for i in range(round(runspecs["npoints"] / runspecs["npruns"])):
         command = " ".join(
@@ -344,12 +376,15 @@ def run_ensemble(
                 # though `ecl_file.num_report_steps()` is nonzero.
                 member_data: dict[str, np.ndarray] = {}
                 for keyword in ecl_keywords:
-                    # Append the data corresponding to the keyword for all report steps
-                    # and cells. Disregard the zeroth time step.
-                    member_data[keyword] = np.array(ecl_file.iget_kw(keyword))[1:, ...]
+                    # Append the data corresponding to the keyword for all chosen report
+                    # steps and cells. Disregard the zeroth time step.
+                    member_data[keyword] = np.array(ecl_file.iget_kw(keyword))[
+                        1::step_size_time, ::step_size_cell
+                    ]
                     if (
                         num_report_steps is not None
-                        and member_data[keyword].shape[0] < num_report_steps
+                        and member_data[keyword].shape[0]
+                        < num_report_steps // step_size_time
                     ):
                         simulation_finished = False
 
@@ -362,34 +397,41 @@ def run_ensemble(
                 for keyword in ecl_keywords:
                     data[keyword].append(member_data[keyword])
 
-                with open_ecl_file(
-                    str(ensemble_path / f"results_{j}" / f"RUN_{j}.INIT")
-                ) as init_file:
-                    for keyword in init_keywords:
-                        # Append the data corresponding to the keyword for all cells.
-                        data[keyword].append(np.array(init_file.iget_kw(keyword)))
+                # Get additional data from init and summary file.
+                if len(init_keywords) > 0:
+                    with open_ecl_file(
+                        str(ensemble_path / f"results_{j}" / f"RUN_{j}.INIT")
+                    ) as init_file:
+                        for keyword in init_keywords:
+                            # Append the data corresponding to the keyword for all chosen
+                            # cells.
+                            # NOTE: The array has shape ``[1, num_cells]``, hence no axis
+                            # needs to be added.
+                            data[keyword].append(
+                                np.array(init_file.iget_kw(keyword))[::step_size_cell]
+                            )
 
-                summary_file: EclSum = EclSum(
-                    str(ensemble_path / f"results_{j}" / f"RUN_{j}.SMSPEC")
-                )
-                for keyword in summary_keywords:
-                    # Append the data corresponding to the keyword for all report steps
-                    # (not for all time steps). The ``*.SMSPEC`` file does not include
-                    # the zeroth report step. Add a dimension to make it
-                    # broadcastable to data from the ``*.UNRST`` and ``*.INIT`` files.
-                    data[keyword].append(
-                        np.array(
-                            summary_file.get_values(keyword, report_only=True)[
-                                ..., None
-                            ]
-                        )
+                if len(summary_keywords):
+                    summary_file: EclSum = EclSum(
+                        str(ensemble_path / f"results_{j}" / f"RUN_{j}.SMSPEC")
                     )
-                # NOTE: There does not seem to be a way to close an ``EclSum`` object.
-                # Also, there is no context manager.
+                    for keyword in summary_keywords:
+                        # Append the data corresponding to the keyword for all chosen report
+                        # steps (not for all time steps). The ``*.SMSPEC`` file does not
+                        # include the zeroth report step. Add a dimension to make the array
+                        # broadcastable to data from the ``*.UNRST`` and ``*.INIT`` files.
+                        data[keyword].append(
+                            np.array(
+                                summary_file.get_values(keyword, report_only=True)
+                            )[::step_size_time, None]
+                        )
+                    # NOTE: There does not seem to be a way to close an ``EclSum``
+                    # object. Also, there is no context manager.
 
             else:
                 num_disregarded_runs += 1
                 logger.info(f"Disregarded ensemble run {j}")
+
             # Remove the run files and result folder (except for the first one that
             # remains to check if everything went right).
             if not keep_result_files and j > 0:

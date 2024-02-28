@@ -206,6 +206,7 @@ class BaseDataset:
     def get_analytical_PI(
         self,
         permeabilities: np.ndarray,
+        cell_heights: np.ndarray,
         radii: np.ndarray,
         well_radius: float,
     ) -> np.ndarray:
@@ -214,7 +215,8 @@ class BaseDataset:
         _extended_summary_
 
         Args:
-            permeabilities (np.ndarray): Unit has to be [mD]!
+            permeabilities (np.ndarray): Unit has to be [m^2]!
+            cell_heights (np.ndarray): Unit [m].
             radii (np.ndarray): _description_
             well_radius (float): _description_
 
@@ -222,9 +224,7 @@ class BaseDataset:
             np.ndarray: _description_
         """
         analytical_PI: np.ndarray = formulas.peaceman_matrix_WI(
-            k_h=permeabilities
-            * units.MILIDARCY_TO_M2
-            * (self.num_zcells / self.num_layers),
+            k_h=permeabilities * cell_heights,
             r_e=radii,
             r_w=well_radius,
         )
@@ -258,6 +258,7 @@ class BaseDataset:
 
         Returns:
             np.ndarray: _description_
+
         """
         densities_lst: list[list[float]] = []
         viscosities_lst: list[list[float]] = []

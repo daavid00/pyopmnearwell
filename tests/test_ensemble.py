@@ -25,6 +25,8 @@ TEST_ENSEMBLE_MAKO: pathlib.Path = pathlib.Path(__file__).parent / "test_ensembl
 REPORT_STEPS: int = 20
 NUM_CELLS: int = 100
 
+rng: np.random.Generator = np.random.default_rng()
+
 
 # Test cases for create_ensemble, setup_ensemble, run_ensemble
 @pytest.mark.parametrize(
@@ -322,7 +324,7 @@ def test_memory_efficient_sample(num_members: int):
     # Create sample input data.
     num_samples = 100
     num_variables = 5
-    variables = np.random.rand(num_variables, num_samples)
+    variables = rng.random((num_variables, num_samples))
 
     # Call the function.
     result = memory_efficient_sample(variables, num_members)

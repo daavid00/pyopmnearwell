@@ -1,5 +1,11 @@
 # pylint: skip-file
-"""Provide useful mathematical formulas for reservoir modelling."""
+"""Provide useful mathematical formulas for reservoir modelling.
+
+TODO: The typing is off in this module. Instead of returning an ArrayLike, most
+functions should return an np.ndarray, however that does not work when a float is passed
+as then an np.float64 or similar is returned. Not sure how to fix this.
+
+"""
 
 import math
 import os
@@ -46,7 +52,7 @@ def pyopmnearwell_correction(theta: ArrayLike = math.pi / 3) -> ArrayLike:
     return 2 * np.tan(theta / 2) / theta
 
 
-def equivalent_well_radius(delta_x: ArrayLike) -> ArrayLike:
+def equivalent_well_radius(delta_x: ArrayLike) -> np.ndarray:
     """Calculate the equivalent well block radius for a given quadratic cell size.
 
     Args:

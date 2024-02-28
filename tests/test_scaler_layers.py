@@ -12,6 +12,9 @@ from tensorflow import keras
 
 from pyopmnearwell.ml.scaler_layers import MinMaxScalerLayer, MinMaxUnScalerLayer
 
+rng: np.random.Generator = np.random.default_rng()
+
+
 layers: list[str] = ["scaler", "unscaler"]
 feature_ranges: list[tuple[float, float]] = [(0.0, 1.0), (-3.7, 0.0), (-5.0, 4.0)]
 
@@ -22,8 +25,8 @@ def layers_and_feature_ranges(request) -> tuple[str, tuple[float, float]]:
 
 
 @pytest.fixture(
-    params=[np.random.uniform(-500, 500, (5, 1)) for _ in range(5)]
-    + [np.random.uniform(-500, 500, (5, 10)) for _ in range(5)]
+    params=[rng.uniform(-500, 500, (5, 1)) for _ in range(5)]
+    + [rng.uniform(-500, 500, (5, 10)) for _ in range(5)]
 )
 def data(request) -> np.ndarray:
     return request.param
@@ -80,8 +83,8 @@ def test_save_scaler_layer(fitted_model: keras.Model, tmp_path: pathlib.Path) ->
 
 @pytest.mark.parametrize(
     "model_input",
-    [np.random.uniform(-500, 500, (5, 1)) for _ in range(5)]
-    + [np.random.uniform(-500, 500, (5, 10)) for _ in range(5)],
+    [rng.uniform(-500, 500, (5, 1)) for _ in range(5)]
+    + [rng.uniform(-500, 500, (5, 10)) for _ in range(5)],
 )
 def test_minmax_scaler_layer(
     model_input: np.ndarray,
