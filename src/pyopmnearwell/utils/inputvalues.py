@@ -170,7 +170,7 @@ def readthesecondpart(lol, dic, index):
     dic["krnf"] = str(lol[index + 1][0])  # Non-wetting rel perm saturation function [-]
     dic["pcwcf"] = str(lol[index + 2][0])  # Capillary pressure saturation function [Pa]
     index += 6
-    for name in ["rock", "safu"]:
+    for name in ["rock", "safu", "micrPara", "permPoro", "iniBio"]:
         dic[name] = []
     if dic["hysteresis"] == 1:
         dic["imbnum"] = 2
@@ -210,7 +210,31 @@ def readthesecondpart(lol, dic, index):
             dic["thickness"].append(float(row[7]))
             if dic["model"] == "co2eor" or dic["model"] == "co2eormodified":
                 dic["nz_perlayer"].append(int(row[9]))
-    index += 3 + dic["satnum"] + dic["perforations"][0]
+    if dic["template"] == "biofilm":
+        index += 2 + dic["satnum"] + dic["perforations"][0]
+        for i in range(dic["satnum"]):
+            row = list((lol[index + i][0].strip()).split())
+            dic["micrPara"].append(
+                [
+                    row[1],
+                    row[3],
+                    row[5],
+                    row[7],
+                    row[9],
+                ]
+            )
+            dic["permPoro"].append(
+                    [
+                        row[11],
+                        row[13],
+                        row[15],
+                        row[17],
+                    ]
+                )
+            dic["iniBio"].append(row[19])
+        index += 3 + dic["satnum"]
+    else:
+        index += 3 + dic["satnum"] + dic["perforations"][0]
     column = []
     dic["minWBHP_prod"] = []
     for i in range(len(lol) - index):
