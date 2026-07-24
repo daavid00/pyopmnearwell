@@ -6,6 +6,26 @@ The following steps work installing the dependencies in Linux via apt-get or in 
 While using packages managers such as Anaconda, Miniforge, or Mamba might work, these are not tested.
 The supported Python versions are 3.12 to 3.14.
 
+`ResInsight <https://resinsight.org>`_ and `plopm <https://github.com/cssr-tools/plopm>`_ can be used for the visualization of the results.
+
+.. note::
+
+    There are binary packages for Linux and Windows to install Resinsight, see the `ResInsight Documentation <https://resinsight.org/releases/>`_. For macOS users, you could try to install it using `brew <https://brew.sh>`_ by executing:
+
+    .. code-block:: bash
+
+        brew tap cssr-tools/opm
+        brew trust cssr-tools/opm
+        brew install cssr-tools/opm/resinsight -y
+    
+    Then, you should be able to open resinsight by typing in the terminal **resinsight**.
+
+    The **plopm** tool can be installed by executing:
+
+    .. code-block:: bash
+
+        pip install git+https://github.com/cssr-tools/plopm.git
+
 .. _vpyopmnearwell:
 
 Python package
@@ -110,11 +130,13 @@ Brew formula for macOS
 ++++++++++++++++++++++
 For macOS, there are no available binary packages, so OPM Flow needs to be built from source. Recently, a formula to build flow using brew has
 been added in `https://github.com/cssr-tools/homebrew-opm <https://github.com/cssr-tools/homebrew-opm>`_. 
-Then, you can try to install flow (v2026.04) by simply typing:
+Then, you can try to install flow (v2026.07 interim release) by simply typing:
 
 .. code-block:: console
 
-    brew install cssr-tools/opm/opm-simulators
+    brew tap cssr-tools/opm
+    brew trust cssr-tools/opm
+    brew install cssr-tools/opm/opm-simulators -y
 
 You can check if the installation of OPM Flow succeded by typing in the terminal **flow \-\-help**.
 
@@ -123,4 +145,4 @@ You can check if the installation of OPM Flow succeded by typing in the terminal
 
 Source build in macOS
 +++++++++++++++++++++
-See `this repository <https://github.com/daavid00/OPM-Flow_macOS>`_ dedicated to build OPM Flow from source in the latest macOS (GitHub actions), and tested with **pycopm**, another repository in cssr-tools.
+See `this repository <https://github.com/daavid00/OPM-Flow_macOS>`_ dedicated to build OPM Flow from source in macOS 26 (GitHub actions), and tested with **pycopm**, another repository in cssr-tools.

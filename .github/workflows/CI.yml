@@ -1,47 +1,35 @@
 name: Run pyopmnearwell
 
 on:
- push:
-   branches:
-     - main
  pull_request:
    
 jobs:
   run-pyopmnearwell-local:
     permissions:
       contents: read
-      pull-requests: write
     timeout-minutes: 60
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-
-    - name: Set up Python 3.12
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.12
+    - uses: actions/checkout@v5
     
     - name: Install Flow Simulator
       run: |
         sudo apt-get update
-        sudo apt-get install software-properties-common
+        sudo apt-get install software-properties-common mpi-default-bin
         sudo apt-add-repository ppa:opm/ppa
         sudo apt-get update
-        sudo apt-get install mpi-default-bin
         sudo apt-get install libopm-simulators-bin
-        
-    - name: Install test dependecies
+
+    - name: Install pyopmnearwell and python requirements
       run: |
+        python3 -m venv vpyopmnearwell
+        . vpyopmnearwell/bin/activate
+        echo "$PWD/vpyopmnearwell/bin" >> $GITHUB_PATH
         pip install --upgrade pip setuptools wheel
-        pip install -r dev-requirements.txt
-        pip install tensorflow
-        
-    - name: Install pyopmnearwell
-      run: |
         pip install .
+        pip install tensorflow
+        pip install -r dev-requirements.txt
         
     - name: Check code style and linting 
       run: |
@@ -57,4 +45,4 @@ jobs:
     - name: Build documentation
       run: |
         pushd docs
-        make html
+        make html SPHINXOPTS="-W"

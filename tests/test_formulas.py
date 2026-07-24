@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 import math
-from typing import Optional
 
 import numpy as np
 import pytest
@@ -231,7 +230,7 @@ def test_data_WI(q: ArrayLike, p_w: ArrayLike, p_gb: ArrayLike, expected: ArrayL
     ],
 )
 def test_hydrostatic_fluid(
-    rho: ArrayLike, height: ArrayLike, gravity: Optional[ArrayLike], expected: ArrayLike
+    rho: ArrayLike, height: ArrayLike, gravity: ArrayLike | None, expected: ArrayLike
 ):
     args = locals()
     filtered_args = {
@@ -264,7 +263,7 @@ def test_hydrostatic_gas(
     height: ArrayLike,
     temperature: ArrayLike,
     molecule_mass: ArrayLike,
-    gravity: Optional[ArrayLike],
+    gravity: ArrayLike | None,
     expected: ArrayLike,
 ):
     args = locals()

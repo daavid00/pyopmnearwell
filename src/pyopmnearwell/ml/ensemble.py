@@ -12,7 +12,7 @@ import os
 import pathlib
 import shutil
 from collections import OrderedDict
-from typing import Any, Optional
+from typing import Any
 
 import numpy as np
 import tensorflow as tf
@@ -44,8 +44,8 @@ FLAGS = (
 
 def create_ensemble(
     runspecs: dict[str, Any],
-    efficient_sampling: Optional[list[str]] = None,
-    seed: Optional[int] = None,
+    efficient_sampling: list[str] | None = None,
+    seed: int | None = None,
 ) -> list[dict[str, Any]]:
     """Create an ensemble.
 
@@ -105,7 +105,7 @@ def create_ensemble(
     # Generate random value ranges for all variables.
     logger.info("Generating value ranges for all variables")
     for variable, (min_val, max_val, npoints) in runspecs["variables"].items():
-        if variable.startswith("PERM") or variable.startswith("LOG"):
+        if variable.startswith(("PERM", "LOG")):
             # Generate a log uniform distribution for permeabilities and other values
             # that should be log uniform sampled.
             variables[variable] = np.exp(
@@ -198,7 +198,7 @@ def create_ensemble(
 
 
 def memory_efficient_sample(
-    variables: np.ndarray, num_members: int, seed: Optional[int] = None
+    variables: np.ndarray, num_members: int, seed: int | None = None
 ) -> np.ndarray:
     """Sample all variables individually.
 
@@ -266,9 +266,9 @@ def setup_ensemble(
     for i, member in enumerate(ensemble):
         try:
             filledtemplate = mytemplate.render(**member)
-        except Exception as error:
+        except Exception:
             print(exceptions.text_error_template().render())
-            raise error
+            raise
 
         (ensemble_path / f"runfiles_{i}").mkdir(exist_ok=True)
         (ensemble_path / f"runfiles_{i}" / "preprocessing").mkdir(exist_ok=True)
@@ -342,7 +342,7 @@ def run_ensemble(
     ecl_keywords: list[str],
     init_keywords: list[str],
     summary_keywords: list[str],
-    num_report_steps: Optional[int] = None,
+    num_report_steps: int | None = None,
     keep_result_files: bool = False,
     **kwargs,
 ) -> dict[str, Any]:
@@ -426,11 +426,7 @@ def run_ensemble(
                     num_report_steps is not None
                     and member_data[keyword].shape[0]
                     < num_report_steps // step_size_time
-                ):
-                    simulation_finished = False
-
-                # Disregard the result if an `inf` value is returned.
-                elif np.any(np.isinf(member_data[keyword])):
+                ) or np.any(np.isinf(member_data[keyword])):
                     simulation_finished = False
 
             # Only append data if the simulation finished.
@@ -530,12 +526,7 @@ def calculate_radii(
         lines: list[str] = radii_file.readlines()[9 : 10 + num_cells]
         assert len(lines) == num_cells + 1
         radii: np.ndarray = np.array(
-            list(
-                map(
-                    lambda x: float(x.strip("\n").split()[0]),
-                    lines,
-                )
-            )
+            [float(line.strip("\n").split()[0]) for line in lines]
         )
         if triangle_grid:
             radii *= pyopmnearwell_correction(angle)
@@ -616,7 +607,7 @@ def calculate_WI(
 def extract_features(
     data: dict[str, Any],
     keywords: list[str],
-    keyword_scalings: Optional[dict[str, float]] = None,
+    keyword_scalings: dict[str, float] | None = None,
 ) -> np.ndarray:
     r"""Extract features from a ``run_ensemble`` run into a numpy array.
 

@@ -8,7 +8,7 @@ linting completely. It is possible that the module is not functional at the mome
 
 from __future__ import annotations
 
-from typing import Optional, Sequence, Union
+from collections.abc import Sequence
 
 import keras
 import numpy as np
@@ -26,12 +26,12 @@ class ScalerLayer(keras.layers.Layer):
 
     def __init__(
         self,
-        data_min: Optional[float | ArrayLike] = None,
-        data_max: Optional[float | ArrayLike] = None,
-        feature_range: Union[Sequence[float], np.ndarray, tf.Tensor] = (0, 1),
+        data_min: float | ArrayLike | None = None,
+        data_max: float | ArrayLike | None = None,
+        feature_range: Sequence[float] | np.ndarray | tf.Tensor = (0, 1),
         **kwargs,  # pylint: disable=W0613
     ) -> None:
-        super(ScalerLayer, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         if isinstance(feature_range, tuple):
             # One feature range for all features
             if feature_range[0] >= feature_range[1]:
@@ -173,14 +173,12 @@ class MinMaxScalerLayer(
 
     def __init__(
         self,
-        data_min: Optional[float | ArrayLike] = None,
-        data_max: Optional[float | ArrayLike] = None,
+        data_min: float | ArrayLike | None = None,
+        data_max: float | ArrayLike | None = None,
         feature_range: Sequence[float] | np.ndarray | tf.Tensor = (0, 1),
         **kwargs,  # pylint: disable=W0613
     ) -> None:
-        super(MinMaxScalerLayer, self).__init__(
-            data_min, data_max, feature_range, **kwargs
-        )
+        super().__init__(data_min, data_max, feature_range, **kwargs)
         self.name: str = "MinMaxScalerLayer"
 
         if data_min is not None and data_max is not None:
@@ -201,11 +199,10 @@ class MinMaxScalerLayer(
 
         feature_ranges = tf.convert_to_tensor(self.feature_range_, dtype=tf.float32)
         # If only one feature range is given for multiple features --> broadcast
-        if len(feature_ranges.shape) == 1:
-            if len(inputs.shape) > 1:
-                feature_ranges = tf.expand_dims(feature_ranges, axis=0)
-                feature_ranges = tf.tile(feature_ranges, [tf.shape(inputs)[1], 1])
-                self.feature_range_ = feature_ranges
+        if len(feature_ranges.shape) == 1 and len(inputs.shape) > 1:
+            feature_ranges = tf.expand_dims(feature_ranges, axis=0)
+            feature_ranges = tf.tile(feature_ranges, [tf.shape(inputs)[1], 1])
+            self.feature_range_ = feature_ranges
 
         scaled_data = (inputs - self.min) / self.scalar
         return (
@@ -218,7 +215,7 @@ class MinMaxScalerLayer(
 
     def get_config(self):
         """Return the config for serialization."""
-        config = super(MinMaxScalerLayer, self).get_config()
+        config = super().get_config()
         config.update(
             {
                 "feature_range": self.feature_range_,
@@ -262,8 +259,8 @@ class MinMaxUnScalerLayer(ScalerLayer, tf.keras.layers.Layer):
 
     def __init__(
         self,
-        data_min: Optional[float | ArrayLike] = None,
-        data_max: Optional[float | ArrayLike] = None,
+        data_min: float | ArrayLike | None = None,
+        data_max: float | ArrayLike | None = None,
         feature_range: Sequence[float] | np.ndarray | tf.Tensor = (0, 1),
         **kwargs,  # pylint: disable=W0613
     ) -> None:
@@ -285,11 +282,10 @@ class MinMaxUnScalerLayer(ScalerLayer, tf.keras.layers.Layer):
         inputs = tf.convert_to_tensor(inputs, dtype=tf.float32)
 
         # If only one feature is given for multiple features --> broadcast
-        if len(feature_ranges.shape) == 1:
-            if len(inputs.shape) > 1:
-                feature_ranges = tf.expand_dims(feature_ranges, axis=0)
-                feature_ranges = tf.tile(feature_ranges, [tf.shape(inputs)[1], 1])
-                self.feature_range_ = feature_ranges
+        if len(feature_ranges.shape) == 1 and len(inputs.shape) > 1:
+            feature_ranges = tf.expand_dims(feature_ranges, axis=0)
+            feature_ranges = tf.tile(feature_ranges, [tf.shape(inputs)[1], 1])
+            self.feature_range_ = feature_ranges
 
         unscaled_data = (inputs - self.feature_range_[:, 0]) / (
             self.feature_range_[:, 1] - self.feature_range_[:, 0]
@@ -302,7 +298,7 @@ class MinMaxUnScalerLayer(ScalerLayer, tf.keras.layers.Layer):
 
     def get_config(self):
         """Return the config for serialization."""
-        config = super(MinMaxUnScalerLayer, self).get_config()
+        config = super().get_config()
         config.update(
             {
                 "feature_range": self.feature_range_,

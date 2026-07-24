@@ -5,13 +5,11 @@ seed of ``numpy``. Make sure to set them locally for full determinism.
 
 """
 
-from typing import Optional
-
 import keras
 import tensorflow as tf
 
 
-def enable_determinism(seed: Optional[int] = None):
+def enable_determinism(seed: int | None = None):
     """Set a seed for python, numpy, and tensorflow and enable deterministic behavior.
 
     Args:

@@ -132,7 +132,7 @@ def test_get_analytical_WI(test_upscaler: MockUpscaler) -> None:
     permeabilities: np.ndarray = rng.random((10, 20, 30, 40))
     temperature: float = 300.0
     surface_density: float = 0.1
-    radii: np.ndarray = rng.random((40))
+    radii: np.ndarray = rng.random(40)
     OPM: pathlib.Path = pathlib.Path("path/to/OPM.txt")  # pylint: disable=invalid-name
     analytical_WI = test_upscaler.get_analytical_WI(  # pylint: disable=invalid-name
         pressures,

@@ -20,7 +20,7 @@ import logging
 import os
 import pathlib
 import shutil
-from typing import Any, Optional
+from typing import Any
 
 from mako import exceptions
 from mako.template import Template
@@ -37,7 +37,7 @@ def recompile_flow(
     StandardWell_impl_template: pathlib.Path,
     StandardWell_template: pathlib.Path,
     stencil_size: int = 3,
-    local_feature_names: Optional[list[str]] = None,
+    local_feature_names: list[str] | None = None,
 ) -> None:
     """Fill ``StandardWell_impl`` and recompile ``flow_gaswater_dissolution_diffuse``.
 
@@ -159,7 +159,7 @@ def run_integration(
     # Ignore MyPy complaining.
 
     # Loop through all variables in runspecs.
-    for i in range(len(list(variables.values())[0])):  # type: ignore
+    for i in range(len(next(iter(variables.values())))):  # type: ignore
         logger.info(f"Write pyopmnearwell deck for {i}th integration run")
 
         # Fill template for each run.
@@ -168,9 +168,9 @@ def run_integration(
         )
         try:
             filledtemplate = mytemplate.render(**constants)
-        except Exception as error:
+        except Exception:
             print(exceptions.text_error_template().render())
-            raise error
+            raise
         with (savepath / f"run_{i}.toml").open("w", encoding="utf-8") as file:
             # We assume that filledtemplate is a string and ignore Pylance complaining.
             file.write(filledtemplate)  # type: ignore
