@@ -8,20 +8,21 @@ import logging
 import math
 import pathlib
 from functools import partial
-from typing import Any, Literal, Optional, TypeAlias
+from typing import Any, Literal
 
 import keras_tuner
 import numpy as np
 import pandas as pd
 import tensorflow as tf
-from pyopmnearwell.ml.kerasify import export_model
 from sklearn.preprocessing import MinMaxScaler
 from tensorflow import keras
+
+from pyopmnearwell.ml.kerasify import export_model
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-ArrayLike: TypeAlias = tf.Tensor | np.ndarray
+type ArrayLike = tf.Tensor | np.ndarray
 
 
 def get_FCNN(
@@ -29,7 +30,7 @@ def get_FCNN(
     noutputs: int,
     depth: int = 5,
     hidden_dim: int = 10,
-    saved_model: Optional[str] = None,
+    saved_model: str | None = None,
     activation: Literal["sigmoid", "relu", "tanh"] = "sigmoid",
     kernel_initializer: Literal["glorot_normal", "glorot_uniform"] = "glorot_normal",
     normalization: bool = False,
@@ -77,7 +78,7 @@ def get_RNN(
     ninputs: int,
     noutputs: int,
     units: int = 20,
-    saved_model: Optional[str] = None,
+    saved_model: str | None = None,
     activation: Literal["sigmoid", "relu", "tanh"] = "tanh",
     kernel_initializer: Literal["glorot_normal", "glorot_uniform"] = "glorot_uniform",
 ) -> keras.Model:
@@ -126,7 +127,7 @@ def get_GRU(
     ninputs: int,
     noutputs: int,
     units: int = 20,
-    saved_model: Optional[str] = None,
+    saved_model: str | None = None,
     activation: Literal["sigmoid", "relu", "tanh"] = "tanh",
     kernel_initializer: Literal["glorot_normal", "glorot_uniform"] = "glorot_uniform",
 ) -> keras.Model:
@@ -175,7 +176,7 @@ def get_LSTM(
     ninputs: int,
     noutputs: int,
     units: int = 20,
-    saved_model: Optional[str] = None,
+    saved_model: str | None = None,
     activation: Literal["sigmoid", "relu", "tanh"] = "tanh",
     kernel_initializer: Literal["glorot_normal", "glorot_uniform"] = "glorot_uniform",
 ) -> keras.Model:
@@ -225,8 +226,8 @@ def scale_and_prepare_dataset(
     feature_names: list[str],
     savepath: str | pathlib.Path,
     train_split: float = 0.9,
-    val_split: Optional[float] = 0.1,
-    test_split: Optional[float] = None,
+    val_split: float | None = 0.1,
+    test_split: float | None = None,
     shuffle: Literal["first", "last", "false"] = "first",
     feature_range: tuple[float, float] = (-1, 1),
     target_range: tuple[float, float] = (-1, 1),
@@ -642,7 +643,7 @@ def tune(
     objective: Literal["loss", "val_loss"] = "val_loss",
     max_trials: int = 5,
     executions_per_trial: int = 1,
-    sample_weight: ArrayLike = np.array([1.0]),
+    sample_weight: ArrayLike | None = None,
     lr_tune: float = 0.1,
     **kwargs,
 ) -> tuple[keras.Model, keras_tuner.Tuner]:
@@ -671,6 +672,8 @@ def tune(
         ValueError: If `train_data` or `val_data` is not a tuple of two tensors.
 
     """
+    if sample_weight is None:
+        sample_weight = np.array([1.0])
     # Define the tuner and start a search.
     tuner = keras_tuner.RandomSearch(
         hypermodel=partial(

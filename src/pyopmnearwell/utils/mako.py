@@ -3,14 +3,13 @@
 from __future__ import annotations
 
 import pathlib
-from typing import Optional
 
 from mako import exceptions
 from mako.template import Template
 
 
 def fill_template(
-    var: dict, filename: Optional[str | pathlib.Path] = None, text: Optional[str] = None
+    var: dict, filename: str | pathlib.Path | None = None, text: str | None = None
 ) -> str:
     """
     Fill a Mako template with the given variables.
@@ -38,7 +37,7 @@ def fill_template(
     mytemplate: Template = Template(filename=filename, text=text)
     try:
         filledtemplate = mytemplate.render(**var)
-    except Exception as error:
+    except Exception:
         print(exceptions.text_error_template().render())
-        raise error
+        raise
     return filledtemplate

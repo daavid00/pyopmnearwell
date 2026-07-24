@@ -9,8 +9,8 @@ from dataclasses import dataclass
 from pathlib import Path
 
 import numpy as np
-from opm.io.ecl import EGrid as OpmGrid
 from opm.io.ecl import EclFile as OpmFile
+from opm.io.ecl import EGrid as OpmGrid
 
 from pyopmnearwell.core.pyopmnearwell import main
 

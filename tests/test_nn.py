@@ -197,9 +197,9 @@ def test_scale_and_prepare_dataset(
     assert len(train[0]) + len(val[0]) + len(test[0]) == len(orig_dataset)
 
     # Check that the splits are disjoint.
-    train_set = set(target.item() for target in train[1])
-    val_set = set(target.item() for target in val[1])
-    test_set = set(target.item() for target in test[1])
+    train_set = {target.item() for target in train[1]}
+    val_set = {target.item() for target in val[1]}
+    test_set = {target.item() for target in test[1]}
     assert not train_set.intersection(val_set)
     assert not train_set.intersection(test_set)
     assert not val_set.intersection(test_set)

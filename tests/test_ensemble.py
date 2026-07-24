@@ -6,7 +6,7 @@ from __future__ import annotations
 import itertools
 import pathlib
 from contextlib import nullcontext as does_not_raise
-from typing import Any, Optional
+from typing import Any
 from unittest.mock import mock_open, patch
 
 import numpy as np
@@ -93,7 +93,7 @@ rng: np.random.Generator = np.random.default_rng()
     "fixture_create_ensemble",
     [
         (does_not_raise()),
-        (does_not_raise()),
+        (does_not_raise()),  # noqa: PT014
         (pytest.raises(ValueError)),
     ],
     indirect=True,
@@ -122,7 +122,7 @@ class TestEnsemble:
     @pytest.fixture(scope="class", name="fixture_create_ensemble")
     def fixture_create_ensemble(
         self, request, runspecs: dict[str, Any]
-    ) -> Optional[list[dict[str, Any]]]:
+    ) -> list[dict[str, Any]] | None:
         """Create and return ensemble.
 
         Args:
@@ -150,9 +150,9 @@ class TestEnsemble:
     def fixture_setup_ensemble(
         self,
         request,
-        fixture_create_ensemble: Optional[list[dict[str, Any]]],
+        fixture_create_ensemble: list[dict[str, Any]] | None,
         tmp_path_factory,
-    ) -> Optional[pathlib.Path]:
+    ) -> pathlib.Path | None:
         """Setup ensemble and return the folder path.
 
         Args:
@@ -188,8 +188,8 @@ class TestEnsemble:
     def test_create_ensemble(
         self,
         runspecs: dict[str, Any],
-        fixture_create_ensemble: Optional[list[dict[str, Any]]],
-        fixture_setup_ensemble: Optional[pathlib.Path],
+        fixture_create_ensemble: list[dict[str, Any]] | None,
+        fixture_setup_ensemble: pathlib.Path | None,
     ) -> None:
         if fixture_create_ensemble is not None:
             max_values: dict[str, np.ndarray] = {}

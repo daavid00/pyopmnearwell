@@ -14,6 +14,7 @@ from typing import Literal
 
 import numpy as np
 from numpy.typing import ArrayLike
+
 from pyopmnearwell.utils import units
 
 # TODO: Change the typing to typevars. There needs to be some logic, e.g., in case some

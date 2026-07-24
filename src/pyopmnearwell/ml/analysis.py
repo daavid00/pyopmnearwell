@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import math
 import pathlib
-from typing import Literal, Optional
+from typing import Literal
 
 import keras
 import numpy as np
@@ -131,8 +131,8 @@ def plot_analysis(
     outputs: np.ndarray,
     inputs: np.ndarray,
     savepath: str | pathlib.Path,
-    feature_names: Optional[list[str]] = None,
-    main_plot: Optional[tuple[np.ndarray, np.ndarray]] = None,
+    feature_names: list[str] | None = None,
+    main_plot: tuple[np.ndarray, np.ndarray] | None = None,
     **kwargs,
 ) -> None:
     r"""

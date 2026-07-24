@@ -98,15 +98,15 @@ the origin.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>radius</strong> (<em>ArrayLike</em>) – The radius of the circle.</p></li>
-<li><p><strong>sidelength</strong> (<em>ArrayLike</em>) – The sidelength of the square.</p></li>
+<li><p><strong>radius</strong> (<a class="reference internal" href="pyopmnearwell.ml.nn.html#pyopmnearwell.ml.nn.ArrayLike" title="pyopmnearwell.ml.nn.ArrayLike"><em>ArrayLike</em></a>) – The radius of the circle.</p></li>
+<li><p><strong>sidelength</strong> (<a class="reference internal" href="pyopmnearwell.ml.nn.html#pyopmnearwell.ml.nn.ArrayLike" title="pyopmnearwell.ml.nn.ArrayLike"><em>ArrayLike</em></a>) – The sidelength of the square.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The calculated area.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>ArrayLike</p>
+<dd class="field-odd"><p><a class="reference internal" href="pyopmnearwell.ml.nn.html#pyopmnearwell.ml.nn.ArrayLike" title="pyopmnearwell.ml.nn.ArrayLike">ArrayLike</a></p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>ValueError</strong> – If <code class="docutils literal notranslate"><span class="pre">radius</span></code> or <code class="docutils literal notranslate"><span class="pre">sidelength</span></code> contain a negative value.</p>
@@ -133,13 +133,13 @@ the origin.</p>
 <dd><p>Calculate the size of a quadratic cell for a given equivalent well block radius.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>delta_x</strong> (<em>ArrayLike</em>) – _description_</p>
+<dd class="field-odd"><p><strong>delta_x</strong> (<a class="reference internal" href="pyopmnearwell.ml.nn.html#pyopmnearwell.ml.nn.ArrayLike" title="pyopmnearwell.ml.nn.ArrayLike"><em>ArrayLike</em></a>) – _description_</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>_description_</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>(ArrayLike)</p>
+<dd class="field-odd"><p>(<a class="reference internal" href="pyopmnearwell.ml.nn.html#pyopmnearwell.ml.nn.ArrayLike" title="pyopmnearwell.ml.nn.ArrayLike">ArrayLike</a>)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -176,9 +176,9 @@ the origin.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>q</strong> (<em>ArrayLike</em>) – Injection rate. Unit: [m^3/s].</p></li>
-<li><p><strong>p_w</strong> (<em>ArrayLike</em>) – Bottom hole pressure. Unit: [Pa].</p></li>
-<li><p><strong>p_gb</strong> (<em>ArrayLike</em>) – Grid block pressure. Unit: [Pa].</p></li>
+<li><p><strong>q</strong> (<a class="reference internal" href="pyopmnearwell.ml.nn.html#pyopmnearwell.ml.nn.ArrayLike" title="pyopmnearwell.ml.nn.ArrayLike"><em>ArrayLike</em></a>) – Injection rate. Unit: [m^3/s].</p></li>
+<li><p><strong>p_w</strong> (<a class="reference internal" href="pyopmnearwell.ml.nn.html#pyopmnearwell.ml.nn.ArrayLike" title="pyopmnearwell.ml.nn.ArrayLike"><em>ArrayLike</em></a>) – Bottom hole pressure. Unit: [Pa].</p></li>
+<li><p><strong>p_gb</strong> (<a class="reference internal" href="pyopmnearwell.ml.nn.html#pyopmnearwell.ml.nn.ArrayLike" title="pyopmnearwell.ml.nn.ArrayLike"><em>ArrayLike</em></a>) – Grid block pressure. Unit: [Pa].</p></li>
 <li><p><strong>well_type</strong> (<em>Literal</em><em>[</em><em>&quot;injector&quot;</em><em>, </em><em>&quot;producer</em><em>]</em><em>, </em><em>optional</em>) – Calculate WI for injector</p></li>
 <li><p><strong>&quot;injector&quot;.</strong> (<em>or producer. Defaults to</em>)</p></li>
 </ul>
@@ -187,7 +187,7 @@ the origin.</p>
 <dd class="field-even"><p><span class="math notranslate nohighlight">\(WI\)</span>. Unit: [m^4*s/kg].</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>WI (ArrayLike)</p>
+<dd class="field-odd"><p>WI (<a class="reference internal" href="pyopmnearwell.ml.nn.html#pyopmnearwell.ml.nn.ArrayLike" title="pyopmnearwell.ml.nn.ArrayLike">ArrayLike</a>)</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>ValueError</strong> – If bottom hole pressure and grid block pressure are equal for any
@@ -202,13 +202,13 @@ the origin.</p>
 <dd><p>Calculate the equivalent well block radius for a given quadratic cell size.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>delta_x</strong> (<em>ArrayLike</em>) – _description_</p>
+<dd class="field-odd"><p><strong>delta_x</strong> (<a class="reference internal" href="pyopmnearwell.ml.nn.html#pyopmnearwell.ml.nn.ArrayLike" title="pyopmnearwell.ml.nn.ArrayLike"><em>ArrayLike</em></a>) – _description_</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>_description_</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>(ArrayLike)</p>
+<dd class="field-odd"><p>(<a class="reference internal" href="pyopmnearwell.ml.nn.html#pyopmnearwell.ml.nn.ArrayLike" title="pyopmnearwell.ml.nn.ArrayLike">ArrayLike</a>)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -229,9 +229,9 @@ the origin.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>rho</strong> (<em>ArrayLike</em>) – Fluid density. Unit [kg/m^3].</p></li>
-<li><p><strong>height</strong> (<em>ArrayLike</em>) – Height of the fluid column. Unit [m].</p></li>
-<li><p><strong>gravity</strong> (<em>ArrayLike</em><em>, </em><em>optional</em>) – Acceleration due to gravity. Unit [m/s^2].
+<li><p><strong>rho</strong> (<a class="reference internal" href="pyopmnearwell.ml.nn.html#pyopmnearwell.ml.nn.ArrayLike" title="pyopmnearwell.ml.nn.ArrayLike"><em>ArrayLike</em></a>) – Fluid density. Unit [kg/m^3].</p></li>
+<li><p><strong>height</strong> (<a class="reference internal" href="pyopmnearwell.ml.nn.html#pyopmnearwell.ml.nn.ArrayLike" title="pyopmnearwell.ml.nn.ArrayLike"><em>ArrayLike</em></a>) – Height of the fluid column. Unit [m].</p></li>
+<li><p><strong>gravity</strong> (<a class="reference internal" href="pyopmnearwell.ml.nn.html#pyopmnearwell.ml.nn.ArrayLike" title="pyopmnearwell.ml.nn.ArrayLike"><em>ArrayLike</em></a><em>, </em><em>optional</em>) – Acceleration due to gravity. Unit [m/s^2].
 Defaults to <code class="docutils literal notranslate"><span class="pre">units.GRAVITATIONAL_ACCELERATION</span></code>, i.e., <span class="math notranslate nohighlight">\(\approx 9.8\)</span>.</p></li>
 </ul>
 </dd>
@@ -239,7 +239,7 @@ Defaults to <code class="docutils literal notranslate"><span class="pre">units.G
 <dd class="field-even"><p>Hydrostatic pressure at the given height. Unit [Pa].</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>ArrayLike</p>
+<dd class="field-odd"><p><a class="reference internal" href="pyopmnearwell.ml.nn.html#pyopmnearwell.ml.nn.ArrayLike" title="pyopmnearwell.ml.nn.ArrayLike">ArrayLike</a></p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -270,11 +270,11 @@ using the ideal gas law and the hydrostatic equilibrium formula. The formula is:
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>reference_pressure</strong> (<em>ArrayLike</em>) – Reference pressure at height 0. Unit [Pa].</p></li>
-<li><p><strong>height</strong> (<em>ArrayLike</em>) – Height of the gas column. Unit [m].</p></li>
-<li><p><strong>temperature</strong> (<em>ArrayLike</em>) – Temperature. Unit [K].</p></li>
-<li><p><strong>molecule_mass</strong> (<em>ArrayLike</em>) – Molecular mass of the gas. Unit [kg/mol].</p></li>
-<li><p><strong>gravity</strong> (<em>ArrayLike</em><em>, </em><em>optional</em>) – Acceleration due to gravity. Unit [m/s^2].</p></li>
+<li><p><strong>reference_pressure</strong> (<a class="reference internal" href="pyopmnearwell.ml.nn.html#pyopmnearwell.ml.nn.ArrayLike" title="pyopmnearwell.ml.nn.ArrayLike"><em>ArrayLike</em></a>) – Reference pressure at height 0. Unit [Pa].</p></li>
+<li><p><strong>height</strong> (<a class="reference internal" href="pyopmnearwell.ml.nn.html#pyopmnearwell.ml.nn.ArrayLike" title="pyopmnearwell.ml.nn.ArrayLike"><em>ArrayLike</em></a>) – Height of the gas column. Unit [m].</p></li>
+<li><p><strong>temperature</strong> (<a class="reference internal" href="pyopmnearwell.ml.nn.html#pyopmnearwell.ml.nn.ArrayLike" title="pyopmnearwell.ml.nn.ArrayLike"><em>ArrayLike</em></a>) – Temperature. Unit [K].</p></li>
+<li><p><strong>molecule_mass</strong> (<a class="reference internal" href="pyopmnearwell.ml.nn.html#pyopmnearwell.ml.nn.ArrayLike" title="pyopmnearwell.ml.nn.ArrayLike"><em>ArrayLike</em></a>) – Molecular mass of the gas. Unit [kg/mol].</p></li>
+<li><p><strong>gravity</strong> (<a class="reference internal" href="pyopmnearwell.ml.nn.html#pyopmnearwell.ml.nn.ArrayLike" title="pyopmnearwell.ml.nn.ArrayLike"><em>ArrayLike</em></a><em>, </em><em>optional</em>) – Acceleration due to gravity. Unit [m/s^2].</p></li>
 <li><p><strong>units.GRAVITATIONAL_ACCELERATION</strong> (<em>Defaults to</em>)</p></li>
 <li><p><strong>i.e.</strong></p></li>
 <li><p><strong>9.8`.</strong> (<em>ca.</em>)</p></li>
@@ -284,7 +284,7 @@ using the ideal gas law and the hydrostatic equilibrium formula. The formula is:
 <dd class="field-even"><p>Hydrostatic pressure at the given height. Unit [Pa].</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>ArrayLike</p>
+<dd class="field-odd"><p><a class="reference internal" href="pyopmnearwell.ml.nn.html#pyopmnearwell.ml.nn.ArrayLike" title="pyopmnearwell.ml.nn.ArrayLike">ArrayLike</a></p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -304,19 +304,19 @@ from the Peaceman well model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>k_h</strong> (<em>ArrayLike</em>) – Permeability times the cell thickness. Unit: [m^3].</p></li>
-<li><p><strong>r_e</strong> (<em>ArrayLike</em>) – Equivalent well-block radius. Needs to have the same unit as
+<li><p><strong>k_h</strong> (<a class="reference internal" href="pyopmnearwell.ml.nn.html#pyopmnearwell.ml.nn.ArrayLike" title="pyopmnearwell.ml.nn.ArrayLike"><em>ArrayLike</em></a>) – Permeability times the cell thickness. Unit: [m^3].</p></li>
+<li><p><strong>r_e</strong> (<a class="reference internal" href="pyopmnearwell.ml.nn.html#pyopmnearwell.ml.nn.ArrayLike" title="pyopmnearwell.ml.nn.ArrayLike"><em>ArrayLike</em></a>) – Equivalent well-block radius. Needs to have the same unit as
 <code class="docutils literal notranslate"><span class="pre">r_w</span></code>.</p></li>
-<li><p><strong>r_w</strong> (<em>ArrayLike</em>) – Wellbore radius. Needs to have the same unit as <code class="docutils literal notranslate"><span class="pre">r_e</span></code>.</p></li>
-<li><p><strong>rho</strong> (<em>ArrayLike</em>) – Density. Unit: [kg/m^3].</p></li>
-<li><p><strong>mu</strong> (<em>ArrayLike</em>) – Viscosity. Unit: [Pa*s].</p></li>
+<li><p><strong>r_w</strong> (<a class="reference internal" href="pyopmnearwell.ml.nn.html#pyopmnearwell.ml.nn.ArrayLike" title="pyopmnearwell.ml.nn.ArrayLike"><em>ArrayLike</em></a>) – Wellbore radius. Needs to have the same unit as <code class="docutils literal notranslate"><span class="pre">r_e</span></code>.</p></li>
+<li><p><strong>rho</strong> (<a class="reference internal" href="pyopmnearwell.ml.nn.html#pyopmnearwell.ml.nn.ArrayLike" title="pyopmnearwell.ml.nn.ArrayLike"><em>ArrayLike</em></a>) – Density. Unit: [kg/m^3].</p></li>
+<li><p><strong>mu</strong> (<a class="reference internal" href="pyopmnearwell.ml.nn.html#pyopmnearwell.ml.nn.ArrayLike" title="pyopmnearwell.ml.nn.ArrayLike"><em>ArrayLike</em></a>) – Viscosity. Unit: [Pa*s].</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><span class="math notranslate nohighlight">\(WI\)</span>. Unit: [m*s].</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>WI (ArrayLike)</p>
+<dd class="field-odd"><p>WI (<a class="reference internal" href="pyopmnearwell.ml.nn.html#pyopmnearwell.ml.nn.ArrayLike" title="pyopmnearwell.ml.nn.ArrayLike">ArrayLike</a>)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -333,17 +333,17 @@ from the Peaceman well model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>k_h</strong> (<em>ArrayLike</em>) – Permeability times the cell thickness. Unit: [m^3].</p></li>
-<li><p><strong>r_e</strong> (<em>ArrayLike</em>) – Equivalent well-block radius. Needs to have the same unit as
+<li><p><strong>k_h</strong> (<a class="reference internal" href="pyopmnearwell.ml.nn.html#pyopmnearwell.ml.nn.ArrayLike" title="pyopmnearwell.ml.nn.ArrayLike"><em>ArrayLike</em></a>) – Permeability times the cell thickness. Unit: [m^3].</p></li>
+<li><p><strong>r_e</strong> (<a class="reference internal" href="pyopmnearwell.ml.nn.html#pyopmnearwell.ml.nn.ArrayLike" title="pyopmnearwell.ml.nn.ArrayLike"><em>ArrayLike</em></a>) – Equivalent well-block radius. Needs to have the same unit as
 <code class="docutils literal notranslate"><span class="pre">r_w</span></code>.</p></li>
-<li><p><strong>r_w</strong> (<em>ArrayLike</em>) – Wellbore radius. Needs to have the same unit as <code class="docutils literal notranslate"><span class="pre">r_e</span></code>.</p></li>
+<li><p><strong>r_w</strong> (<a class="reference internal" href="pyopmnearwell.ml.nn.html#pyopmnearwell.ml.nn.ArrayLike" title="pyopmnearwell.ml.nn.ArrayLike"><em>ArrayLike</em></a>) – Wellbore radius. Needs to have the same unit as <code class="docutils literal notranslate"><span class="pre">r_e</span></code>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><span class="math notranslate nohighlight">\(WI\)</span>. Unit: [m^3].</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>WI (ArrayLike)</p>
+<dd class="field-odd"><p>WI (<a class="reference internal" href="pyopmnearwell.ml.nn.html#pyopmnearwell.ml.nn.ArrayLike" title="pyopmnearwell.ml.nn.ArrayLike">ArrayLike</a>)</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
@@ -369,14 +369,14 @@ on the triangle grid is equal to the solution on a radial grid with the given ce
 radii.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>angle</strong> (<em>ArrayLike</em>) – Angle between both sides of the triangle grid. Default is
+<dd class="field-odd"><p><strong>angle</strong> (<a class="reference internal" href="pyopmnearwell.ml.nn.html#pyopmnearwell.ml.nn.ArrayLike" title="pyopmnearwell.ml.nn.ArrayLike"><em>ArrayLike</em></a>) – Angle between both sides of the triangle grid. Default is
 <span class="math notranslate nohighlight">\(\pi/3\)</span>.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><span class="math notranslate nohighlight">\(r_{radial_grid} / x_{triangle_grid}\)</span></p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>ArrayLike</p>
+<dd class="field-odd"><p><a class="reference internal" href="pyopmnearwell.ml.nn.html#pyopmnearwell.ml.nn.ArrayLike" title="pyopmnearwell.ml.nn.ArrayLike">ArrayLike</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -400,23 +400,23 @@ doi: 10.1016/j.geothermics.2022.102516.]</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>k_h</strong> (<em>ArrayLike</em>) – Permeability times the cell thickness. Unit: [m^3].</p></li>
-<li><p><strong>r_e</strong> (<em>ArrayLike</em>) – Equivalent well-block radius. Needs to have the same unit as
+<li><p><strong>k_h</strong> (<a class="reference internal" href="pyopmnearwell.ml.nn.html#pyopmnearwell.ml.nn.ArrayLike" title="pyopmnearwell.ml.nn.ArrayLike"><em>ArrayLike</em></a>) – Permeability times the cell thickness. Unit: [m^3].</p></li>
+<li><p><strong>r_e</strong> (<a class="reference internal" href="pyopmnearwell.ml.nn.html#pyopmnearwell.ml.nn.ArrayLike" title="pyopmnearwell.ml.nn.ArrayLike"><em>ArrayLike</em></a>) – Equivalent well-block radius. Needs to have the same unit as
 <code class="docutils literal notranslate"><span class="pre">r_w</span></code>.</p></li>
-<li><p><strong>r_w</strong> (<em>ArrayLike</em>) – Wellbore radius. Needs to have the same unit as <code class="docutils literal notranslate"><span class="pre">r_e</span></code>.</p></li>
-<li><p><strong>rho_1</strong> (<em>ArrayLike</em>) – Density of phase 1. Unit: [kg/m^3].</p></li>
-<li><p><strong>mu_1</strong> (<em>ArrayLike</em>) – Viscosity of phase 1. Unit: [Pa*s].</p></li>
-<li><p><strong>k_r1</strong> (<em>ArrayLike</em>) – Relative permeability of phase 1.</p></li>
-<li><p><strong>rho_2</strong> (<em>ArrayLike</em>) – Density of phase 2. Unit: [kg/m^3].</p></li>
-<li><p><strong>mu_2</strong> (<em>ArrayLike</em>) – Viscosity of phase 2. Unit: [Pa*s].</p></li>
-<li><p><strong>k_r2</strong> (<em>ArrayLike</em>) – Relative permeability of phase 2.</p></li>
+<li><p><strong>r_w</strong> (<a class="reference internal" href="pyopmnearwell.ml.nn.html#pyopmnearwell.ml.nn.ArrayLike" title="pyopmnearwell.ml.nn.ArrayLike"><em>ArrayLike</em></a>) – Wellbore radius. Needs to have the same unit as <code class="docutils literal notranslate"><span class="pre">r_e</span></code>.</p></li>
+<li><p><strong>rho_1</strong> (<a class="reference internal" href="pyopmnearwell.ml.nn.html#pyopmnearwell.ml.nn.ArrayLike" title="pyopmnearwell.ml.nn.ArrayLike"><em>ArrayLike</em></a>) – Density of phase 1. Unit: [kg/m^3].</p></li>
+<li><p><strong>mu_1</strong> (<a class="reference internal" href="pyopmnearwell.ml.nn.html#pyopmnearwell.ml.nn.ArrayLike" title="pyopmnearwell.ml.nn.ArrayLike"><em>ArrayLike</em></a>) – Viscosity of phase 1. Unit: [Pa*s].</p></li>
+<li><p><strong>k_r1</strong> (<a class="reference internal" href="pyopmnearwell.ml.nn.html#pyopmnearwell.ml.nn.ArrayLike" title="pyopmnearwell.ml.nn.ArrayLike"><em>ArrayLike</em></a>) – Relative permeability of phase 1.</p></li>
+<li><p><strong>rho_2</strong> (<a class="reference internal" href="pyopmnearwell.ml.nn.html#pyopmnearwell.ml.nn.ArrayLike" title="pyopmnearwell.ml.nn.ArrayLike"><em>ArrayLike</em></a>) – Density of phase 2. Unit: [kg/m^3].</p></li>
+<li><p><strong>mu_2</strong> (<a class="reference internal" href="pyopmnearwell.ml.nn.html#pyopmnearwell.ml.nn.ArrayLike" title="pyopmnearwell.ml.nn.ArrayLike"><em>ArrayLike</em></a>) – Viscosity of phase 2. Unit: [Pa*s].</p></li>
+<li><p><strong>k_r2</strong> (<a class="reference internal" href="pyopmnearwell.ml.nn.html#pyopmnearwell.ml.nn.ArrayLike" title="pyopmnearwell.ml.nn.ArrayLike"><em>ArrayLike</em></a>) – Relative permeability of phase 2.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><span class="math notranslate nohighlight">\(WI\)</span>. Unit: [m*s].</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>WI (ArrayLike)</p>
+<dd class="field-odd"><p>WI (<a class="reference internal" href="pyopmnearwell.ml.nn.html#pyopmnearwell.ml.nn.ArrayLike" title="pyopmnearwell.ml.nn.ArrayLike">ArrayLike</a>)</p>
 </dd>
 </dl>
 </dd></dl>

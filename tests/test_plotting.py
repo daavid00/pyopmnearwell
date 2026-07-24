@@ -10,7 +10,7 @@ from pyopmnearwell.utils.plotting import save_fig_and_data
 
 def test_save_fig_and_data(tmp_path: pathlib.Path):
     # Create a pyplot figure
-    fig, ax = plt.subplots()
+    fig, _ = plt.subplots()
     plt.plot([1, 2, 3], [4, 5, 6])
 
     # Save the figure and data
