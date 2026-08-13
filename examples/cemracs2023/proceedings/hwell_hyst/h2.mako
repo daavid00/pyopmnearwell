@@ -36,10 +36,10 @@ rock = [[700.15,700.15,0.3,50,100]]
 #If --enable-tuning=1, then last entry for TUNING values as described in the OPM manual.
 inj = [
 % for i in range(mt.floor(time/(tperiodi + tperiodp))):
-[${tperiodi},${tperiodi},1,${qi}],
+[${tperiodi},${tperiodi},1,${qi},"2* 1e-12"],
 % if i == mt.floor(time/(tperiodi + tperiodp)) - 1:
-[${tperiodp},${tperiodp},1,${-qp},3.5e1]]
+[${tperiodp},${tperiodp},1,${-qp},3.5e1,"2* 1e-12"]]
 % else:
-[${tperiodp},${tperiodp},1,${-qp},3.5e1],
+[${tperiodp},${tperiodp},1,${-qp},3.5e1,"2* 1e-12"],
 % endif
 % endfor

@@ -29,6 +29,18 @@ def process_input(dic, in_file):
     dic["ycn"] = [1]
     with open(in_file, "rb") as file:
         dic.update(tomllib.load(file))
+    if "flow" not in dic:
+        # For toml files without flow, we generate only the requested tables
+        if "safu" not in dic:
+            dic["safu"] = [1]
+        if "template" not in dic:
+            dic["template"] = "base"
+        if "model" not in dic:
+            dic["model"] = "co2store"
+        if "hysteresis" not in dic:
+            dic["hysteresis"] = 0
+        dic["imbnum"] = 2 if dic["hysteresis"] != 0 else 1
+        return dic
     dic["satnum"] = len(dic["rock"]) - dic["perforations"][0]
     dic["fluxnum"] = len(dic["rock"]) > 1
     dic["imbnum"] = 2 if dic["hysteresis"] != 0 else 1

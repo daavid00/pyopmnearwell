@@ -82,24 +82,24 @@ CASES: tuple[ModelCase, ...] = (
         default_template="base",
         keywords=("H2STORE",),
         templates=(
-            ModelTemplateExpected("base", 40.04848861694336, 40.92131805419922),
-            ModelTemplateExpected("gaswater", 40.04848861694336, 40.92131805419922),
-            ModelTemplateExpected("hwell", 40.04848861694336, 40.92131805419922),
-            ModelTemplateExpected("hwellnoise", 40.04848861694336, 40.92131805419922),
+            ModelTemplateExpected("base", 41.048431396484375, 41.92125701904297),
+            ModelTemplateExpected("gaswater", 41.048431396484375, 41.92125701904297),
+            ModelTemplateExpected("hwell", 41.048431396484375, 41.92125701904297),
+            ModelTemplateExpected("hwellnoise", 41.048431396484375, 41.92125701904297),
             ModelTemplateExpected(
-                "nodissolution", 40.04848861694336, 40.92131805419922
+                "nodissolution", 41.048431396484375, 41.92125701904297
             ),
             ModelTemplateExpected(
-                "okoroafor2023", 40.04848861694336, 40.92131805419922
+                "okoroafor2023", 41.048431396484375, 41.92125701904297
             ),
         ),
     ),
     ModelCase(
-        model="h2store",
+        model="h2ch4",
         default_template="base",
         keywords=("CH4",),
         templates=(
-            ModelTemplateExpected("H2CH4", 40.0012321472168, 40.023380279541016),
+            ModelTemplateExpected("h2ch4", 40.0012321472168, 40.023380279541016),
         ),
     ),
     ModelCase(
@@ -125,7 +125,7 @@ CASES: tuple[ModelCase, ...] = (
             "PCFACT",
         ),
         templates=(
-            ModelTemplateExpected("biofilm", 40.048500061035156, 54.38808059692383),
+            ModelTemplateExpected("biofilm", 41.04844284057617, 55.40837860107422),
         ),
     ),
 )

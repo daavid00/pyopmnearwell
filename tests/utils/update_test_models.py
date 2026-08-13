@@ -70,10 +70,10 @@ CASES: tuple[ModelCase, ...] = (
         ),
     ),
     ModelCase(
-        model="h2store",
+        model="h2ch4",
         default_template="base",
         keywords=("CH4",),
-        templates=("H2CH4",),
+        templates=("h2ch4",),
     ),
     ModelCase(
         model="saltprec",

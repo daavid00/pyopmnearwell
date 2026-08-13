@@ -88,6 +88,30 @@
              
   <section id="examples">
 <h1>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h1>
+<p><a class="reference external" href="https://resinsight.org">ResInsight</a> and <a class="reference external" href="https://github.com/cssr-tools/plopm">plopm</a> are used for the visualization of the results.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can install <a class="reference external" href="https://github.com/cssr-tools/plopm">plopm</a> by executing in the terminal:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/cssr-tools/plopm.git
+</pre></div>
+</div>
+<p>There are binary packages for Linux and Windows to install Resinsight, see the <a class="reference external" href="https://resinsight.org/releases/">ResInsight Documentation</a>. For macOS users, you could try to install it using <a class="reference external" href="https://brew.sh">brew</a> by executing:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>brew<span class="w"> </span>tap<span class="w"> </span>cssr-tools/opm
+brew<span class="w"> </span>trust<span class="w"> </span>cssr-tools/opm
+brew<span class="w"> </span>install<span class="w"> </span>cssr-tools/opm/resinsight<span class="w"> </span>-y
+</pre></div>
+</div>
+<p>Then, you should be able to open resinsight by typing in the terminal <strong>resinsight</strong>. If you have issues installing ResInsight, <a class="reference external" href="https://www.paraview.org">ParaView</a> can be also used. However, you need to add the flag <strong>--enable-vtk-output=true</strong>
+to OPM Flow.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>For the figures in the following examples we show a screen recording from ResInsight and a PNG and GIF from plopm. To generate the results,
+we add a link to a bash file that can be run from the main pyopmnearwell repository as (the results are generated in the test_outputs folder):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>.<span class="w"> </span>./tests/scripts/name_of_script.sh
+</pre></div>
+</div>
+</div>
 <section id="hello-world">
 <h2>Hello world<a class="headerlink" href="#hello-world" title="Link to this heading"></a></h2>
 <p>In this example we consider the configuration file <a class="reference external" href="https://github.com/cssr-tools/pyopmnearwell/blob/main/examples/h2o.toml">h2o.toml</a> available in the
@@ -103,12 +127,9 @@ examples folder, where the co2store model is used and only water is injected in 
 <figure class="align-default">
 <img alt="_images/pressure_1D.png" src="_images/pressure_1D.png" />
 </figure>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>You can install <a class="reference external" href="https://github.com/cssr-tools/plopm">plopm</a> by executing in the terminal:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/cssr-tools/plopm.git
+<p>Then, both commands (pyopmnearwell and plopm) can be run by (<a class="reference external" href="https://github.com/cssr-tools/pyopmnearwell/blob/main/tests/scripts/docs_hello_world.sh">docs_hello_world.sh</a>):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>.<span class="w"> </span>./tests/scripts/docs_hello_world.sh
 </pre></div>
-</div>
 </div>
 </section>
 <section id="co2-cyclic-injection">
@@ -121,22 +142,26 @@ examples folder as <a class="reference external" href="https://github.com/cssr-t
 </pre></div>
 </div>
 <p>The execution time was c.a. 20 seconds and the following is an animation using <a class="reference external" href="https://resinsight.org">ResInsight</a> to visualize the gas saturation:</p>
-<figure class="align-default" id="id1">
+<figure class="align-default" id="id3">
 <img alt="_images/saturation.gif" src="_images/saturation.gif" />
 <figcaption>
-<p><span class="caption-text">Visualization of the gas saturation using ResInsight.</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+<p><span class="caption-text">Visualization of the gas saturation using ResInsight.</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>To generate a gif using plopm, this can be achieved by executing:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>plopm<span class="w"> </span>-i<span class="w"> </span>CO2<span class="w"> </span>-v<span class="w"> </span>sgas<span class="w"> </span>-m<span class="w"> </span>gif<span class="w"> </span>-dpi<span class="w"> </span><span class="m">1000</span><span class="w"> </span>-interval<span class="w"> </span><span class="m">50</span><span class="w"> </span>-loop<span class="w"> </span><span class="m">1</span><span class="w"> </span>-d<span class="w"> </span><span class="m">10</span>,5<span class="w"> </span>-yformat<span class="w"> </span>.0f<span class="w"> </span>-f<span class="w"> </span><span class="m">20</span><span class="w"> </span>-cnum<span class="w"> </span><span class="m">6</span><span class="w"> </span>-t<span class="w"> </span><span class="s2">&quot;Cyclic injection&quot;</span>
 </pre></div>
 </div>
-<figure class="align-default" id="id2">
+<figure class="align-default" id="id4">
 <img alt="_images/co2_sgas.gif" src="_images/co2_sgas.gif" />
 <figcaption>
-<p><span class="caption-text">Visualization of the gas saturation using plopm.</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+<p><span class="caption-text">Visualization of the gas saturation using plopm.</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
 </figcaption>
 </figure>
+<p>Then, both commands (pyopmnearwell and plopm) can be run by (<a class="reference external" href="https://github.com/cssr-tools/pyopmnearwell/blob/main/tests/scripts/docs_co2_cyclic_injection.sh">docs_co2_cyclic_injection.sh</a>):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>.<span class="w"> </span>./tests/scripts/docs_co2_cyclic_injection.sh
+</pre></div>
+</div>
 </section>
 <section id="ccus-machine-learning">
 <h2>CCUS (machine learning)<a class="headerlink" href="#ccus-machine-learning" title="Link to this heading"></a></h2>

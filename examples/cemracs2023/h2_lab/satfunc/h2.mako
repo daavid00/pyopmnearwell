@@ -31,9 +31,9 @@ rock = [[700.15,700.15,0.25,20,10]]
 #1) injection time [d], 2) time step size to write results [d], 3) fluid (0 wetting, 1 non-wetting),
 #4) injection rates [kg/day] (for h2store, 5) minimum BHP for producer [Bar]).
 #If --enable-tuning=1, then last entry for TUNING values as described in the OPM manual.
-inj = [[365,365,1,${200000. / 6},"0.01 10"],
-[90,90,1,0,"0.01 10"],
+inj = [[365,365,1,${200000. / 6},"0.01 10 1e-12"],
+[90,90,1,0,"0.01 10 1e-12"],
 % for _,control in enumerate(schedule):
-[${tperiod},${tperiod},1,${-1*qrate if control == 0 else qrate}${",3.6e1,'0.01 0.1']," if control == 0 else ",'0.01 0.1'],"}
+[${tperiod},${tperiod},1,${-1*qrate if control == 0 else qrate}${",3.6e1,'0.01 0.1 1e-12']," if control == 0 else ",'0.01 0.1 1e-12'],"}
 % endfor
-[730,730,1,${-200000. / 6},3.6e1,"0.01 10"]]
+[730,730,1,${-200000. / 6},3.6e1,"0.01 10 1e-12"]]
