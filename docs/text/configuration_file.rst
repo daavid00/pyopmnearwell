@@ -141,9 +141,9 @@ top to the bottom on the left side of the domain and the injection is given as k
     #1) injection time [d], 2) time step size to write results [d],
     #3) fluid (0 wetting, 1 non-wetting), 4) injection rates [kg/day].
     #If --enable-tuning=1, then 5) for TUNING values as described in the OPM manual.
-    inj = [[7,1e-1,1,57611.52,"1* 1e-2"],
-    [7,1e-1,0,57611.52,"1* 5e-2"],
-    [7,1e-1,1,57611.52,"1* 5e-2"]]
+    inj = [[7,1e-1,1,57611.52,"1* 1e-2 1e-12"],
+    [7,1e-1,0,57611.52,"1* 5e-2 1e-12"],
+    [7,1e-1,1,57611.52,"1* 5e-2 1e-12"]]
 
 Here CO2 (non-wetting phase) is injected for seven days printing the results 70 times and limmiting the time step
 to 1e-2 days, after water (wetting phase) is injected for the same period at the same mass rate but limiting the time step 

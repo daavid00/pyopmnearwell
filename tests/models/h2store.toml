@@ -16,14 +16,14 @@ pvmult = 1e5 #Pore volume multiplier on the boundary [-] (-1 to ignore; 0 to use
 econ = 0.95   #For h2 models, econ for the producer
 
 #Set the saturation functions
-krw = "krw * ((sw - swi) / (1.0 - sni -swi)) ** nkrw"        #Wetting rel perm saturation function [-]
-krn = "krn * ((1.0 - sw - sni) / (1.0 - sni - swi)) ** nkrn" #Non-wetting rel perm saturation function [-]
-pcap = "pen * ((sw - swi) / (1.0 - swi)) ** (-(1.0 / npen))" #Capillary pressure saturation function [Bar]
+krw = "krw * ((sw - swi) / (1.0 -swi)) ** nkrw"        #Wetting rel perm saturation function [-]
+krn = "krn * ((1.0 - sw - sni) / (1.0 - sni)) ** nkrn" #Non-wetting rel perm saturation function [-]
+pcap = "pen * ((sw - swi) / (1.0 - swi)) ** (-(1.0 / npen))" #Capillary pressure saturation function [bar]
 
 #Properties sat functions: 1) swi [-], 2) sni [-], 3) krw [-], 4) krn [-], 5) pen [Bar], 6) nkrw [-],
 #7) nkrn [-], 8) npen [-], 9) threshold cP evaluation, 10) ignore swi for cP? (sl* for cplog)
 #11) npoints [-] (entry per layer, if hysteresis, additional entries per layer)
-safu = [[0.15,0.05,1,1,0,2,2,2,1e-4,0,10000]]
+safu = [[0.15,0,1,1,1,5,2,2,1e-4,0,100]]
 
 #Properties rock: 1) Kxy [mD], 2) Kz [mD], 3) phi [-], 4) thickness [m], and 5) no cells in the z dir [-] (entry per layer)
 rock = [[1013.25,101.325,0.25,10,10]]
@@ -32,4 +32,4 @@ rock = [[1013.25,101.325,0.25,10,10]]
 #1) injection time [d], 2) time step size to write results [d], 3) fluid (0 wetting, 1 non-wetting),
 #4) injection rates [kg/day] (for h2store, 5) minimum BHP for producer [Bar]).
 #If --enable-tuning=1, then last entry for TUNING values as described in the OPM manual.
-inj = [[1,1,1,5000],[1,1,1,-5000,3e1]]
+inj = [[1,1,1,5000],[1,1,1,-500,3e1]]

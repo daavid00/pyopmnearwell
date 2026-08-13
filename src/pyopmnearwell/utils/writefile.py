@@ -50,6 +50,13 @@ def reservoir_files(
         dic (dict): Global dictionary with new added parameters
 
     """
+    if "flow" not in dic:
+        # We generate only the tables
+        if "poroperm" in dic:
+            generate_permfact_pcfact(dic)
+        if "krw" in dic:
+            manage_tables(dic)
+        return
     inc_folder = pathlib.Path(kwargs.get("inc_folder", pathlib.Path("")))
     recalc_grid = kwargs.get("recalc_grid", True)
     recalc_tables = kwargs.get("recalc_tables", True)
@@ -423,23 +430,29 @@ def manage_sections(dic):
             f.write(result)
 
     if dic["model"] in ["saltprec"] or dic["template"] in ["biofilm"]:
-        result = generate_permfact(dic)
+        generate_permfact_pcfact(dic)
+
+
+def generate_permfact_pcfact(dic):
+    "Generate both permfact and pcfact"
+    fprep = dic["fprep"]
+    result = generate_permfact(dic)
+    with open(
+        os.path.join(fprep, "PERMFACT.INC"),
+        "w",
+        encoding="utf-8",
+    ) as f:
+        f.writelines(HEADER)
+        f.writelines(result)
+    if dic["pcfact"] != 0:
+        result = generate_pcfact(dic)
         with open(
-            os.path.join(fprep, "PERMFACT.INC"),
+            os.path.join(fprep, "PCFACT.INC"),
             "w",
             encoding="utf-8",
         ) as f:
             f.writelines(HEADER)
             f.writelines(result)
-        if dic["pcfact"] != 0:
-            result = generate_pcfact(dic)
-            with open(
-                os.path.join(fprep, "PCFACT.INC"),
-                "w",
-                encoding="utf-8",
-            ) as f:
-                f.writelines(HEADER)
-                f.writelines(result)
 
 
 def generate_pcfact(dic):
@@ -549,12 +562,123 @@ def manage_tables(dic):
     """Write the saturation function tables"""
     model = dic["model"]
     template = dic["template"].lower()
-    if model in ["co2store", "h2store", "saltprec"] and template != "h2ch4":
+    if model in ["h2store"] and template != "h2ch4":
+        result = generate_saturation_functions_gsf_wsf(dic)
+    elif model in ["co2store", "saltprec"]:
         result = generate_saturation_functions_format_2(dic)
     else:
         result = generate_saturation_functions_format_1(dic)
     with open(f"{dic['fprep']}/TABLES.INC", "w", encoding="utf8") as f:
         f.writelines(result)
+
+
+def generate_saturation_functions_gsf_wsf(dic):
+    "Using GSF and WSF"
+    krw_code = compile(dic["krw"].strip(), "<string>", "eval")
+    krn_code = compile(dic["krn"].strip(), "<string>", "eval")
+    pcap_code = compile(dic["pcap"].strip(), "<string>", "eval")
+
+    safeglob = {"__builtins__": {}, "np": np}
+
+    safug = [[0.0] * len(dic["safu"][0]) for _ in range(len(dic["safu"]))]
+    safuw = [[0.0] * len(dic["safu"][0]) for _ in range(len(dic["safu"]))]
+
+    for i in range(len(dic["safu"])):
+        for j in range(len(dic["safu"][i])):
+            value = dic["safu"][i][j]
+            safug[i][j] = value
+
+            if dic["imbnum"] == 2 and j == 1 and len(dic["safu"]) / dic["imbnum"] <= i:
+                idx = i % (len(dic["safu"]) // dic["imbnum"])
+                safuw[i][j] = dic["safu"][idx][j]
+            else:
+                safuw[i][j] = value
+
+    lines = []
+    lines.append("GSF\n")
+    for j, para in enumerate(safug):
+        if j > 0 and safug[j - 1] == para:
+            lines.append("/\n")
+            continue
+
+        swi = para[0]
+        sni = para[1]
+        krn = para[3]
+        pen = para[4]
+        nkrn = para[6]
+        npen = para[7]
+
+        sco2 = np.linspace(0, 1 - swi, para[10])
+        sw_values = 1 - sco2
+        pc_sw_values = sw_values + para[8]
+
+        krn_vals = eval(  # pylint: disable=eval-used
+            krn_code,
+            safeglob,
+            {
+                "sw": sw_values,
+                "swi": swi,
+                "sni": sni,
+                "krn": krn,
+                "nkrn": nkrn,
+            },
+        )
+
+        krn_vals = np.maximum(0, krn_vals)
+
+        if pen == 0:
+            pcw_vals = np.zeros_like(sco2)
+        else:
+            pcw_vals = eval(  # pylint: disable=eval-used
+                pcap_code,
+                safeglob,
+                {
+                    "sw": pc_sw_values,
+                    "swi": swi,
+                    "sni": sni,
+                    "pen": pen,
+                    "npen": npen,
+                },
+            )
+
+        for i, value in enumerate(sco2):
+            lines.append(f"{value:E} {krn_vals[i]:E} {pcw_vals[i]:E} \n")
+
+        lines.append("/\n")
+
+    lines.append("WSF\n")
+    for j, para in enumerate(safuw):
+        if j > 0 and safuw[j - 1] == para:
+            lines.append("/\n")
+            continue
+
+        swi = para[0]
+        sni = para[1]
+        krw = para[2]
+        nkrw = para[5]
+
+        sw_values = np.linspace(swi, 1, para[10])
+
+        krw_vals = eval(  # pylint: disable=eval-used
+            krw_code,
+            safeglob,
+            {
+                "sw": sw_values,
+                "swi": swi,
+                "sni": sni,
+                "krw": krw,
+                "nkrw": nkrw,
+            },
+        )
+
+        krw_vals = np.maximum(0, krw_vals)
+
+        for i, value in enumerate(sw_values):
+            lines.append(f"{value:E} {krw_vals[i]:E}\n")
+
+        lines.append("/\n")
+
+    return lines
 
 
 def generate_saturation_functions_format_2(dic):
