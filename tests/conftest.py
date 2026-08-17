@@ -75,7 +75,7 @@ def fixture_run_main(tmp_path_factory) -> pathlib.Path:
     shared_dir: pathlib.Path = tmp_path_factory.mktemp("shared")
     shutil.copy((dirname / "models" / "input").with_suffix(".toml"), shared_dir)
     os.chdir(shared_dir)
-    main()
+    main([])
     return shared_dir
 
 
