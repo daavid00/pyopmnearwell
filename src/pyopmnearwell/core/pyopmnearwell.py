@@ -14,8 +14,40 @@ from pyopmnearwell.utils.runs import simulations
 from pyopmnearwell.utils.writefile import reservoir_files
 
 
-def main(argv=None) -> None:
+def main(argv: list[str] | None = None) -> None:
     """Main function for the pyopmnearwell executable"""
+    cmdargs = load_parser(argv)
+    check_cmdargs(cmdargs)
+    if int(cmdargs.warnings) == 0:
+        warnings.filterwarnings("ignore")
+    file = cmdargs.input
+    fol = os.path.abspath(cmdargs.output)
+    mode = cmdargs.mode
+    dic: dict[str, Any] = {
+        "pat": os.path.split(os.path.dirname(__file__))[0],
+        "fol": fol,
+        "mode": mode,
+        "write": int(cmdargs.vectors),
+        "runname": pathlib.Path(file).stem,
+    }
+    dic = process_input(dic, file)
+    os.makedirs(fol, exist_ok=True)
+    if mode == "single":
+        dic["fprep"] = fol
+        dic["foutp"] = fol
+    else:
+        dic["fprep"] = f"{fol}/preprocessing"
+        dic["foutp"] = f"{fol}/output"
+    if mode in ["all", "deck", "single"]:
+        os.makedirs(dic["fprep"], exist_ok=True)
+        reservoir_files(dic)
+    if mode in ["all", "flow", "single"]:
+        os.makedirs(dic["foutp"], exist_ok=True)
+        simulations(dic)
+
+
+def load_parser(argv: list[str] | None) -> argparse.Namespace:
+    """CLI arguments"""
     parser = argparse.ArgumentParser(
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
         description="Main script to run a near-well system with OPM Flow.",
@@ -60,30 +92,34 @@ def main(argv=None) -> None:
         default="0",
         help="Print Python warnings",
     )
-    cmdargs = vars(parser.parse_known_args(argv)[0])
-    if int(cmdargs["warnings"]) == 0:
-        warnings.filterwarnings("ignore")
-    file = cmdargs["input"]
-    fol = os.path.abspath(cmdargs["output"])
-    mode = cmdargs["mode"]
-    dic: dict[str, Any] = {
-        "pat": os.path.split(os.path.dirname(__file__))[0],
-        "fol": fol,
-        "mode": mode,
-        "write": int(cmdargs["vectors"]),
-        "runname": pathlib.Path(file).stem,
-    }
-    dic = process_input(dic, file)
-    os.makedirs(fol, exist_ok=True)
-    if mode == "single":
-        dic["fprep"] = fol
-        dic["foutp"] = fol
-    else:
-        dic["fprep"] = f"{fol}/preprocessing"
-        dic["foutp"] = f"{fol}/output"
-    if mode in ["all", "deck", "single"]:
-        os.makedirs(dic["fprep"], exist_ok=True)
-        reservoir_files(dic)
-    if mode in ["all", "flow", "single"]:
-        os.makedirs(dic["foutp"], exist_ok=True)
-        simulations(dic)
+    return parser.parse_args(argv)
+
+
+def check_cmdargs(cmdargs: argparse.Namespace) -> None:
+    """Validate command-line arguments.
+
+    The checks cover the input configuration file and output folder.
+
+    Parameters
+    ----------
+    cmdargs
+        Parsed arguments returned by :mod:`argparse`.
+
+    Raises
+    ------
+    SystemExit
+        If an argument is invalid.
+    """
+    input_file = cmdargs.input
+    if not input_file:
+        print("\nInvalid value for '-i', the input file cannot be empty.\n")
+        raise SystemExit(1)
+    if not input_file.lower().endswith(".toml"):
+        print(
+            f"\nInvalid extension for input file '-i {input_file}', "
+            "the valid extension is .toml.\n"
+        )
+        raise SystemExit(1)
+    if not cmdargs.output:
+        print("\nInvalid value for '-o', the output folder cannot be empty.\n")
+        raise SystemExit(1)
