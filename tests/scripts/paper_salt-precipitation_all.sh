@@ -20,10 +20,10 @@ $OUT/case1/nca.png
 missing_file="test_outputs/missing_publication_files.txt"
 missing=0
 
-for f in $files; do
+printf '%s\n' "$files" | while IFS= read -r f; do
+    [ -z "$f" ] && continue
     if [ ! -f "$f" ]; then
         echo "$f" >> "$missing_file"
-        missing=$((missing + 1))
     fi
 done
 
