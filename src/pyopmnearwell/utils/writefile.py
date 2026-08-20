@@ -580,35 +580,21 @@ def generate_saturation_functions_gsf_wsf(dic):
 
     safeglob = {"__builtins__": {}, "np": np}
 
-    safug = [[0.0] * len(dic["safu"][0]) for _ in range(len(dic["safu"]))]
-    safuw = [[0.0] * len(dic["safu"][0]) for _ in range(len(dic["safu"]))]
-
-    for i in range(len(dic["safu"])):
-        for j in range(len(dic["safu"][i])):
-            value = dic["safu"][i][j]
-            safug[i][j] = value
-
-            if dic["imbnum"] == 2 and j == 1 and len(dic["safu"]) / dic["imbnum"] <= i:
-                idx = i % (len(dic["safu"]) // dic["imbnum"])
-                safuw[i][j] = dic["safu"][idx][j]
-            else:
-                safuw[i][j] = value
-
     lines = []
     lines.append("GSF\n")
-    for j, para in enumerate(safug):
-        if j > 0 and safug[j - 1] == para:
+    for j, para in enumerate(dic["safu"]):
+        if j > 0 and dic["safu"][j - 1] == para:
             lines.append("/\n")
             continue
 
         swi = para[0]
         sni = para[1]
-        krn = para[3]
+        krn_end = para[3]
         pen = para[4]
         nkrn = para[6]
         npen = para[7]
 
-        sco2 = np.linspace(0, 1 - swi, para[10])
+        sco2 = np.linspace(sni, 1 - swi, para[10])
         sw_values = 1 - sco2
         pc_sw_values = sw_values + para[8]
 
@@ -619,7 +605,7 @@ def generate_saturation_functions_gsf_wsf(dic):
                 "sw": sw_values,
                 "swi": swi,
                 "sni": sni,
-                "krn": krn,
+                "krn": krn_end,
                 "nkrn": nkrn,
             },
         )
@@ -642,22 +628,23 @@ def generate_saturation_functions_gsf_wsf(dic):
             )
 
         for i, value in enumerate(sco2):
-            lines.append(f"{value:E} {krn_vals[i]:E} {pcw_vals[i]:E} \n")
+            krn_value = 0.0 if i == 0 else krn_vals[i]
+            lines.append(f"{value:E} {krn_value:E} {pcw_vals[i]:E} \n")
 
         lines.append("/\n")
 
     lines.append("WSF\n")
-    for j, para in enumerate(safuw):
-        if j > 0 and safuw[j - 1] == para:
+    for j, para in enumerate(dic["safu"]):
+        if j > 0 and dic["safu"][j - 1] == para:
             lines.append("/\n")
             continue
 
         swi = para[0]
         sni = para[1]
-        krw = para[2]
+        krw_end = para[2]
         nkrw = para[5]
 
-        sw_values = np.linspace(swi, 1, para[10])
+        sw_values = np.linspace(swi, 1 - sni, para[10])
 
         krw_vals = eval(  # pylint: disable=eval-used
             krw_code,
@@ -666,7 +653,7 @@ def generate_saturation_functions_gsf_wsf(dic):
                 "sw": sw_values,
                 "swi": swi,
                 "sni": sni,
-                "krw": krw,
+                "krw": krw_end,
                 "nkrw": nkrw,
             },
         )
@@ -674,7 +661,8 @@ def generate_saturation_functions_gsf_wsf(dic):
         krw_vals = np.maximum(0, krw_vals)
 
         for i, value in enumerate(sw_values):
-            lines.append(f"{value:E} {krw_vals[i]:E}\n")
+            krw_value = 0.0 if i == 0 else krw_vals[i]
+            lines.append(f"{value:E} {krw_value:E}\n")
 
         lines.append("/\n")
 

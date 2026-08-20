@@ -14,7 +14,7 @@ pressure = 10 #Pressure [Bar] on the top
 temperature = [40,40] #Top and bottom temperatures [C]
 initialphase = 0 #Initial phase in the reservoir (0 wetting, 1 non-wetting) 
 pvmult = 1e5 #Pore volume multiplier on the boundary [-] (-1 to ignore; 0 to use well producers instead)
-hysteresis = "Killough" #Add hysteresis (Killough or Carlson, 0 by default, i.e., no hysteresis)
+ehystr = "1* 2 2* KR" #Define Hysteresis model and parameters (see EHYSTR in the OPM Flow manual)
 zxy = "20-20*np.cos((2*np.pi*x/250)) + 200*(x/1000)**2" #The function for the reservoir surface
 
 #Set the saturation functions

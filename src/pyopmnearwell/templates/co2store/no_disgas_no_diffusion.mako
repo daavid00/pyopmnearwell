@@ -20,7 +20,7 @@ EQLDIMS
 /
 
 TABDIMS
-${f"{(1*(dic['hysteresis']!=0)+1)*(dic['satnum']+dic['perforations'][0])} /" if (1*(dic["hysteresis"]!=0)+1)*(dic['satnum']+dic['perforations'][0])>1 else "/"}
+${f"{(1*(dic['ehystr']!=0)+1)*(dic['satnum']+dic['perforations'][0])} /" if (1*(dic["ehystr"]!=0)+1)*(dic['satnum']+dic['perforations'][0])>1 else "/"}
 
 WATER
 GAS
@@ -30,7 +30,7 @@ METRIC
 
 START
 1 JAN 2000 /
-% if dic["hysteresis"]!=0:
+% if dic["ehystr"]!=0:
 
 SATOPTS
 HYSTER /
@@ -70,9 +70,9 @@ PROPS
 INCLUDE
 ${dic['tables_file']} /
 
-% if dic["hysteresis"]!=0:
+% if dic["ehystr"]!=0:
 EHYSTR
-1* ${0 if dic["hysteresis"].upper()=="CARLSON" else 2} 2* BOTH /
+${dic["ehystr"]} /
 % endif
 
 % if dic["rockcomp"]>0:
@@ -84,11 +84,11 @@ ROCK
 SALINITY
 ${dic["salinity"]} /
 % endif
-% if dic["hysteresis"]!=0 or dic["fluxnum"]:
+% if dic["ehystr"]!=0 or dic["fluxnum"]:
 ----------------------------------------------------------------------------
 REGIONS
 ----------------------------------------------------------------------------
-% if dic["hysteresis"]!=0 and dic["fluxnum"]:
+% if dic["ehystr"]!=0 and dic["fluxnum"]:
 COPY
 FLUXNUM SATNUM /
 FLUXNUM IMBNUM /

@@ -9,9 +9,9 @@ import subprocess
 from mako.template import Template
 
 command_processes = []
-for name in ["nohysteresis", "Carlson", "Killough"]:
+for name, value in zip(["nohysteresis", "Carlson", "Killough"], ["nohysteresis", "1* 0 2* KR", "1* 2 2* KR"]):
     mytemplate = Template(filename="co2.mako")
-    var = {"name": name}
+    var = {"value": value}
     filledtemplate = mytemplate.render(**var)
     with open(
         f"co2_{name}.toml",
