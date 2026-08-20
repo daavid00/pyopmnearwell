@@ -12,7 +12,7 @@ import numpy as np
 def process_input(dic, in_file):
     """Process the input file"""
     for name in [
-        "hysteresis",
+        "ehystr",
         "rockcomp",
         "xflow",
         "confact",
@@ -37,13 +37,13 @@ def process_input(dic, in_file):
             dic["template"] = "base"
         if "model" not in dic:
             dic["model"] = "co2store"
-        if "hysteresis" not in dic:
-            dic["hysteresis"] = 0
-        dic["imbnum"] = 2 if dic["hysteresis"] != 0 else 1
+        if "ehystr" not in dic:
+            dic["ehystr"] = 0
+        dic["imbnum"] = 2 if dic["ehystr"] != 0 else 1
         return dic
     dic["satnum"] = len(dic["rock"]) - dic["perforations"][0]
     dic["fluxnum"] = len(dic["rock"]) > 1
-    dic["imbnum"] = 2 if dic["hysteresis"] != 0 else 1
+    dic["imbnum"] = 2 if dic["ehystr"] != 0 else 1
     zdim, znc, dic["homo"], tmp = 0.0, 0, True, dic["rock"][0][3]
     for index, rock in enumerate(dic["rock"]):
         if len(rock) > 3:

@@ -14,7 +14,7 @@ pressure = 213 #Pressure [Bar] on the top
 temperature = [40,40] #Top and bottom temperatures [C]
 initialphase = 0 #Initial phase in the reservoir (0 wetting, 1 non-wetting)
 pvmult = -1 #Pore volume multiplier on the boundary [-] (-1 to ignore; 0 to use well producers instead)
-hysteresis = "Killough" #Add hysteresis (Killough or Carlson, 0 by default, i.e., no hysteresis)
+ehystr = "1* 2 2* KR" #Define Hysteresis model and parameters (see EHYSTR in the OPM Flow manual)
 rockcomp = 8.5e-5 #Rock compressibility [1/Bar]
 salinity = 2.72 #Brine salinity [1e-3kg-M/kg]
 

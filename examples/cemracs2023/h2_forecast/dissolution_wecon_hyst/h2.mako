@@ -16,7 +16,7 @@ temperature = [50,50] #Top and bottom temperatures [C]
 initialphase = 0 #Initial phase in the reservoir (0 wetting, 1 non-wetting)
 pvmult = 1e4 #Pore volume multiplier on the boundary [-] (-1 to ignore; 0 to use well producers instead)
 
-hysteresis = "Killough" #Add hysteresis (Killough or Carlson, 0 by default, i.e., no hysteresis)
+ehystr = "1* 2 2* KR" #Define Hysteresis model and parameters (see EHYSTR in the OPM Flow manual)
 econ = ${econ} #For h2 models, econ for the producer
 
 zxy = "300-300*mt.exp(-(x**2)/(2*500**2)) - 0*100*mt.exp(-((x-500)**2)/(2*100**2))" #The function for the reservoir surface

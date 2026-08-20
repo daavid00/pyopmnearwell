@@ -15,8 +15,8 @@ temperature = [40,40] #Top and bottom temperatures [C]
 initialphase = 0 #Initial phase in the reservoir (0 wetting, 1 non-wetting) 
 pvmult = -1 #Pore volume multiplier on the boundary [-] (-1 to ignore; 0 to use well producers instead)
 rockcomp = 8.5e-5 #Rock compressibility [1/Bar]
-% if name != "nohysteresis":
-hysteresis = "${name}" #Add hysteresis (Killough or Carlson, 0 by default, i.e., no hysteresis)
+% if value != "nohysteresis":
+ehystr = "${value}" #Define Hysteresis model and parameters (see EHYSTR in the OPM Flow manual)
 % endif
 
 #Set the saturation functions
