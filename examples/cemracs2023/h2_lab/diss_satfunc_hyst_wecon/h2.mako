@@ -9,7 +9,7 @@ adim = 60 #Grid cake/radial: theta [degrees]; core: input/output pipe length [m]
 xdim = 2500 #Length [m] (for cartesian/cpg3d/coord3d/tensor3d, Length=Width=2*xdim)
 xcn = [250] #Number of x-cells [-]; coordinates for grid type coord2d/coord3d [m]; numbers of x-cells for grid type tensor2d/tensor3d [-]
 diameter = 0.25 #Well diameter [m]
-pressure = 40 #Pressure [Bar] on the top 
+pressure = 40 #Pressure [bar] on the top 
 temperature = [50,50] #Top and bottom temperatures [C]
 initialphase = 0 #Initial phase in the reservoir (0 wetting, 1 non-wetting)
 pvmult = 1e4 #Pore volume multiplier on the boundary [-] (-1 to ignore; 0 to use well producers instead)
@@ -19,9 +19,9 @@ econ = 0.95 #For h2 models, econ for the producer
 #Set the saturation functions
 krw = "krw * ((sw - swi) / (1.0 - sni -swi)) ** nkrw"        #Wetting rel perm saturation function [-]
 krn = "krn * ((1.0 - sw - sni) / (1.0 - sni - swi)) ** nkrn" #Non-wetting rel perm saturation function [-]
-pcap = "pen * ((sw - swi) / (1.0 - swi)) ** (-(1.0 / npen))" #Capillary pressure saturation function [Bar]
+pcap = "pen * ((sw - swi) / (1.0 - swi)) ** (-(1.0 / npen))" #Capillary pressure saturation function [bar]
 
-#Properties sat functions: 1) swi [-], 2) sni [-], 3) krw [-], 4) krn [-], 5) pen [Bar], 6) nkrw [-],
+#Properties sat functions: 1) swi [-], 2) sni [-], 3) krw [-], 4) krn [-], 5) pen [bar], 6) nkrw [-],
 #7) nkrn [-], 8) npen [-], 9) threshold cP evaluation, 10) ignore swi for cP? (sl* for cplog)
 #11) npoints [-] (entry per layer, if hysteresis, additional entries per layer)
 safu = [[0.1,0.1,0.8,0.2,4,4,3.5,1.2,1e-4,0,10000],[0.1,0.2,0.8,0.2,4,4,4.5,1.2,1e-4,0,10000]]
@@ -31,7 +31,7 @@ rock = [[700.15,700.15,0.25,20,10]]
 
 #Define the injection values (entry per change in the schedule): 
 #1) injection time [d], 2) time step size to write results [d], 3) fluid (0 wetting, 1 non-wetting),
-#4) injection rates [kg/day] (for h2store, 5) minimum BHP for producer [Bar]).
+#4) injection rates [kg/day] (for h2store, 5) minimum BHP for producer [bar]).
 #If --enable-tuning=1, then last entry for TUNING values as described in the OPM manual.
 inj = [[365,365,1,${200000. / 6},"0.01 10 1e-12"],
 [90,90,1,0,"0.01 10 1e-12"],

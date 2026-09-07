@@ -1,9 +1,8 @@
-============
 Installation
 ============
 
 The following steps work installing the dependencies in Linux via apt-get or in macOS using brew or macports.
-While using packages managers such as Anaconda, Miniforge, or Mamba might work, these are not tested.
+While using package managers such as Anaconda, Miniforge, or Mamba might work, these are not tested.
 The supported Python versions are 3.12 to 3.14.
 
 `ResInsight <https://resinsight.org>`_ and `plopm <https://github.com/cssr-tools/plopm>`_ can be used for the visualization of the results.
@@ -65,7 +64,7 @@ install the Python requirements in a virtual environment with the following comm
 
 .. note::
 
-    The tensorflow package has been removed from the dependencies to allow for a ligther installation of **pyopmnearwell**. Most of the functionality
+    The tensorflow package has been removed from the dependencies to allow for a lighter installation of **pyopmnearwell**. Most of the functionality
     in **pyopmnearwell** can be used without having installed tensorflow, i.e., running in the terminal **pyopmnearwell -i configuration_file.toml** does not require tensorflow.
     The tensorflow package is a requirement only for the machine learning near well functionality, see the `ML_near_well repository <https://github.com/cssr-tools/ML_near_well>`_.
     If you are interested in the ML functionality and using Python 3.12 or 3.13, then after installing **pyopmnearwell**, install tensorflow by executing in the terminal
@@ -97,7 +96,7 @@ supported either via source builds or through running a virtual machine.
 Source build in Linux/Windows
 +++++++++++++++++++++++++++++
 If you are a Linux user (including the Windows subsystem for Linux, see `this link <https://learn.microsoft.com/en-us/windows/python/web-frameworks>`_ 
-for a nice tutorial for setting Python environments in WSL), then you could try to build Flow (after installing the `prerequisites <https://opm-project.org/?page_id=239>`_) from the master branches with mpi support by running
+for a nice tutorial for setting Python environments in WSL), then you could try to build Flow (after installing the `prerequisites <https://opm-project.org/?page_id=239>`_) from the master branches with MPI support by running
 in the terminal the following lines (which in turn should build flow in the folder ./build/opm-simulators/bin/flow): 
 
 .. code-block:: console
@@ -138,7 +137,7 @@ Then, you can try to install flow (v2026.07 interim release) by simply typing:
     brew trust cssr-tools/opm
     brew install cssr-tools/opm/opm-simulators -y
 
-You can check if the installation of OPM Flow succeded by typing in the terminal **flow \-\-help**.
+You can check if the installation of OPM Flow succeeded by typing in the terminal **flow \-\-help**.
 
 .. tip::
     See the actions in the `cssr-tools/homebrew-opm <https://github.com/cssr-tools/homebrew-opm/actions>`_ repository.
@@ -146,3 +145,14 @@ You can check if the installation of OPM Flow succeded by typing in the terminal
 Source build in macOS
 +++++++++++++++++++++
 See `this repository <https://github.com/daavid00/OPM-Flow_macOS>`_ dedicated to build OPM Flow from source in macOS 26 (GitHub actions), and tested with **pycopm**, another repository in cssr-tools.
+
+Verification
+------------
+
+.. code-block:: console
+
+   pyopmnearwell --help
+   flow --help
+   plopm --help
+
+Continue with :doc:`configuration_file` or :doc:`examples`.

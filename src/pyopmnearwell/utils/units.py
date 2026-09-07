@@ -1,7 +1,5 @@
 # pylint: skip-file
-"""Provide conversions between different units and physical/chemical/... constants."""
-
-from __future__ import annotations
+"""Provide unit-conversion factors and physical constants."""
 
 # Permeability
 M2_TO_MILIDARCY: float = 1.01324997e15

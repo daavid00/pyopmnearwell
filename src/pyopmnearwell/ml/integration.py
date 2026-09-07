@@ -10,10 +10,7 @@ the ``recompile_flow`` and ``run_integration`` functions.
 ``recompile_flow`` can only used for well models at the moment, however the
 functionality could easily be extended to replace other parts of the OPM simulator
 before recompiling.
-
 """
-
-from __future__ import annotations
 
 import csv
 import logging
@@ -26,6 +23,7 @@ from mako import exceptions
 from mako.template import Template
 
 from pyopmnearwell.utils.mako import fill_template
+from pyopmnearwell.utils.terminal import pyopmnearwell_error
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -56,13 +54,8 @@ def recompile_flow(
             Defaults to 3.
         local_feature_names (Optional[list[str]], optional): List of local feature names
             that are input to the model. Defaults to Optional.
-
-    Returns:
-        None
-
     Raises:
         ValueError: If ``scalingsfile`` contains an invalid row.
-
     """
     # Ensure ``scalingsfile`` and ``opm_path`` are ``Path`` objects.
     scalingsfile = pathlib.Path(scalingsfile)
@@ -142,10 +135,6 @@ def run_integration(
             in parallel and runs a simulation for each.
         savepath (str): Path to save the output files.
         makofile (str): Path to the ``pyopmnearwell`` deck template for the simulations.
-
-    Returns:
-        None
-
     """
     # Ensure ``savepath`` is a ``Path`` objects.
     savepath = pathlib.Path(savepath)
@@ -168,9 +157,8 @@ def run_integration(
         )
         try:
             filledtemplate = mytemplate.render(**constants)
-        except Exception:
-            print(exceptions.text_error_template().render())
-            raise
+        except ValueError:
+            pyopmnearwell_error(exceptions.text_error_template().render())
         with (savepath / f"run_{i}.toml").open("w", encoding="utf-8") as file:
             # We assume that filledtemplate is a string and ignore Pylance complaining.
             file.write(filledtemplate)  # type: ignore

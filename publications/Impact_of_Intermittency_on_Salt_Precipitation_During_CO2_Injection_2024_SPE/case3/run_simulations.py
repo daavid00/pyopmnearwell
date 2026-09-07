@@ -43,17 +43,17 @@ command_processes.append(
             CASE,
             "-v",
             "permx",
-            "-z",
+            "-asp",
             "0",
             "-c",
             "Pastel1",
-            "-cnum",
+            "-cbn",
             "4",
         ]
     )
 )
 command_processes.append(
-    subprocess.Popen(["plopm", "-i", CASE, "-v", "sgas", "-z", "0", "-x", "[0,20]"])
+    subprocess.Popen(["plopm", "-i", CASE, "-v", "sgas", "-asp", "0", "-x", "[0,20]"])
 )
 command_processes.append(
     subprocess.Popen(
@@ -63,7 +63,7 @@ command_processes.append(
             CASE,
             "-v",
             "saltp",
-            "-z",
+            "-asp",
             "0",
             "-x",
             "[0,20]",
@@ -73,7 +73,7 @@ command_processes.append(
     )
 )
 command_processes.append(
-    subprocess.Popen(["plopm", "-i", ".", "-v", "wbhp:inj0", "-labels", LABELS])
+    subprocess.Popen(["plopm", "-i", ".", "-v", "wbhp:inj0", "-llb", LABELS])
 )
 for process in command_processes:
     process.wait()

@@ -75,6 +75,6 @@ axis.plot(
     marker="*",
     markersize=5,
 )
-axis.set_ylabel("Bhp [Bar]", fontsize=12)
+axis.set_ylabel("Bhp [bar]", fontsize=12)
 axis.set_xlabel(r"Time of injected H${_2}$ [d]", fontsize=12)
 fig.savefig("pbhp.png")

@@ -140,6 +140,8 @@ FGIR
 FWIR
 FGIT
 FGPT
+FAMIR
+FAMPR
 FGMIR
 FGMPR
 FWIT
@@ -222,16 +224,17 @@ PRO4 ${dic['nocells'][0]} ${dic['nocells'][0]} 1 ${dic['nocells'][2]} OPEN 2* ${
 % for j in range(len(dic['inj'])):
 
 % if dic["tuning"]:
-<% i = 1 if dic["inj"][j][3]<0 else 0 %>
+<% i = 1 if (dic["inj"][j][3]<0 or (len(dic["inj"][j]) > 4 and not isinstance(dic["inj"][j][4], str) and dic["inj"][j][4] > 0)) else 0 %>
 TUNING
 ${dic['inj'][j][4+i]+" " if len(dic['inj'][j])>4+i else ""}/
 ${dic['inj'][j][5+i]+" " if len(dic['inj'][j])>5+i else ""}/
 ${dic['inj'][j][6+i]+" " if len(dic['inj'][j])>6+i else ""}/
 % endif
 WCONINJE
-% if dic['inj'][j][2]>0:
-INJ0 GAS ${'OPEN' if dic['inj'][j][3]>0 else 'SHUT'}
-RATE ${f"{dic['inj'][j][3] / 0.0850397:E}"} 1* 480 /
+% if len(dic["inj"][j]) > 4 and not isinstance(dic["inj"][j][4], str) and dic["inj"][j][4] > 0 and not dic["inj"][j][3] < 0:
+INJ0 ${'GAS' if dic['inj'][j][2]>0 else 'WATER'} OPEN BHP 2* ${dic['inj'][j][4]} /
+% elif dic['inj'][j][2]>0:
+INJ0 GAS ${'OPEN' if dic['inj'][j][3]>0 else 'SHUT'} RATE ${f"{dic['inj'][j][3] / 0.0850397:E}"} 1* 480 /
 % else:
 INJ0 WATER ${'OPEN' if dic['inj'][j][3]>0 else 'SHUT'} RATE ${f"{dic['inj'][j][3] / 998.108:E}"} 1* 480 /
 % endif

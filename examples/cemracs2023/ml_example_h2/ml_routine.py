@@ -96,7 +96,7 @@ pyplot.plot(
 
 )
 pyplot.xlabel(r"Time of injected H${_2}$ [d]")
-pyplot.ylabel("Max bhp [Bar]")
+pyplot.ylabel("Max bhp [bar]")
 pyplot.legend()
 pyplot.savefig("ml_bhp.png", dpi=1200)
 pyplot.show()

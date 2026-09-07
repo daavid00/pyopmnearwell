@@ -1,0 +1,717 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pyopmnearwell.core.pyopmnearwell &#8212; pyopmnearwell documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=530fd138" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
+
+    <script src="../../../_static/documentation_options.js?v=1485e655"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=eef4a3d2"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyopmnearwell/core/pyopmnearwell';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2026.10rc0" />
+    <meta name="docbuild:last-update" content="2026-09-07"/>
+  
+    
+    <script src="../../../_static/searchtools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script src="../../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/logo.png" class="logo__image only-light" alt="pyopmnearwell documentation - Home"/>
+    <img src="../../../_static/logo.png" class="logo__image only-dark pst-js-only" alt="pyopmnearwell documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../introduction.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../configuration_file.html">
+    Configuration reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../examples.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../command-line.html">
+    Command-line reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api.html">
+    pyopmnearwell Python API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../output_folder.html">
+    Output folder
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../contributing.html">
+    Contributing
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../related.html">
+    Related projects
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cssr-tools/pyopmnearwell/issues/new/choose" title="Report an issue" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-bug fa-lg" aria-hidden="true"></i><span class="visually-hidden">Report an issue</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cssr-tools/pyopmnearwell" title="GitHub repository" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub repository</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../introduction.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../configuration_file.html">
+    Configuration reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../examples.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../command-line.html">
+    Command-line reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api.html">
+    pyopmnearwell Python API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../output_folder.html">
+    Output folder
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../contributing.html">
+    Contributing
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../related.html">
+    Related projects
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cssr-tools/pyopmnearwell/issues/new/choose" title="Report an issue" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-bug fa-lg" aria-hidden="true"></i><span class="visually-hidden">Report an issue</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cssr-tools/pyopmnearwell" title="GitHub repository" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub repository</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">pyopmnearwell.core.pyopmnearwell</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for pyopmnearwell.core.pyopmnearwell</h1><div class="highlight"><pre>
+<span></span><span class="c1"># SPDX-FileCopyrightText: 2023-2026, NORCE Research AS</span>
+<span class="c1"># SPDX-License-Identifier: GPL-3.0</span>
+
+<span class="sd">"""Command-line entry point and top-level workflow coordination for pyopmnearwell.</span>
+
+<span class="sd">pyopmnearwell supports two connected workflows for near-well OPM Flow models:</span>
+
+<span class="sd">* Deck generation creates model-specific OPM Flow input and include files from a</span>
+<span class="sd">  validated TOML configuration.</span>
+<span class="sd">* Simulation execution runs OPM Flow for the generated deck, either in separate</span>
+<span class="sd">  preprocessing and output folders or in a shared folder.</span>
+
+<span class="sd">This module parses and validates command-line arguments, initializes the shared</span>
+<span class="sd">configuration dictionary, creates output folders, dispatches the selected deck</span>
+<span class="sd">and simulation workflows, and reports generated files. Configuration handling,</span>
+<span class="sd">deck writing, and simulation execution are implemented in the utility modules.</span>
+<span class="sd">"""</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pathlib</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyopmnearwell.utils.inputvalues</span><span class="w"> </span><span class="kn">import</span> <span class="n">process_input</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyopmnearwell.utils.runs</span><span class="w"> </span><span class="kn">import</span> <span class="n">simulations</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyopmnearwell.utils.terminal</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">cli_error_value</span><span class="p">,</span>
+    <span class="n">pyopmnearwell_error</span><span class="p">,</span>
+    <span class="n">pyopmnearwell_info</span><span class="p">,</span>
+    <span class="n">pyopmnearwell_success</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyopmnearwell.utils.writefile</span><span class="w"> </span><span class="kn">import</span> <span class="n">reservoir_files</span>
+
+
+<div class="viewcode-block" id="main">
+<a class="viewcode-back" href="../../../api/pyopmnearwell.core.pyopmnearwell.html#pyopmnearwell.core.pyopmnearwell.main">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">argv</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Run the pyopmnearwell command-line workflow.</span>
+
+<span class="sd">    Parse and validate CLI arguments, initialize the shared configuration, create</span>
+<span class="sd">    the requested output folders, and dispatch deck generation and OPM Flow</span>
+<span class="sd">    execution according to the selected mode.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    argv : list[str] | None, optional</span>
+<span class="sd">        Arguments to parse instead of ``sys.argv[1:]``. This is primarily used by</span>
+<span class="sd">        tests and programmatic callers.</span>
+<span class="sd">    """</span>
+    <span class="n">cmdargs</span> <span class="o">=</span> <span class="n">load_parser</span><span class="p">(</span><span class="n">argv</span><span class="p">)</span>
+    <span class="n">check_cmdargs</span><span class="p">(</span><span class="n">cmdargs</span><span class="p">)</span>
+    <span class="n">file</span> <span class="o">=</span> <span class="n">cmdargs</span><span class="o">.</span><span class="n">input</span>
+    <span class="n">fol</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">cmdargs</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
+    <span class="n">mode</span> <span class="o">=</span> <span class="n">cmdargs</span><span class="o">.</span><span class="n">mode</span>
+    <span class="n">dic</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">"pat"</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="s2">"fol"</span><span class="p">:</span> <span class="n">fol</span><span class="p">,</span>
+        <span class="s2">"mode"</span><span class="p">:</span> <span class="n">mode</span><span class="p">,</span>
+        <span class="s2">"write"</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">cmdargs</span><span class="o">.</span><span class="n">vectors</span><span class="p">),</span>
+        <span class="s2">"runname"</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">file</span><span class="p">)</span><span class="o">.</span><span class="n">stem</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="n">dic</span> <span class="o">=</span> <span class="n">process_input</span><span class="p">(</span><span class="n">dic</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">fol</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">"single"</span><span class="p">:</span>
+        <span class="n">dic</span><span class="p">[</span><span class="s2">"fprep"</span><span class="p">]</span> <span class="o">=</span> <span class="n">fol</span>
+        <span class="n">dic</span><span class="p">[</span><span class="s2">"foutp"</span><span class="p">]</span> <span class="o">=</span> <span class="n">fol</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">dic</span><span class="p">[</span><span class="s2">"fprep"</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">fol</span><span class="si">}</span><span class="s2">/preprocessing"</span>
+        <span class="n">dic</span><span class="p">[</span><span class="s2">"foutp"</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">fol</span><span class="si">}</span><span class="s2">/output"</span>
+    <span class="k">if</span> <span class="n">mode</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"all"</span><span class="p">,</span> <span class="s2">"deck"</span><span class="p">,</span> <span class="s2">"single"</span><span class="p">]:</span>
+        <span class="n">pyopmnearwell_info</span><span class="p">(</span><span class="s2">"generating the deck files, please wait..."</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">dic</span><span class="p">[</span><span class="s2">"fprep"</span><span class="p">],</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">generated_files</span> <span class="o">=</span> <span class="n">reservoir_files</span><span class="p">(</span><span class="n">dic</span><span class="p">)</span>
+        <span class="n">pyopmnearwell_success</span><span class="p">(</span><span class="s2">""</span><span class="p">,</span> <span class="n">dic</span><span class="p">[</span><span class="s2">"fprep"</span><span class="p">],</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">generated_files</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">mode</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"all"</span><span class="p">,</span> <span class="s2">"flow"</span><span class="p">,</span> <span class="s2">"single"</span><span class="p">]:</span>
+        <span class="n">pyopmnearwell_info</span><span class="p">(</span><span class="s2">"running OPM Flow, please wait..."</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">dic</span><span class="p">[</span><span class="s2">"foutp"</span><span class="p">],</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">simulations</span><span class="p">(</span><span class="n">dic</span><span class="p">)</span>
+        <span class="n">pyopmnearwell_success</span><span class="p">(</span>
+            <span class="s2">"the simulation results have been written to"</span><span class="p">,</span> <span class="n">dic</span><span class="p">[</span><span class="s2">"foutp"</span><span class="p">],</span> <span class="p">[]</span>
+        <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="load_parser">
+<a class="viewcode-back" href="../../../api/pyopmnearwell.core.pyopmnearwell.html#pyopmnearwell.core.pyopmnearwell.load_parser">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">load_parser</span><span class="p">(</span><span class="n">argv</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">argparse</span><span class="o">.</span><span class="n">Namespace</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Create the CLI parser and parse pyopmnearwell arguments.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    argv : list[str] | None</span>
+<span class="sd">        Arguments to parse instead of ``sys.argv[1:]``. This is primarily used by</span>
+<span class="sd">        tests and programmatic callers.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    argparse.Namespace</span>
+<span class="sd">        Parsed command-line arguments.</span>
+<span class="sd">    """</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span>
+        <span class="n">formatter_class</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentDefaultsHelpFormatter</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">"Main script to run a near-well system with OPM Flow."</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">"-i"</span><span class="p">,</span>
+        <span class="s2">"--input"</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="o">.</span><span class="n">strip</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">"input.toml"</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">"The base name of the input file"</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">"-o"</span><span class="p">,</span>
+        <span class="s2">"--output"</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="o">.</span><span class="n">strip</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">"output"</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">"The base name of the output folder"</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">"-m"</span><span class="p">,</span>
+        <span class="s2">"--mode"</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="o">.</span><span class="n">strip</span><span class="p">,</span>
+        <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s2">"deck"</span><span class="p">,</span> <span class="s2">"flow"</span><span class="p">,</span> <span class="s2">"single"</span><span class="p">,</span> <span class="s2">"all"</span><span class="p">],</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">"all"</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">"Run the whole framework ('all'), only generate the deck ('deck'), "</span>
+        <span class="s2">"only run flow ('flow'), or generate the deck and run flow in the same "</span>
+        <span class="s2">"output folder ('single')"</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">"-v"</span><span class="p">,</span>
+        <span class="s2">"--vectors"</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="o">.</span><span class="n">strip</span><span class="p">,</span>
+        <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s2">"0"</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">],</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">"1"</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">"Write cell values, i.e., EGRID, INIT, UNRST"</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">(</span><span class="n">argv</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="check_cmdargs">
+<a class="viewcode-back" href="../../../api/pyopmnearwell.core.pyopmnearwell.html#pyopmnearwell.core.pyopmnearwell.check_cmdargs">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">check_cmdargs</span><span class="p">(</span><span class="n">cmdargs</span><span class="p">:</span> <span class="n">argparse</span><span class="o">.</span><span class="n">Namespace</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Validate pyopmnearwell command-line arguments.</span>
+
+<span class="sd">    Validation covers the input configuration filename and the output directory.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    cmdargs : argparse.Namespace</span>
+<span class="sd">        Parsed command-line arguments.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    SystemExit</span>
+<span class="sd">        If the input filename is empty, does not use the ``.toml`` extension, or</span>
+<span class="sd">        the output directory is empty.</span>
+<span class="sd">    """</span>
+    <span class="n">input_file</span> <span class="o">=</span> <span class="n">cmdargs</span><span class="o">.</span><span class="n">input</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">input_file</span><span class="p">:</span>
+        <span class="n">pyopmnearwell_error</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"Invalid value for </span><span class="si">{</span><span class="n">cli_error_value</span><span class="p">(</span><span class="s1">'-i'</span><span class="p">)</span><span class="si">}</span><span class="s2">, the input file cannot be empty."</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">input_file</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">".toml"</span><span class="p">):</span>
+        <span class="n">pyopmnearwell_error</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"Invalid extension </span><span class="si">{</span><span class="n">cli_error_value</span><span class="p">(</span><span class="sa">f</span><span class="s1">'-i </span><span class="si">{</span><span class="n">input_file</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span><span class="si">}</span><span class="s2">, "</span>
+            <span class="s2">"the valid extension is .toml."</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">cmdargs</span><span class="o">.</span><span class="n">output</span><span class="p">:</span>
+        <span class="n">pyopmnearwell_error</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"invalid value </span><span class="si">{</span><span class="n">cli_error_value</span><span class="p">(</span><span class="s1">'-o'</span><span class="p">)</span><span class="si">}</span><span class="s2">, the output folder cannot be empty."</span>
+        <span class="p">)</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2023-2026, NORCE Research AS.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

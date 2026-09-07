@@ -3,8 +3,6 @@
 arguments.
 """
 
-from __future__ import annotations
-
 import copy
 import logging
 import math
@@ -24,6 +22,7 @@ from resdata.summary import Summary
 
 from pyopmnearwell.utils.formulas import area_squaredcircle, pyopmnearwell_correction
 from pyopmnearwell.utils.inputvalues import process_input
+from pyopmnearwell.utils.terminal import pyopmnearwell_error
 from pyopmnearwell.utils.writefile import reservoir_files
 
 logging.basicConfig(level=logging.INFO)
@@ -93,7 +92,6 @@ def create_ensemble(
     Raises:
         ValueError: If ``runspecs["npoints"]`` is larger than the number of generated
             ensemble members.
-
     """
     if efficient_sampling is None:
         efficient_sampling = []
@@ -200,19 +198,21 @@ def create_ensemble(
 def memory_efficient_sample(
     variables: np.ndarray, num_members: int, seed: int | None = None
 ) -> np.ndarray:
-    """Sample all variables individually.
+    """Sample variable arrays independently without constructing their Cartesian product.
 
-    Note: Requires that all variables arrays have the same length.
+    Parameters
+    ----------
+    variables : np.ndarray
+        Variable values arranged by variable and candidate sample.
+    num_members : int
+        Number of samples to draw.
+    seed : int | None, optional
+        Value used by the operation.
 
-    Args:
-        variables (np.ndarray), (``shape=(num_variables, len_variables)``): _description_
-        num_members (int): _description_
-        seed: (Optional[int]): Seed for the ``np.random.Generator``. Default is
-            ``None``.
-
-    Returns:
-        np.ndarray (``shape=()``):
-
+    Returns
+    -------
+    np.ndarray
+        Result produced by the operation.
     """
     rng: np.random.Generator = np.random.default_rng(seed=seed)
     indices: np.ndarray = rng.integers(
@@ -247,10 +247,6 @@ def setup_ensemble(
 
     Raises:
         Exception: If there is an error rendering the Mako template.
-
-    Returns:
-        None
-
     """
     # Ensure ``ensemble_path`` is a ``Path`` object.
     ensemble_path = pathlib.Path(ensemble_path)
@@ -267,7 +263,7 @@ def setup_ensemble(
         try:
             filledtemplate = mytemplate.render(**member)
         except Exception:
-            print(exceptions.text_error_template().render())
+            pyopmnearwell_error(exceptions.text_error_template().render())
             raise
 
         (ensemble_path / f"runfiles_{i}").mkdir(exist_ok=True)
@@ -321,7 +317,6 @@ def get_flags(
 
     Returns:
         str: All flags that are passed to OPM Flow.
-
     """
     # Ensure ``makofile`` is a ``Path`` object.
     makofile = pathlib.Path(makofile)
@@ -346,32 +341,33 @@ def run_ensemble(
     keep_result_files: bool = False,
     **kwargs,
 ) -> dict[str, Any]:
-    """Run OPM Flow for each ensemble member and store data.
+    """Run OPM Flow for each ensemble member and collect requested results.
 
-    Note: The initial time step (i.e., t=0) is always disregarded.
+    Parameters
+    ----------
+    flow_path : str | pathlib.Path
+        Path to the OPM Flow executable.
+    ensemble_path : str | pathlib.Path
+        Directory containing ensemble run folders.
+    runspecs : dict[str, Any]
+        Ensemble size, parallel-run count, variables, and constants.
+    ecl_keywords : list[str]
+        Restart keywords to extract from UNRST files.
+    init_keywords : list[str]
+        Static keywords to extract from INIT files.
+    summary_keywords : list[str]
+        Summary vectors to extract from SMSPEC files.
+    num_report_steps : int | None, optional
+        Required report-step count for a completed run.
+    keep_result_files : bool, optional
+        Whether result folders for all ensemble members are retained.
+    **kwargs : Any
+        Additional options forwarded to the underlying operation.
 
-    Args:
-        flow_path (str | pathlib.Path): _description_
-        ensemble_path (str | pathlib.Path): _description_
-        runspecs (dict[str, Any]): _description_
-        ecl_keywords (list[str]): _description_
-        init_keywords (list[str]): _description_
-        summary_keywords (list[str]): _description_
-        num_report_steps (Optional[int], optional): Disregard an ensemble simulation if
-            it did not run to the last report step. Defaults to None.
-        keep_result_files (bool): Keep result files of all ensemble members, not
-            only the first one. Defaults to False.
-        **kwargs: Possible parameters are:
-
-            - step_size_time (int): Save data only for every ``step_size_time`` report
-              step. Default is 1.
-            - step_size_cell (int): Save data only for every ``step_size_cell`` grid
-              cell. Default is 1.
-            - flags (str): Flags to run OPM Flow with.
-
-    Returns:
-        dict[str, Any]: _description_
-
+    Returns
+    -------
+    dict[str, Any]
+        Result produced by the operation.
     """
     # Ensure ``ensemble_path`` is a ``Path`` object.
     ensemble_path = pathlib.Path(ensemble_path)
@@ -491,8 +487,7 @@ def calculate_radii(
     triangle_grid: bool = False,
     angle: float = math.pi / 3,
 ) -> np.ndarray | tuple[np.ndarray, np.ndarray, np.ndarray]:
-    """
-    Calculates the radii of the cells in a grid grom a given .
+    """Calculates the radii of the cells in a grid grom a given .
 
     Args:
         gridfile (str | pathlib.Path): Path to the file containing the grid.
@@ -517,7 +512,6 @@ def calculate_radii(
     Raises:
         AssertionError: If the number of lines in the grid file is not equal to
             num_cells + 1.
-
     """
     # Ensure ``gridfile`` is a ``Path`` object.
     gridfile = pathlib.Path(gridfile)
@@ -542,8 +536,7 @@ def calculate_WI(
     pressures: np.ndarray,
     injection_rates: float | np.ndarray,
 ) -> tuple[np.ndarray, list[int]]:
-    r"""
-    Calculate the well index (WI) for a given dataset.
+    r"""Calculate the well index (WI) for a given dataset.
 
     The well index (WI) is calculated using the following formula:
     .. math::
@@ -572,7 +565,6 @@ def calculate_WI(
 
     Raises:
         ValueError: If no data is found for the 'pressure' keyword in the dataset.
-
     """
 
     # Calculate WI for each ensemble member.
@@ -633,7 +625,6 @@ def extract_features(
 
     Raises:
         ValueError: If no data is found for one of the keywords.
-
     """
     if keyword_scalings is None:
         keyword_scalings = {}
@@ -685,7 +676,6 @@ def integrate_fine_scale_value(
 
     Raise:
         ValueError: If the radial cells do not cover the square grid block.
-
     """
     if isinstance(block_sidelengths, float):
         block_sidelengths = np.array([block_sidelengths])
@@ -726,7 +716,6 @@ def store_dataset(
 
     Returns:
         pathlib.Path: Savepath of the dataset
-
     """
     ds = tf.data.Dataset.from_tensor_slices((features, targets))
     ds.save(str(savepath))

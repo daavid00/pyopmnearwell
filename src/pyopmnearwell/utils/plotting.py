@@ -1,6 +1,4 @@
-"""Helper functions for plotting."""
-
-from __future__ import annotations
+"""Save pyopmnearwell figures and the data needed to reproduce them."""
 
 import pathlib
 import pickle
@@ -10,15 +8,18 @@ from matplotlib.figure import Figure
 
 
 def save_fig_and_data(fig: Figure, path: str | pathlib.Path) -> None:
-    """Save a pyplot figure to an ``.svg`` file and save the data to a ``.pickle`` file.
+    """Save a figure and its plotting data.
 
-    Args:
-        fig (matplotlib.figure.Figure): The figure to save.
-        path (str | pathlib.Path): The path to save the figure and data to.
+    The figure is written as an SVG file and the complete Matplotlib figure object
+    is serialized to a Pickle file with the same stem. The input figure is closed
+    after both files have been written.
 
-    Returns:
-        None
-
+    Parameters
+    ----------
+    fig : matplotlib.figure.Figure
+        Figure to save and serialize.
+    path : str | pathlib.Path
+        Output path. Existing suffixes are replaced by ``.svg`` and ``.pickle``.
     """
     # Convert to a path in case a string was passed.
     path = pathlib.Path(path)

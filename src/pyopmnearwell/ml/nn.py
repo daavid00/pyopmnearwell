@@ -1,8 +1,6 @@
 # pylint: skip-file
 """Transform ensemble data into datasets and train neural networks."""
 
-from __future__ import annotations
-
 import csv
 import logging
 import math
@@ -55,7 +53,6 @@ def get_FCNN(
 
     Returns:
         keras.Model: A fully connected neural network.
-
     """
     layers = [
         keras.layers.Dense(
@@ -100,7 +97,6 @@ def get_RNN(
 
     Returns:
         keras.Model: A fully connected neural network.
-
     """
     model: keras.Model = keras.Sequential()
     # RNN as model head.
@@ -149,7 +145,6 @@ def get_GRU(
 
     Returns:
         keras.Model: A fully connected neural network.
-
     """
     model: keras.Model = keras.Sequential()
     # RNN as model head.
@@ -198,7 +193,6 @@ def get_LSTM(
 
     Returns:
         keras.Model: A fully connected neural network.
-
     """
     model: keras.Model = keras.Sequential()
     # RNN as model head.
@@ -273,7 +267,6 @@ def scale_and_prepare_dataset(
                 tuple[np.ndarray, np.ndarray],
         ]: Tuple of scaled and split dataset. Includes test set only if
             ``test_split > 0``.
-
     """
 
     # Ensure ``savepath`` is a ``Path`` object.
@@ -512,10 +505,6 @@ def train(
             training. Can e.g., be set to false, if the model is built and compiled by a
             different function. Defaults to True.
         **kwargs: Get passed to the ``model.fit()`` method.
-
-    Returns:
-        None
-
     """
     # Ensure ``savepath`` is a ``Path`` object.
     savepath = pathlib.Path(savepath)
@@ -602,7 +591,6 @@ def build_model(
 
     Returns:
         tf.Module: The built neural network model.
-
     """
     # Get hyperparameters.
     # depth: int = hp.Int("depth", min_value=3, max_value=20, step=2)
@@ -647,8 +635,7 @@ def tune(
     lr_tune: float = 0.1,
     **kwargs,
 ) -> tuple[keras.Model, keras_tuner.Tuner]:
-    """
-    Tune the hyperparameters of a neural network model using random search.
+    """Tune the hyperparameters of a neural network model using random search.
 
     Args:
         ninputs (int): Number of input features to the model.
@@ -670,7 +657,6 @@ def tune(
 
     Raises:
         ValueError: If `train_data` or `val_data` is not a tuple of two tensors.
-
     """
     if sample_weight is None:
         sample_weight = np.array([1.0])
@@ -717,6 +703,15 @@ def tune(
 
 def save_tune_results(tuner: keras_tuner.Tuner, savepath: str | pathlib.Path) -> None:
     # Ensure ``savepath`` is a ``Path`` object.
+    """Save hyperparameter-tuning results as a CSV file.
+
+    Parameters
+    ----------
+    tuner : keras_tuner.Tuner
+        Completed tuner whose trials are written in score order.
+    savepath : str | pathlib.Path
+        Directory in which ``tuner_results.csv`` is written.
+    """
     savepath = pathlib.Path(savepath)
 
     trials: list[keras_tuner.engine.trial.Trial] = tuner.oracle.get_best_trials(
@@ -751,7 +746,6 @@ def scale_and_evaluate(
     Raises:
         FileNotFoundError: If ``scalingsfile`` does not exist.
         ValueError: If ``scalingsfile`` contains an invalid row.
-
     """
     # Ensure ``ensemble_path`` is a ``Path`` object.
     scalingsfile = pathlib.Path(scalingsfile)
@@ -835,7 +829,6 @@ def handle_zeros_in_scale(scale: ArrayLike) -> np.ndarray:
 
     Returns:
         np.ndarray: The modified scale array.
-
     """
     # ``atol`` must be very low s.t. this works for permeability in [m^2] for example.
     return np.where(np.isclose(scale, 0.0, atol=1e-20), np.ones_like(scale), scale)

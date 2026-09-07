@@ -1,0 +1,1296 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pyopmnearwell.ml.ensemble &#8212; pyopmnearwell documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=530fd138" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
+
+    <script src="../../../_static/documentation_options.js?v=1485e655"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=eef4a3d2"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyopmnearwell/ml/ensemble';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2026.10rc0" />
+    <meta name="docbuild:last-update" content="2026-09-07"/>
+  
+    
+    <script src="../../../_static/searchtools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script src="../../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/logo.png" class="logo__image only-light" alt="pyopmnearwell documentation - Home"/>
+    <img src="../../../_static/logo.png" class="logo__image only-dark pst-js-only" alt="pyopmnearwell documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../introduction.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../configuration_file.html">
+    Configuration reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../examples.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../command-line.html">
+    Command-line reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api.html">
+    pyopmnearwell Python API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../output_folder.html">
+    Output folder
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../contributing.html">
+    Contributing
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../related.html">
+    Related projects
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cssr-tools/pyopmnearwell/issues/new/choose" title="Report an issue" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-bug fa-lg" aria-hidden="true"></i><span class="visually-hidden">Report an issue</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cssr-tools/pyopmnearwell" title="GitHub repository" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub repository</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../introduction.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../configuration_file.html">
+    Configuration reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../examples.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../command-line.html">
+    Command-line reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api.html">
+    pyopmnearwell Python API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../output_folder.html">
+    Output folder
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../contributing.html">
+    Contributing
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../related.html">
+    Related projects
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cssr-tools/pyopmnearwell/issues/new/choose" title="Report an issue" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-bug fa-lg" aria-hidden="true"></i><span class="visually-hidden">Report an issue</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cssr-tools/pyopmnearwell" title="GitHub repository" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub repository</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">pyopmnearwell.ml.ensemble</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for pyopmnearwell.ml.ensemble</h1><div class="highlight"><pre>
+<span></span><span class="c1"># pylint: skip-file</span>
+<span class="sd">"""Run high-fidelity nearwell simulations in OPM-Flow for an ensemble of varying input</span>
+<span class="sd">arguments.</span>
+<span class="sd">"""</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pathlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedDict</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tensorflow</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tf</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mako</span><span class="w"> </span><span class="kn">import</span> <span class="n">exceptions</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mako.template</span><span class="w"> </span><span class="kn">import</span> <span class="n">Template</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">resdata</span><span class="w"> </span><span class="kn">import</span> <span class="n">FileMode</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">resdata.resfile</span><span class="w"> </span><span class="kn">import</span> <span class="n">ResdataFile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">resdata.summary</span><span class="w"> </span><span class="kn">import</span> <span class="n">Summary</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyopmnearwell.utils.formulas</span><span class="w"> </span><span class="kn">import</span> <span class="n">area_squaredcircle</span><span class="p">,</span> <span class="n">pyopmnearwell_correction</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyopmnearwell.utils.inputvalues</span><span class="w"> </span><span class="kn">import</span> <span class="n">process_input</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyopmnearwell.utils.terminal</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyopmnearwell_error</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyopmnearwell.utils.writefile</span><span class="w"> </span><span class="kn">import</span> <span class="n">reservoir_files</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="n">dirname</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span>
+
+<span class="n">FLAGS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">" --linear-solver-reduction=1e-5 --relaxed-max-pv-fraction=0"</span>
+    <span class="o">+</span> <span class="s2">" --enable-drift-compensation=0 --newton-max-iterations=50"</span>
+    <span class="o">+</span> <span class="s2">" --newton-min-iterations=5 --tolerance-mb=1e-7 --tolerance-wells=1e-1"</span>
+    <span class="o">+</span> <span class="s2">" --relaxed-well-flow-tol=1e-3 --use-multisegment-well=false --enable-tuning=true"</span>
+    <span class="o">+</span> <span class="s2">" --enable-opm-rst-file=true --linear-solver=cprw"</span>
+    <span class="o">+</span> <span class="s2">" --enable-well-operability-check=false"</span>
+    <span class="o">+</span> <span class="s2">" --min-time-step-before-shutting-problematic-wells-in-days=1e-1"</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="create_ensemble">
+<a class="viewcode-back" href="../../../api/pyopmnearwell.ml.ensemble.html#pyopmnearwell.ml.ensemble.create_ensemble">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_ensemble</span><span class="p">(</span>
+    <span class="n">runspecs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+    <span class="n">efficient_sampling</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">"""Create an ensemble.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        - It is assumed that the user provides the variables in the correct units for</span>
+<span class="sd">          pyopmnearwell.</span>
+<span class="sd">        - If the variable name starts with ``"PERM"`` or ``"LOG"``, the distribution for</span>
+<span class="sd">          random sampling is log uniform.</span>
+<span class="sd">        - If the variable name starts with ``"INT"``, the distribution for random</span>
+<span class="sd">          sampling is uniform on integers.</span>
+<span class="sd">        - Else, the distribution for random sampling is uniformly distributed.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        runspecs (dict[str, Any]): Dictionary with at least the following keys:</span>
+
+<span class="sd">            - "npoints": Maximum number of ensemble members.</span>
+<span class="sd">            - "variables": ``dict`` containing the run Args vary within the</span>
+<span class="sd">              ensemble. The key specifies the variable name (needs to be identical to</span>
+<span class="sd">              the variable name in the ``*.mako`` file that is passed to</span>
+<span class="sd">              ``setup_ensemble``) and the value is a tuple ``(min, max, npoints)`` with</span>
+<span class="sd">              the min. and max. values for the variable and the number of samples</span>
+<span class="sd">              generated for this variable. The samples are taken from a uniform</span>
+<span class="sd">              distribution in the interval :math:`[min, max]`.</span>
+<span class="sd">            - "constants": ``dict`` containing the run Args that are constant for</span>
+<span class="sd">              all ensemble members.</span>
+<span class="sd">        efficient_sampling (Optional[list[str]], optional): List containing the names of</span>
+<span class="sd">            variables that should be sampled instead of fully meshed and then sampled.</span>
+<span class="sd">            This is faster and avoids memory overload for higher dimensional</span>
+<span class="sd">            combinations of variables. E.g., when creating an ensemble with varying</span>
+<span class="sd">            vertical permeabilities. Only 10 layers with 10 samples generate a grid of</span>
+<span class="sd">            10^10 values. By sampling directly instead of generating the grid first, it</span>
+<span class="sd">            is possible to deal with the complexity.</span>
+<span class="sd">        seed: (Optional[int]): Seed for the ``np.random.Generator``. Is passed to</span>
+<span class="sd">            ``memory_efficient_sample`` as well. Default is ``None``.</span>
+
+<span class="sd">    Note: The ensemble is generated as the cartesian product of all variable ranges. The</span>
+<span class="sd">        total number of ensemble members is thus the product of all individual</span>
+<span class="sd">        ``npoints``. If ``runspecs["npoints"]`` is lower than the product, a random</span>
+<span class="sd">        sample of size ``runspecs["npoints"]`` of the full ensemble is returned.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        ensemble (list[dict[str, Any]]): List containing a dict with the specified</span>
+<span class="sd">            variable values for each ensemble member.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If ``runspecs["npoints"]`` is larger than the number of generated</span>
+<span class="sd">            ensemble members.</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">efficient_sampling</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">efficient_sampling</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">variables</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+
+    <span class="n">rng</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">Generator</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+
+    <span class="c1"># Generate random value ranges for all variables.</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Generating value ranges for all variables"</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">variable</span><span class="p">,</span> <span class="p">(</span><span class="n">min_val</span><span class="p">,</span> <span class="n">max_val</span><span class="p">,</span> <span class="n">npoints</span><span class="p">)</span> <span class="ow">in</span> <span class="n">runspecs</span><span class="p">[</span><span class="s2">"variables"</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">variable</span><span class="o">.</span><span class="n">startswith</span><span class="p">((</span><span class="s2">"PERM"</span><span class="p">,</span> <span class="s2">"LOG"</span><span class="p">)):</span>
+            <span class="c1"># Generate a log uniform distribution for permeabilities and other values</span>
+            <span class="c1"># that should be log uniform sampled.</span>
+            <span class="n">variables</span><span class="p">[</span><span class="n">variable</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span>
+                <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">min_val</span><span class="p">),</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">max_val</span><span class="p">),</span> <span class="n">npoints</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="k">elif</span> <span class="n">variable</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"INT"</span><span class="p">):</span>
+            <span class="c1"># Generate a uniform distribution on integers.</span>
+            <span class="n">variables</span><span class="p">[</span><span class="n">variable</span><span class="p">]</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="n">min_val</span><span class="p">,</span> <span class="n">max_val</span><span class="p">,</span> <span class="n">npoints</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Generate a uniform distribution for all other variables.</span>
+            <span class="n">variables</span><span class="p">[</span><span class="n">variable</span><span class="p">]</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">min_val</span><span class="p">,</span> <span class="n">max_val</span><span class="p">,</span> <span class="n">npoints</span><span class="p">)</span>
+    <span class="n">constants</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">runspecs</span><span class="p">[</span><span class="s2">"constants"</span><span class="p">]</span>
+
+    <span class="c1"># Differentiate between variables whose data ranges are sampled memory efficiently</span>
+    <span class="c1"># and then added to the ensemble and variables whose data ranges are fully meshed</span>
+    <span class="c1"># together and then added to the ensemble.</span>
+    <span class="c1"># NOTE: At the end, the ensemble gets sampled again if it is too large.</span>
+    <span class="n">variables_to_sample</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="n">variable</span><span class="p">:</span> <span class="n">values</span>
+            <span class="k">for</span> <span class="n">variable</span><span class="p">,</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">variables</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">variable</span> <span class="ow">in</span> <span class="n">efficient_sampling</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+    <span class="n">variables_to_mesh</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="n">variable</span><span class="p">:</span> <span class="n">values</span>
+            <span class="k">for</span> <span class="n">variable</span><span class="p">,</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">variables</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">variable</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">efficient_sampling</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">"Sampling the following variables individually: </span><span class="si">{</span><span class="n">variables_to_sample</span><span class="o">.</span><span class="n">keys</span><span class="si">}</span><span class="s2">"</span>
+    <span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">"Meshing the following variables and sampling afterwards: </span><span class="si">{</span><span class="n">variables_to_mesh</span><span class="o">.</span><span class="n">keys</span><span class="si">}</span><span class="s2">"</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Mesh/sample all values to get the ensemble and put the values back into a</span>
+    <span class="c1"># dictionary.</span>
+    <span class="n">meshed_variables</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">array</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">array</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="o">*</span><span class="n">variables_to_mesh</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="n">indexing</span><span class="o">=</span><span class="s2">"ij"</span><span class="p">)</span>
+    <span class="p">]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">variables_to_sample</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">sampled_variables</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">|</span> <span class="nb">list</span> <span class="o">=</span> <span class="n">memory_efficient_sample</span><span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">variables_to_sample</span><span class="o">.</span><span class="n">values</span><span class="p">())),</span>
+            <span class="n">num_members</span><span class="o">=</span><span class="n">runspecs</span><span class="p">[</span><span class="s2">"npoints"</span><span class="p">],</span>
+            <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">sampled_variables</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">ensemble</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">values</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">meshed_variables</span><span class="p">,</span> <span class="o">*</span><span class="n">sampled_variables</span><span class="p">):</span>
+        <span class="n">member</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">constants</span><span class="p">)</span>
+        <span class="n">member</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+            <span class="p">{</span>
+                <span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">variables_to_mesh</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">variables_to_sample</span><span class="o">.</span><span class="n">keys</span><span class="p">()))[</span>
+                    <span class="n">i</span>
+                <span class="p">]:</span> <span class="n">value</span>
+                <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+        <span class="n">ensemble</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">member</span><span class="p">)</span>
+
+    <span class="c1"># Sample a subset of the ensemble if the ensemble size is larger than wanted.</span>
+    <span class="n">ensemble_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">([</span><span class="n">npoints</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">__</span><span class="p">,</span> <span class="n">npoints</span> <span class="ow">in</span> <span class="n">runspecs</span><span class="p">[</span><span class="s2">"variables"</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">()])</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">runspecs</span><span class="p">[</span><span class="s2">"npoints"</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">ensemble_size</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">"Sample size is larger than ensemble size. Randomly selecting a subset"</span>
+        <span class="p">)</span>
+
+        <span class="n">idx</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span>
+            <span class="nb">len</span><span class="p">(</span><span class="n">ensemble</span><span class="p">),</span>
+            <span class="n">size</span><span class="o">=</span><span class="n">runspecs</span><span class="p">[</span><span class="s2">"npoints"</span><span class="p">],</span>
+        <span class="p">)</span>
+        <span class="n">ensemble</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">ensemble</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">,</span> <span class="n">idx</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="n">runspecs</span><span class="p">[</span><span class="s2">"npoints"</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">ensemble_size</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"runspecs['npoints']=</span><span class="si">{</span><span class="n">runspecs</span><span class="p">[</span><span class="s1">'npoints'</span><span class="p">]</span><span class="si">}</span><span class="s2"> is larger than the"</span>
+            <span class="o">+</span> <span class="sa">f</span><span class="s2">" ensemble_size=</span><span class="si">{</span><span class="n">ensemble_size</span><span class="si">}</span><span class="s2"> generated from the variables."</span>
+        <span class="p">)</span>
+
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Created ensemble"</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">ensemble</span></div>
+
+
+
+<div class="viewcode-block" id="memory_efficient_sample">
+<a class="viewcode-back" href="../../../api/pyopmnearwell.ml.ensemble.html#pyopmnearwell.ml.ensemble.memory_efficient_sample">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">memory_efficient_sample</span><span class="p">(</span>
+    <span class="n">variables</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">num_members</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Sample variable arrays independently without constructing their Cartesian product.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    variables : np.ndarray</span>
+<span class="sd">        Variable values arranged by variable and candidate sample.</span>
+<span class="sd">    num_members : int</span>
+<span class="sd">        Number of samples to draw.</span>
+<span class="sd">    seed : int | None, optional</span>
+<span class="sd">        Value used by the operation.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    np.ndarray</span>
+<span class="sd">        Result produced by the operation.</span>
+<span class="sd">    """</span>
+    <span class="n">rng</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">Generator</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+    <span class="n">indices</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span>
+        <span class="mi">0</span><span class="p">,</span> <span class="n">variables</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">variables</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">num_members</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">variables</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">variables</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">indices</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="setup_ensemble">
+<a class="viewcode-back" href="../../../api/pyopmnearwell.ml.ensemble.html#pyopmnearwell.ml.ensemble.setup_ensemble">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">setup_ensemble</span><span class="p">(</span>
+    <span class="n">ensemble_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span>
+    <span class="n">ensemble</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]],</span>
+    <span class="n">makofile</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Create a deck file for each ensemble member.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        ensemble_path (str | pathlib.Path): The path to the ensemble directory.</span>
+<span class="sd">        ensemble (list[dict[str, Any]]): A list of dictionaries containing the</span>
+<span class="sd">            parameters for each ensemble member. Usually generated by</span>
+<span class="sd">            ``create_ensemble``.</span>
+<span class="sd">        makofile (str | pathlib.Path): The path to the Mako template file for the</span>
+<span class="sd">            pyopmnearwell deck for ensemble members.</span>
+<span class="sd">        **kwargs: kwargs are passed to ``reservoir_files``. Possible kwargs are:</span>
+
+<span class="sd">            - recalc_grid (bool, optional): Whether to recalculate ``GRID.INC`` for each</span>
+<span class="sd">                ensemble member. Defaults to False.</span>
+<span class="sd">            - recalc_tables (bool, optional): Whether to recalculate ``TABLES.INC`` for</span>
+<span class="sd">                each ensemble member. Defaults to False.</span>
+<span class="sd">            - recalc_sections (bool, optional): Whether to recalculate ``GEOLOGY.INC``</span>
+<span class="sd">                and ``REGIONS.INC`` for each ensemble member. Defaults to False.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        Exception: If there is an error rendering the Mako template.</span>
+<span class="sd">    """</span>
+    <span class="c1"># Ensure ``ensemble_path`` is a ``Path`` object.</span>
+    <span class="n">ensemble_path</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">ensemble_path</span><span class="p">)</span>
+
+    <span class="c1"># Update kwargs with the (future) relative path to the first  first ensemble member</span>
+    <span class="c1"># from any other ensemble member.</span>
+    <span class="n">kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+        <span class="p">{</span><span class="s2">"inc_folder"</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">".."</span><span class="p">)</span> <span class="o">/</span> <span class="s2">".."</span> <span class="o">/</span> <span class="s2">"runfiles_0"</span> <span class="o">/</span> <span class="s2">"preprocessing"</span><span class="p">}</span>
+    <span class="p">)</span>
+
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Filling templates for </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">ensemble</span><span class="p">)</span><span class="si">}</span><span class="s2"> members"</span><span class="p">)</span>
+    <span class="n">mytemplate</span><span class="p">:</span> <span class="n">Template</span> <span class="o">=</span> <span class="n">Template</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">makofile</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">member</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ensemble</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">filledtemplate</span> <span class="o">=</span> <span class="n">mytemplate</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="o">**</span><span class="n">member</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">pyopmnearwell_error</span><span class="p">(</span><span class="n">exceptions</span><span class="o">.</span><span class="n">text_error_template</span><span class="p">()</span><span class="o">.</span><span class="n">render</span><span class="p">())</span>
+            <span class="k">raise</span>
+
+        <span class="p">(</span><span class="n">ensemble_path</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"runfiles_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="p">(</span><span class="n">ensemble_path</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"runfiles_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">"</span> <span class="o">/</span> <span class="s2">"preprocessing"</span><span class="p">)</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="c1"># NOTE: It might be possible to skip the writing and deleting of the toml file</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">ensemble_path</span><span class="si">}</span><span class="s2">/runfiles_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">/input.toml"</span><span class="p">,</span>
+            <span class="s2">"w"</span><span class="p">,</span>
+            <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf8"</span><span class="p">,</span>
+        <span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+            <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">filledtemplate</span><span class="p">)</span>
+        <span class="n">dic</span> <span class="o">=</span> <span class="n">process_input</span><span class="p">(</span>
+            <span class="p">{</span>
+                <span class="s2">"pat"</span><span class="p">:</span> <span class="n">dirname</span> <span class="o">/</span> <span class="s2">".."</span><span class="p">,</span>  <span class="c1"># Path to pyopmnearwell.</span>
+                <span class="s2">"fol"</span><span class="p">:</span> <span class="n">ensemble_path</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"runfiles_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">ensemble_path</span><span class="si">}</span><span class="s2">/runfiles_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">/input.toml"</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="sa">f</span><span class="s2">"rm </span><span class="si">{</span><span class="n">ensemble_path</span><span class="si">}</span><span class="s2">/runfiles_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">/input.toml"</span><span class="p">)</span>
+        <span class="n">dic</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">"runname"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"RUN_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">"</span><span class="p">})</span>
+        <span class="n">dic</span><span class="p">[</span><span class="s2">"fprep"</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">dic</span><span class="p">[</span><span class="s1">'fol'</span><span class="p">]</span><span class="si">}</span><span class="s2">/preprocessing"</span>
+        <span class="n">dic</span><span class="p">[</span><span class="s2">"foutp"</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">dic</span><span class="p">[</span><span class="s1">'fol'</span><span class="p">]</span><span class="si">}</span><span class="s2">/output"</span>
+        <span class="c1"># Always calculate geology, grid, tables, etc. for the first ensemble member.</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">reservoir_files</span><span class="p">(</span><span class="n">dic</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">reservoir_files</span><span class="p">(</span>
+                <span class="n">dic</span><span class="p">,</span>
+                <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                <span class="c1"># recalc_grid=recalc_grid,</span>
+                <span class="c1"># recalc_tables=recalc_tables,</span>
+                <span class="c1"># recalc_sections=recalc_sections,</span>
+                <span class="c1"># inc_folder=pathlib.Path("..") / ".." / "runfiles_0" / "preprocessing",</span>
+            <span class="p">)</span>
+    <span class="c1"># pyopmnearwell creates these unneeded folders, so we remove them.</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">ensemble_path</span> <span class="o">/</span> <span class="s2">"preprocessing"</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+        <span class="k">pass</span>  <span class="c1"># No preprocessing folder</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Filled templates for </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">ensemble</span><span class="p">)</span><span class="si">}</span><span class="s2"> members"</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="get_flags">
+<a class="viewcode-back" href="../../../api/pyopmnearwell.ml.ensemble.html#pyopmnearwell.ml.ensemble.get_flags">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_flags</span><span class="p">(</span>
+    <span class="n">makofile</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Extract OPM Flow run flags from a makofile.</span>
+
+
+<span class="sd">    Args:</span>
+<span class="sd">        makofile (str | pathlib.Path): Path to the makofile.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: All flags that are passed to OPM Flow.</span>
+<span class="sd">    """</span>
+    <span class="c1"># Ensure ``makofile`` is a ``Path`` object.</span>
+    <span class="n">makofile</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">makofile</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">makofile</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="c1"># Second line has command line arguments.</span>
+        <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+        <span class="n">line</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+        <span class="c1"># Strip first argument, which is just the ``flow`` command.</span>
+        <span class="n">command_line_args</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">" "</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="c1"># Strip the newline at the end.</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s2">" "</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">command_line_args</span><span class="p">)</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="run_ensemble">
+<a class="viewcode-back" href="../../../api/pyopmnearwell.ml.ensemble.html#pyopmnearwell.ml.ensemble.run_ensemble">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">run_ensemble</span><span class="p">(</span>
+    <span class="n">flow_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span>
+    <span class="n">ensemble_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span>
+    <span class="n">runspecs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+    <span class="n">ecl_keywords</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">init_keywords</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">summary_keywords</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">num_report_steps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">keep_result_files</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Run OPM Flow for each ensemble member and collect requested results.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    flow_path : str | pathlib.Path</span>
+<span class="sd">        Path to the OPM Flow executable.</span>
+<span class="sd">    ensemble_path : str | pathlib.Path</span>
+<span class="sd">        Directory containing ensemble run folders.</span>
+<span class="sd">    runspecs : dict[str, Any]</span>
+<span class="sd">        Ensemble size, parallel-run count, variables, and constants.</span>
+<span class="sd">    ecl_keywords : list[str]</span>
+<span class="sd">        Restart keywords to extract from UNRST files.</span>
+<span class="sd">    init_keywords : list[str]</span>
+<span class="sd">        Static keywords to extract from INIT files.</span>
+<span class="sd">    summary_keywords : list[str]</span>
+<span class="sd">        Summary vectors to extract from SMSPEC files.</span>
+<span class="sd">    num_report_steps : int | None, optional</span>
+<span class="sd">        Required report-step count for a completed run.</span>
+<span class="sd">    keep_result_files : bool, optional</span>
+<span class="sd">        Whether result folders for all ensemble members are retained.</span>
+<span class="sd">    **kwargs : Any</span>
+<span class="sd">        Additional options forwarded to the underlying operation.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    dict[str, Any]</span>
+<span class="sd">        Result produced by the operation.</span>
+<span class="sd">    """</span>
+    <span class="c1"># Ensure ``ensemble_path`` is a ``Path`` object.</span>
+    <span class="n">ensemble_path</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">ensemble_path</span><span class="p">)</span>
+
+    <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">keyword</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">keyword</span> <span class="ow">in</span> <span class="n">ecl_keywords</span> <span class="o">+</span> <span class="n">init_keywords</span> <span class="o">+</span> <span class="n">summary_keywords</span>
+    <span class="p">}</span>
+    <span class="n">num_disregarded_runs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># Get **kwargs that determine how many report steps and cells shall be skipped when</span>
+    <span class="c1"># extracting the data.</span>
+    <span class="n">step_size_time</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"step_size_time"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">step_size_cell</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"step_size_cell"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">runspecs</span><span class="p">[</span><span class="s2">"npoints"</span><span class="p">]</span> <span class="o">/</span> <span class="n">runspecs</span><span class="p">[</span><span class="s2">"npruns"</span><span class="p">])):</span>
+        <span class="n">command</span> <span class="o">=</span> <span class="s2">" "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">flow_path</span><span class="si">}</span><span class="s2">"</span>
+                <span class="o">+</span> <span class="sa">f</span><span class="s2">" </span><span class="si">{</span><span class="n">ensemble_path</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="sa">f</span><span class="s1">'runfiles_</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s1">'</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="s1">'preprocessing'</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="sa">f</span><span class="s1">'RUN_</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s1">.DATA'</span><span class="si">}</span><span class="s2">"</span>
+                <span class="o">+</span> <span class="sa">f</span><span class="s2">" --output-dir=</span><span class="si">{</span><span class="n">ensemble_path</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="sa">f</span><span class="s1">'results_</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s1">'</span><span class="si">}</span><span class="s2">"</span>
+                <span class="o">+</span> <span class="sa">f</span><span class="s2">" </span><span class="si">{</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'flags'</span><span class="p">,</span><span class="w"> </span><span class="s1">''</span><span class="p">)</span><span class="si">}</span><span class="s2"> &amp; "</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">runspecs</span><span class="p">[</span><span class="s2">"npruns"</span><span class="p">]</span> <span class="o">*</span> <span class="n">i</span><span class="p">,</span> <span class="n">runspecs</span><span class="p">[</span><span class="s2">"npruns"</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+        <span class="c1"># TODO: Possibly better to use subprocess?</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">command</span> <span class="o">+</span> <span class="s2">"wait"</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">runspecs</span><span class="p">[</span><span class="s2">"npruns"</span><span class="p">]</span> <span class="o">*</span> <span class="n">i</span><span class="p">,</span> <span class="n">runspecs</span><span class="p">[</span><span class="s2">"npruns"</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
+            <span class="n">simulation_finished</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+
+            <span class="n">resdata_file</span><span class="p">:</span> <span class="n">ResdataFile</span> <span class="o">=</span> <span class="n">ResdataFile</span><span class="p">(</span>
+                <span class="nb">str</span><span class="p">(</span><span class="n">ensemble_path</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"results_</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2">"</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"RUN_</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2">.UNRST"</span><span class="p">),</span>
+                <span class="n">flags</span><span class="o">=</span><span class="n">FileMode</span><span class="o">.</span><span class="n">CLOSE_STREAM</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="c1"># Skip result, if the simulation did not run to the last time step.</span>
+            <span class="k">if</span> <span class="p">(</span>
+                <span class="n">num_report_steps</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+                <span class="ow">and</span> <span class="n">resdata_file</span><span class="o">.</span><span class="n">num_report_steps</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">num_report_steps</span>
+            <span class="p">):</span>
+                <span class="n">simulation_finished</span> <span class="o">=</span> <span class="kc">False</span>
+
+            <span class="c1"># Check again if the simulation data is available for all time steps.</span>
+            <span class="c1"># It seems that sometimes the keyword array has zero report steps, even</span>
+            <span class="c1"># though `resdata_file.num_report_steps()` is nonzero.</span>
+            <span class="n">member_data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">keyword</span> <span class="ow">in</span> <span class="n">ecl_keywords</span><span class="p">:</span>
+                <span class="c1"># Append the data corresponding to the keyword for all chosen report</span>
+                <span class="c1"># steps and cells. Disregard the zeroth time step.</span>
+                <span class="n">member_data</span><span class="p">[</span><span class="n">keyword</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">resdata_file</span><span class="o">.</span><span class="n">iget_kw</span><span class="p">(</span><span class="n">keyword</span><span class="p">))[</span>
+                    <span class="mi">1</span><span class="p">::</span><span class="n">step_size_time</span><span class="p">,</span> <span class="p">::</span><span class="n">step_size_cell</span>
+                <span class="p">]</span>
+                <span class="k">if</span> <span class="p">(</span>
+                    <span class="n">num_report_steps</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+                    <span class="ow">and</span> <span class="n">member_data</span><span class="p">[</span><span class="n">keyword</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="o">&lt;</span> <span class="n">num_report_steps</span> <span class="o">//</span> <span class="n">step_size_time</span>
+                <span class="p">)</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isinf</span><span class="p">(</span><span class="n">member_data</span><span class="p">[</span><span class="n">keyword</span><span class="p">])):</span>
+                    <span class="n">simulation_finished</span> <span class="o">=</span> <span class="kc">False</span>
+
+            <span class="c1"># Only append data if the simulation finished.</span>
+            <span class="k">if</span> <span class="n">simulation_finished</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">keyword</span> <span class="ow">in</span> <span class="n">ecl_keywords</span><span class="p">:</span>
+                    <span class="n">data</span><span class="p">[</span><span class="n">keyword</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">member_data</span><span class="p">[</span><span class="n">keyword</span><span class="p">])</span>
+
+                <span class="c1"># Get additional data from init and summary file.</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">init_keywords</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">init_file</span><span class="p">:</span> <span class="n">ResdataFile</span> <span class="o">=</span> <span class="n">ResdataFile</span><span class="p">(</span>
+                        <span class="nb">str</span><span class="p">(</span><span class="n">ensemble_path</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"results_</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2">"</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"RUN_</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2">.INIT"</span><span class="p">),</span>
+                        <span class="n">flags</span><span class="o">=</span><span class="n">FileMode</span><span class="o">.</span><span class="n">CLOSE_STREAM</span><span class="p">,</span>
+                    <span class="p">)</span>
+                    <span class="k">for</span> <span class="n">keyword</span> <span class="ow">in</span> <span class="n">init_keywords</span><span class="p">:</span>
+                        <span class="c1"># Append the data corresponding to the keyword for all chosen</span>
+                        <span class="c1"># cells.</span>
+                        <span class="c1"># NOTE: The array has shape ``[1, num_cells]``, hence no axis</span>
+                        <span class="c1"># needs to be added.</span>
+                        <span class="n">data</span><span class="p">[</span><span class="n">keyword</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">init_file</span><span class="o">.</span><span class="n">iget_kw</span><span class="p">(</span><span class="n">keyword</span><span class="p">))[::</span><span class="n">step_size_cell</span><span class="p">]</span>
+                        <span class="p">)</span>
+
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">summary_keywords</span><span class="p">):</span>
+                    <span class="c1"># TODO: Check if lazyload option for ``Summary`` is faster or</span>
+                    <span class="c1"># slower.</span>
+                    <span class="n">summary_file</span><span class="p">:</span> <span class="n">Summary</span> <span class="o">=</span> <span class="n">Summary</span><span class="p">(</span>
+                        <span class="nb">str</span><span class="p">(</span><span class="n">ensemble_path</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"results_</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2">"</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"RUN_</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2">.SMSPEC"</span><span class="p">)</span>
+                    <span class="p">)</span>
+                    <span class="k">for</span> <span class="n">keyword</span> <span class="ow">in</span> <span class="n">summary_keywords</span><span class="p">:</span>
+                        <span class="c1"># Append the data corresponding to the keyword for all chosen report</span>
+                        <span class="c1"># steps (not for all time steps). The ``*.SMSPEC`` file does not</span>
+                        <span class="c1"># include the zeroth report step. Add a dimension to make the array</span>
+                        <span class="c1"># broadcastable to data from the ``*.UNRST`` and ``*.INIT`` files.</span>
+                        <span class="n">data</span><span class="p">[</span><span class="n">keyword</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+                                <span class="n">summary_file</span><span class="o">.</span><span class="n">get_values</span><span class="p">(</span><span class="n">keyword</span><span class="p">,</span> <span class="n">report_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                            <span class="p">)[::</span><span class="n">step_size_time</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+                        <span class="p">)</span>
+                    <span class="c1"># NOTE: There does not seem to be a way to specify that a</span>
+                    <span class="c1"># ``Summary`` object shall be closed after use. Also, there is no</span>
+                    <span class="c1"># context manager for ``Summary`` and ``ResdataFile`` objects.</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">num_disregarded_runs</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Disregarded ensemble run </span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+            <span class="c1"># Remove the run files and result folder (except for the first one that</span>
+            <span class="c1"># remains to check if everything went right).</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">keep_result_files</span> <span class="ow">and</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">ensemble_path</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"results_</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">ensemble_path</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"runfiles_</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Disregarded </span><span class="si">{</span><span class="n">num_disregarded_runs</span><span class="si">}</span><span class="s2"> of </span><span class="si">{</span><span class="n">runspecs</span><span class="p">[</span><span class="s1">'npoints'</span><span class="p">]</span><span class="si">}</span><span class="s2"> runs"</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">data</span></div>
+
+
+
+<div class="viewcode-block" id="calculate_radii">
+<a class="viewcode-back" href="../../../api/pyopmnearwell.ml.ensemble.html#pyopmnearwell.ml.ensemble.calculate_radii">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_radii</span><span class="p">(</span>
+    <span class="n">gridfile</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span>
+    <span class="n">num_cells</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">400</span><span class="p">,</span>
+    <span class="c1"># num_dims: int = 1,</span>
+    <span class="n">return_outer_inner</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">triangle_grid</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">angle</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">3</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Calculates the radii of the cells in a grid grom a given .</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        gridfile (str | pathlib.Path): Path to the file containing the grid.</span>
+<span class="sd">        num_cells (int, optional): Number of cells in the grid. Defaults to 400.</span>
+<span class="sd">        num_dims (int, optional): Number of dimensions of the grid. Defaults to 1.</span>
+<span class="sd">        return_outer_inner (bool, optional): Whether to return the inner and outer radii</span>
+<span class="sd">            in addition to the average radii. Defaults to False.</span>
+<span class="sd">        triangle_grid (bool, optional): Whether the grid is a triangle grid. If</span>
+<span class="sd">            True, transform altitudes of the triangle grid to radii of a raidal grid</span>
+<span class="sd">            with equal solution. Defaults to False.</span>
+<span class="sd">        angle (float, optional): Angle between both sides of the triangle grid. Defaults</span>
+<span class="sd">            to ``math.pi/3``.</span>
+
+
+<span class="sd">    Returns:</span>
+<span class="sd">        np.ndarray | tuple[np.ndarray, np.ndarray, np.ndarray]: If return_outer_inner is</span>
+<span class="sd">            False, returns an array of the average radii of the cells.</span>
+
+<span class="sd">            If return_outer_inner is True, returns a tuple containing the array of</span>
+<span class="sd">            average radii, the array of inner radii, and the array of outer radii.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        AssertionError: If the number of lines in the grid file is not equal to</span>
+<span class="sd">            num_cells + 1.</span>
+<span class="sd">    """</span>
+    <span class="c1"># Ensure ``gridfile`` is a ``Path`` object.</span>
+    <span class="n">gridfile</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">gridfile</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="n">gridfile</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">"r"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">radii_file</span><span class="p">:</span>
+        <span class="n">lines</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">radii_file</span><span class="o">.</span><span class="n">readlines</span><span class="p">()[</span><span class="mi">9</span> <span class="p">:</span> <span class="mi">10</span> <span class="o">+</span> <span class="n">num_cells</span><span class="p">]</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span> <span class="o">==</span> <span class="n">num_cells</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">radii</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+            <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">triangle_grid</span><span class="p">:</span>
+            <span class="n">radii</span> <span class="o">*=</span> <span class="n">pyopmnearwell_correction</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+    <span class="n">inner_radii</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">radii</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">outer_radii</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">radii</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+    <span class="n">radii_t</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="p">(</span><span class="n">inner_radii</span> <span class="o">+</span> <span class="n">outer_radii</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>  <span class="c1"># unit: [m]</span>
+    <span class="k">if</span> <span class="n">return_outer_inner</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">radii_t</span><span class="p">,</span> <span class="n">inner_radii</span><span class="p">,</span> <span class="n">outer_radii</span>
+    <span class="k">return</span> <span class="n">radii_t</span></div>
+
+
+
+<div class="viewcode-block" id="calculate_WI">
+<a class="viewcode-back" href="../../../api/pyopmnearwell.ml.ensemble.html#pyopmnearwell.ml.ensemble.calculate_WI">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_WI</span><span class="p">(</span>
+    <span class="n">pressures</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">injection_rates</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Calculate the well index (WI) for a given dataset.</span>
+
+<span class="sd">    The well index (WI) is calculated using the following formula:</span>
+<span class="sd">    .. math::</span>
+
+<span class="sd">        WI = \frac{q}{{p_w - p_{gb}}}</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        - The unit of ``WI_array`` will depend on the units of ``pressures`` and</span>
+<span class="sd">          ``injection_rates``.</span>
+<span class="sd">        - In 3D this might fail. The user is responsible to fix the array shapes before</span>
+<span class="sd">          passing to this function.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        pressures (np.ndarray): First axis are the ensemble members. Last axis is</span>
+<span class="sd">            assumed to be the x-axis. Must contain the well cells (i.e., well pressures</span>
+<span class="sd">            values) at ``pressures[...,0]``.</span>
+<span class="sd">        injection_rates (float | np.ndarray): Injection rate. If an ``np.ndarray``, it</span>
+<span class="sd">            must have shape broadcastable to ``pressures.shape``.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        WI_array (numpy.ndarray): ``shape=(...,num_x_cells - 1)``</span>
+<span class="sd">            An array of well index values for each data point in the dataset.</span>
+<span class="sd">        failed_indices (list[int]): Indices for the ensemble members where WI could not</span>
+<span class="sd">            be computed. E.g., if the simmulation went wrong and the pressure difference</span>
+<span class="sd">            is zero.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If no data is found for the 'pressure' keyword in the dataset.</span>
+<span class="sd">    """</span>
+
+    <span class="c1"># Calculate WI for each ensemble member.</span>
+    <span class="n">WI_values</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">failed_indices</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">injection_rates</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="n">injection_rates</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="n">pressures</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],),</span> <span class="n">injection_rates</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">member_pressure</span><span class="p">,</span> <span class="n">member_injection_rate</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span>
+        <span class="nb">zip</span><span class="p">(</span><span class="n">pressures</span><span class="p">,</span> <span class="n">injection_rates</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+    <span class="p">):</span>
+        <span class="n">p_w</span> <span class="o">=</span> <span class="n">member_pressure</span><span class="p">[</span>
+            <span class="o">...</span><span class="p">,</span> <span class="mi">0</span>
+        <span class="p">]</span>  <span class="c1"># Bottom hole/well pressure extracted at the well cells.</span>
+        <span class="n">p_gb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span>
+            <span class="n">member_pressure</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span>
+        <span class="p">)</span>  <span class="c1"># Cell pressures of all but the well blocks.</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">WI</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">member_injection_rate</span> <span class="o">/</span> <span class="p">(</span><span class="n">p_w</span> <span class="o">-</span> <span class="n">p_gb</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">logical_or</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">WI</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">isinf</span><span class="p">(</span><span class="n">WI</span><span class="p">))):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"WI is nan/inf."</span><span class="p">)</span>
+            <span class="n">WI_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">WI</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="n">failed_indices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">WI_values</span><span class="p">),</span>  <span class="c1"># ``shape=(...,num_x_cells - 1)``</span>
+        <span class="n">failed_indices</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="extract_features">
+<a class="viewcode-back" href="../../../api/pyopmnearwell.ml.ensemble.html#pyopmnearwell.ml.ensemble.extract_features">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">extract_features</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+    <span class="n">keywords</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">keyword_scalings</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Extract features from a ``run_ensemble`` run into a numpy array.</span>
+
+<span class="sd">    Note: The features are in the units used in ``*.UNRST`` and ``*.SMSPEC`` files. The</span>
+<span class="sd">    user is responsible for transforming them to the units needed. This may depend on</span>
+<span class="sd">    various factors such as the mode OPM will run in. In particular, pressure is in</span>
+<span class="sd">    [bar].</span>
+<span class="sd">    Some units for common quantities:</span>
+<span class="sd">    - Pressure: [bar]</span>
+<span class="sd">    - Temperate: [°C]</span>
+<span class="sd">    - Saturation: [unitless]</span>
+<span class="sd">    - Time: []</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (dict[str, Any]): Data generated by ``run_ensemble``.</span>
+<span class="sd">        keywords (list[str]): Keywords to extract. The features will be in the order of</span>
+<span class="sd">        the keywords.</span>
+<span class="sd">        keyword_scalings (Optional[dict[str, float]]): Scalings for the features.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        feature_array: (numpy.ndarray): ``shape=(ensemble_size, num_report_steps, num_cells, num_features)``</span>
+<span class="sd">            An array of input features for each data point in the dataset.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If no data is found for one of the keywords.</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">keyword_scalings</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">keyword_scalings</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">features</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">keyword</span> <span class="ow">in</span> <span class="n">keywords</span><span class="p">:</span>
+        <span class="n">feature</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+            <span class="n">data</span><span class="p">[</span><span class="n">keyword</span><span class="p">]</span>
+        <span class="p">)</span>  <span class="c1"># ``shape=(ensemble_size, num_report_steps, num_cells)``</span>
+        <span class="k">if</span> <span class="n">keyword</span> <span class="o">==</span> <span class="s2">"TEMPERATURE"</span><span class="p">:</span>
+            <span class="n">feature</span> <span class="o">+=</span> <span class="n">keyword_scalings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">keyword</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">feature</span> <span class="o">*=</span> <span class="n">keyword_scalings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">keyword</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+        <span class="n">features</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span>
+
+    <span class="c1"># Broadcast all features to the same shape</span>
+    <span class="n">broadcasted_shape</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">broadcast_shapes</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">feature</span><span class="o">.</span><span class="n">shape</span> <span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">features</span><span class="p">])</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">broadcast_to</span><span class="p">(</span><span class="n">feature</span><span class="p">,</span> <span class="n">broadcasted_shape</span><span class="p">)</span> <span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">features</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span>
+        <span class="n">features</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span>
+    <span class="p">)</span>  <span class="c1"># ``shape=(ensemble_size, num_report_steps, num_cells, num_features)``</span></div>
+
+
+
+<div class="viewcode-block" id="integrate_fine_scale_value">
+<a class="viewcode-back" href="../../../api/pyopmnearwell.ml.ensemble.html#pyopmnearwell.ml.ensemble.integrate_fine_scale_value">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">integrate_fine_scale_value</span><span class="p">(</span>
+    <span class="n">radial_values</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">radii</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">block_sidelengths</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">axis</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Integrate a fine scale value across all radial cells covering a square grid</span>
+<span class="sd">    block.</span>
+
+<span class="sd">    This function correctly takes only fractions of the integrated values for radial</span>
+<span class="sd">    cells that are only partially inside the square block.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        radial_values (np.ndarray): Cell values for the radial cells.</span>
+<span class="sd">        radii (np.ndarray): Array of radii for inner and outer radius of the radial</span>
+<span class="sd">        cells. Has to be ordered from low to high.</span>
+<span class="sd">        block_sidelengths (float | np.ndarray): The sidelengths of the square grid</span>
+<span class="sd">            blocks. The length of this array determines the new length of the integrated</span>
+<span class="sd">            axis.</span>
+<span class="sd">            # TODO: Update the tests for this new functionality, i.e., that</span>
+<span class="sd">            block_sidelengths determins the return shape.</span>
+<span class="sd">        axis (int): Axis to integrate along.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: The integrated value of fine-scale data.</span>
+
+<span class="sd">    Raise:</span>
+<span class="sd">        ValueError: If the radial cells do not cover the square grid block.</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">block_sidelengths</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="n">block_sidelengths</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">block_sidelengths</span><span class="p">])</span>
+
+    <span class="c1"># Return 0 for empty radial_values.</span>
+    <span class="c1"># TODO: Should this be changed to raise an error as well, if block_sidelength &gt; 0?</span>
+    <span class="k">if</span> <span class="n">radial_values</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="n">radial_values</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span> <span class="o">==</span> <span class="n">radii</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">radial_values</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">block_sidelengths</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">radii</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">"The disks defined by the radii do not cover all square blocks."</span>
+        <span class="p">)</span>
+
+    <span class="n">integrated_values_lst</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># Ignore mypy complaining. ``area_squaredcircle`` returns an np.ndarray in this</span>
+    <span class="c1"># case. This can be removed, once the typing in ``formulas.py`` is more strict.</span>
+    <span class="c1"># For some reason Pylance thinks that ``block_sidelengths`` is ``int``. Ignore this.</span>
+    <span class="k">for</span> <span class="n">block_sidelength</span> <span class="ow">in</span> <span class="n">block_sidelengths</span><span class="p">:</span>  <span class="c1"># type: ignore</span>
+        <span class="n">cell_areas</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">area_squaredcircle</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
+            <span class="n">radii</span><span class="p">[</span><span class="mi">1</span><span class="p">::],</span> <span class="n">block_sidelength</span>
+        <span class="p">)</span> <span class="o">-</span> <span class="n">area_squaredcircle</span><span class="p">(</span><span class="n">radii</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">:],</span> <span class="n">block_sidelength</span><span class="p">)</span>
+        <span class="n">integrated_values_lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">radial_values</span> <span class="o">*</span> <span class="n">cell_areas</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">integrated_values_lst</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="store_dataset">
+<a class="viewcode-back" href="../../../api/pyopmnearwell.ml.ensemble.html#pyopmnearwell.ml.ensemble.store_dataset">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">store_dataset</span><span class="p">(</span>
+    <span class="n">features</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">targets</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">savepath</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Store a TensorFlow dataset given by to tensors.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        features (np.ndarray): Features of the dataset.</span>
+<span class="sd">        targets (np.ndarray): Targets of the dataset.</span>
+<span class="sd">        savepath (str | pathlib.Path): Folder where the dataset should be saved.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pathlib.Path: Savepath of the dataset</span>
+<span class="sd">    """</span>
+    <span class="n">ds</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">from_tensor_slices</span><span class="p">((</span><span class="n">features</span><span class="p">,</span> <span class="n">targets</span><span class="p">))</span>
+    <span class="n">ds</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">savepath</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">savepath</span><span class="p">)</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2023-2026, NORCE Research AS.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

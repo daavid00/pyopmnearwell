@@ -1,14 +1,17 @@
-========================
 pyopmnearwell Python API
 ========================
 
-The main script for the **pyopmnearwell** executable is located in the core folder.
-The scripts in the utils folder process the input configuration file, creates the geological model, 
-write the input files by using the scripts in the templates folder, and execute OPM Flow. The ml folder 
-constains scripts used in `this repository <https://github.com/cssr-tools/ML_near_well>`_.
+The top-level executable validates CLI values and coordinates deck generation
+and OPM Flow. Utility modules validate TOML, construct grids and properties,
+render model templates, and execute simulations. The ``ml`` package supports
+the separate ML near-well workflows.
 
 .. figure:: figs/contents.png
+   :alt: Files in the pyopmnearwell package
 
-    Files in the pyopmnearwell tool.
+API files are regenerated beneath ``docs/text/api`` before each build.
 
-.. include:: modules.rst
+.. toctree::
+   :maxdepth: 2
+
+   api/modules

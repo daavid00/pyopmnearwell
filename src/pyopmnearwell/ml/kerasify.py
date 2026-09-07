@@ -24,9 +24,7 @@ ACTIVATION_HARD_SIGMOID = 6
 
 
 def write_dense(file, layer, write_activation):
-    """
-    Process the dense layer.
-    """
+    """Process the dense layer."""
     weights = layer.get_weights()[0]
     biases = layer.get_weights()[1]
     activation = layer.get_config()["activation"]
@@ -46,9 +44,7 @@ def write_dense(file, layer, write_activation):
 
 
 def write_convolution2d(file, layer, write_activation):
-    """
-    Process the Convolution2D layer.
-    """
+    """Process the Convolution2D layer."""
     weights = layer.get_weights()[0]
     biases = layer.get_weights()[1]
     activation = layer.get_config()["activation"]
@@ -74,9 +70,7 @@ def write_convolution2d(file, layer, write_activation):
 
 
 def write_lstm(file, layer, write_activation):
-    """
-    Process the LSTM layer.
-    """
+    """Process the LSTM layer."""
     inner_activation = layer.get_config()["inner_activation"]
     activation = layer.get_config()["activation"]
     return_sequences = int(layer.get_config()["return_sequences"])
@@ -122,8 +116,7 @@ def write_lstm(file, layer, write_activation):
 
 
 def write_floats(file, floats):
-    """
-    Writes floats to file in 1024 chunks.. prevents memory explosion
+    """Writes floats to file in 1024 chunks.. prevents memory explosion
     writing very large arrays to disk when calling struct.pack().
     """
     step = 1024
@@ -138,12 +131,21 @@ def write_floats(file, floats):
 
 
 def export_model(model, filename):
-    """
-    Main routine.
-    """
+    """Main routine."""
     with open(filename, "wb") as file:
 
         def write_activation(activation):
+            """Serialize an activation-function identifier.
+
+            Parameters
+            ----------
+            activation : Any
+                Keras activation name.
+
+            Returns
+            -------
+            Any
+                Result produced by the operation."""
             if activation == "linear":
                 file.write(struct.pack("I", ACTIVATION_LINEAR))
             elif activation == "relu":

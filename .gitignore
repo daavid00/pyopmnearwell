@@ -168,27 +168,20 @@ cython_debug/
 # Python environment
 vpyopmnearwell/
 
-# DUNE
-dune-common/
-dune-geometry/
-dune-grid/
-dune-istl/
-
 # OPM
-opm-common/
-opm-grid/
-opm-simulators/
+dune-*
+opm-*
 
 # Developing
-developing/
-studies/
-prototyping/
-cssr/
-presentation/
-paper/
-playground/
-project/
+/developing/
+/studies/
+/prototyping/
+/cssr/
+/presentation/
+/paper/
+/playground/
+/project/
 .vscode/
-test_outputs/
-tests/data/geometries_data_updated.txt
-tests/data/models_data_updated.txt
+/test_outputs/
+/tests/data/geometries_data_updated.txt
+/tests/data/models_data_updated.txt

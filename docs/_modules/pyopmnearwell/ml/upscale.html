@@ -1,0 +1,1143 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pyopmnearwell.ml.upscale &#8212; pyopmnearwell documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=530fd138" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
+
+    <script src="../../../_static/documentation_options.js?v=1485e655"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=eef4a3d2"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyopmnearwell/ml/upscale';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2026.10rc0" />
+    <meta name="docbuild:last-update" content="2026-09-07"/>
+  
+    
+    <script src="../../../_static/searchtools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script src="../../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/logo.png" class="logo__image only-light" alt="pyopmnearwell documentation - Home"/>
+    <img src="../../../_static/logo.png" class="logo__image only-dark pst-js-only" alt="pyopmnearwell documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../introduction.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../configuration_file.html">
+    Configuration reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../examples.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../command-line.html">
+    Command-line reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api.html">
+    pyopmnearwell Python API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../output_folder.html">
+    Output folder
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../contributing.html">
+    Contributing
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../related.html">
+    Related projects
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cssr-tools/pyopmnearwell/issues/new/choose" title="Report an issue" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-bug fa-lg" aria-hidden="true"></i><span class="visually-hidden">Report an issue</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cssr-tools/pyopmnearwell" title="GitHub repository" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub repository</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../introduction.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../configuration_file.html">
+    Configuration reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../examples.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../command-line.html">
+    Command-line reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api.html">
+    pyopmnearwell Python API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../output_folder.html">
+    Output folder
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../contributing.html">
+    Contributing
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../related.html">
+    Related projects
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cssr-tools/pyopmnearwell/issues/new/choose" title="Report an issue" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-bug fa-lg" aria-hidden="true"></i><span class="visually-hidden">Report an issue</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cssr-tools/pyopmnearwell" title="GitHub repository" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub repository</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">pyopmnearwell.ml.upscale</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for pyopmnearwell.ml.upscale</h1><div class="highlight"><pre>
+<span></span><span class="c1"># pylint: disable=fixme,missing-function-docstring,no-member, pointless-string-statement</span>
+<span class="sd">"""Functionality to upscale data from an ensemble run on a radial grid to a cartesian</span>
+<span class="sd">grid.</span>
+
+<span class="sd">Note: pylint: no-member is disabled, because it complains about the ``BaseUpscaler``</span>
+<span class="sd">missing instance attributes, which are taken care of by the ``Upscaler`` protocol.</span>
+<span class="sd">pylint: pointless-string-statement is disabled, as it complains an attribute docstring</span>
+<span class="sd">in the ``Upscaler`` protocol.</span>
+<span class="sd">"""</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pathlib</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Protocol</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># ``tqdm`` is not a dependency. Up to the user to install it.</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="c1"># Avoid some mypy trouble.</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">tqdm.autonotebook</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tqdm</span>  <span class="c1"># type: ignore</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">_IS_TQDM_AVAILABLE</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">_IS_TQDM_AVAILABLE</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyopmnearwell.ml</span><span class="w"> </span><span class="kn">import</span> <span class="n">ensemble</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyopmnearwell.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">formulas</span><span class="p">,</span> <span class="n">units</span>
+
+
+<div class="viewcode-block" id="Upscaler">
+<a class="viewcode-back" href="../../../api/pyopmnearwell.ml.upscale.html#pyopmnearwell.ml.upscale.Upscaler">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Upscaler</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Protocol class for upscalers.</span>
+
+<span class="sd">    This class is used for typing of abstract attributes of ``BaseUpscaler``. MyPy will</span>
+<span class="sd">    check if subclasses of ``BaseUpscaler`` implement the following instance attributes:</span>
+
+<span class="sd">    - ``num_timesteps``</span>
+<span class="sd">    - ``num_layers``</span>
+<span class="sd">    - ``num_zcells``</span>
+<span class="sd">    - ``num_xcells``</span>
+<span class="sd">    - ``single_feature_shape``</span>
+
+<span class="sd">    However, in comparison to missing abstract functions, no runtime error will be</span>
+<span class="sd">    raised if they are missing.</span>
+
+<span class="sd">    See, e.g., https://stackoverflow.com/a/75253719 for an explanation.</span>
+
+<span class="sd">    Note: As of now (Python 3.11), each instance method of ``BaseUpscaler`` or a</span>
+<span class="sd">        subclass making use of one of the attributes, needs to have its self argumented</span>
+<span class="sd">        annotated with ``Upscaler``. In future python versions it should be possible to</span>
+<span class="sd">        use ``class BaseUpscaler[Upscaler](ABC):...`` instead and remove these</span>
+<span class="sd">        annotations.</span>
+<span class="sd">    """</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">num_timesteps</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Return the number of simulation time steps.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        int</span>
+<span class="sd">            Result produced by the operation.</span>
+<span class="sd">        """</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">num_layers</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Return the number of geological layers.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        int</span>
+<span class="sd">            Result produced by the operation.</span>
+<span class="sd">        """</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">num_zcells</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Return the number of vertical grid cells.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        int</span>
+<span class="sd">            Result produced by the operation.</span>
+<span class="sd">        """</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">num_xcells</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Return the number of radial grid cells.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        int</span>
+<span class="sd">            Result produced by the operation.</span>
+<span class="sd">        """</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">single_feature_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Return the expected shape of one upscaled feature.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        tuple</span>
+<span class="sd">            Result produced by the operation.</span>
+<span class="sd">        """</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">angle</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Return the angular extent of the cake grid in radians.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            Result produced by the operation.</span>
+<span class="sd">        """</span>
+
+<span class="w">    </span><span class="sd">"""Angle of the cake radial grid. Default is 60°."""</span></div>
+
+
+
+<div class="viewcode-block" id="BaseUpscaler">
+<a class="viewcode-back" href="../../../api/pyopmnearwell.ml.upscale.html#pyopmnearwell.ml.upscale.BaseUpscaler">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">BaseUpscaler</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Extract and upscale data from an array of ensemble data.</span>
+
+<span class="sd">    This base class provides several methods to extract features from fine-scale radial</span>
+<span class="sd">    simulations and upscale to coarse cartesian cells. Depending on the type of data,</span>
+<span class="sd">    this is done by averaging/summing/etc. values along all cells that correspond to a</span>
+<span class="sd">    coarse cell.</span>
+
+<span class="sd">    Additionally, the sparsity of the dataset can be increased by taking only some</span>
+<span class="sd">    timesteps/horizontal cells.</span>
+
+<span class="sd">    The upscaled data is usually provided in form of two ``np.ndarrays``, one for</span>
+<span class="sd">    features and one for targets.</span>
+
+<span class="sd">    Subclasses need to implement ``__init__`` and (if needed) ``create_ds`` methods.</span>
+
+<span class="sd">    The feature array will have shape ``(num_ensemble_runs, num_timesteps/step_size_t,</span>
+<span class="sd">    num_layers, num_xcells/step_size_x, num_features)``.</span>
+<span class="sd">    The target array will have shape ``(num_ensemble_runs, num_timesteps/step_size_t,</span>
+<span class="sd">    num_layers, num_xcells/step_size_x, 1)``</span>
+
+<span class="sd">    Note: All methods assume that all cells have the same height. if this is not the</span>
+<span class="sd">        case, the methods must be overridden.</span>
+<span class="sd">    """</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Upscaler</span><span class="p">):</span>  <span class="c1"># pylint: disable=missing-function-docstring</span>
+<span class="w">        </span><span class="sd">"""init  .</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Any</span>
+<span class="sd">            Result produced by the operation.</span>
+<span class="sd">        """</span>
+        <span class="k">return</span>
+
+<div class="viewcode-block" id="BaseUpscaler.create_ds">
+<a class="viewcode-back" href="../../../api/pyopmnearwell.ml.upscale.html#pyopmnearwell.ml.upscale.BaseUpscaler.create_ds">[docs]</a>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_ds</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Upscaler</span><span class="p">):</span>  <span class="c1"># pylint: disable=missing-function-docstring</span>
+<span class="w">        </span><span class="sd">"""Create the upscaled feature and target dataset.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Any</span>
+<span class="sd">            Result produced by the operation.</span>
+<span class="sd">        """</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="BaseUpscaler.reduce_data_size">
+<a class="viewcode-back" href="../../../api/pyopmnearwell.ml.upscale.html#pyopmnearwell.ml.upscale.BaseUpscaler.reduce_data_size">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">reduce_data_size</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">:</span> <span class="n">Upscaler</span><span class="p">,</span>
+        <span class="n">feature</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">step_size_x</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">step_size_t</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">random</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Reduce the size of the input feature array by selecting elements with a</span>
+<span class="sd">        fixed step size.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            feature (np.ndarray): The input feature array.</span>
+<span class="sd">            step_size_x (int, optional): The step size for the x-axis. Defaults to 1.</span>
+<span class="sd">            step_size_t (int, optional): The step size for the t-axis. Defaults to 1.</span>
+<span class="sd">            random (bool, optional): If True, select elements randomly instead of using</span>
+<span class="sd">                a fixed step size. Defaults to False. Not implemented yet.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: The reduced feature array.</span>
+<span class="sd">        """</span>
+        <span class="c1"># TODO: Add option to have a random selection of elements for each member,</span>
+        <span class="c1"># instead of a fixed stepsize. This needs to be the same for each feature, hence</span>
+        <span class="c1"># the current idea does not work.</span>
+        <span class="k">if</span> <span class="n">random</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">return</span> <span class="n">feature</span><span class="p">[:,</span> <span class="p">::</span><span class="n">step_size_t</span><span class="p">,</span> <span class="p">::,</span> <span class="p">::</span><span class="n">step_size_x</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="BaseUpscaler.get_vertically_averaged_values">
+<a class="viewcode-back" href="../../../api/pyopmnearwell.ml.upscale.html#pyopmnearwell.ml.upscale.BaseUpscaler.get_vertically_averaged_values">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_vertically_averaged_values</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">:</span> <span class="n">Upscaler</span><span class="p">,</span>
+        <span class="n">features</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">feature_index</span><span class="p">,</span>
+        <span class="n">disregard_first_xcell</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Average a selected feature over vertical cells within each layer.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        features : np.ndarray</span>
+<span class="sd">            Ensemble feature array.</span>
+<span class="sd">        feature_index : Any</span>
+<span class="sd">            Index of the feature to process.</span>
+<span class="sd">        disregard_first_xcell : bool, optional</span>
+<span class="sd">            Whether to remove the innermost well cell.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        np.ndarray</span>
+<span class="sd">            Result produced by the operation.</span>
+<span class="sd">        """</span>
+        <span class="c1"># Innermost cells (well cells) get disregarded.</span>
+        <span class="n">feature</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">features</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">feature_index</span><span class="p">],</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">2</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">disregard_first_xcell</span><span class="p">:</span>
+            <span class="n">feature</span> <span class="o">=</span> <span class="n">feature</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">:]</span>
+            <span class="k">assert</span> <span class="n">feature</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">single_feature_shape</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="n">feature</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">single_feature_shape</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">assert</span> <span class="n">feature</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">single_feature_shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="k">return</span> <span class="n">feature</span></div>
+
+
+<div class="viewcode-block" id="BaseUpscaler.get_radii">
+<a class="viewcode-back" href="../../../api/pyopmnearwell.ml.upscale.html#pyopmnearwell.ml.upscale.BaseUpscaler.get_radii">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_radii</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">:</span> <span class="n">Upscaler</span><span class="p">,</span> <span class="n">radii_file</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""Read radial-cell centers and boundaries for upscaling.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        radii_file : pathlib.Path</span>
+<span class="sd">            Grid-coordinate file containing radial boundaries.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        tuple[np.ndarray, np.ndarray]</span>
+<span class="sd">            Result produced by the operation.</span>
+<span class="sd">        """</span>
+        <span class="n">cell_center_radii</span><span class="p">,</span> <span class="n">inner_radii</span><span class="p">,</span> <span class="n">outer_radii</span> <span class="o">=</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">calculate_radii</span><span class="p">(</span>
+            <span class="n">radii_file</span><span class="p">,</span>
+            <span class="n">num_cells</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_xcells</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="n">return_outer_inner</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">triangle_grid</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">angle</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">angle</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="c1"># Innermost cells (well cells) get disregarded. If the cell_boundary_radii are</span>
+        <span class="c1"># used for integrating, this is actually needed, as the content of the well does</span>
+        <span class="c1"># not count towards the well block, hence the well radius should not be</span>
+        <span class="c1"># integrated.</span>
+        <span class="n">cell_center_radii</span> <span class="o">=</span> <span class="n">cell_center_radii</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="n">inner_radii</span> <span class="o">=</span> <span class="n">inner_radii</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="n">outer_radii</span> <span class="o">=</span> <span class="n">outer_radii</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+
+        <span class="n">cell_boundary_radii</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">inner_radii</span><span class="p">,</span> <span class="n">outer_radii</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">assert</span> <span class="n">cell_center_radii</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_xcells</span><span class="p">,)</span>
+        <span class="k">assert</span> <span class="n">cell_boundary_radii</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_xcells</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,)</span>
+        <span class="k">return</span> <span class="n">cell_center_radii</span><span class="p">,</span> <span class="n">cell_boundary_radii</span></div>
+
+
+<div class="viewcode-block" id="BaseUpscaler.get_timesteps">
+<a class="viewcode-back" href="../../../api/pyopmnearwell.ml.upscale.html#pyopmnearwell.ml.upscale.BaseUpscaler.get_timesteps">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_timesteps</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Upscaler</span><span class="p">,</span> <span class="n">simulation_length</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Create uniformly spaced simulation times.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        simulation_length : float</span>
+<span class="sd">            Total simulation duration in days.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        np.ndarray</span>
+<span class="sd">            Result produced by the operation.</span>
+<span class="sd">        """</span>
+        <span class="n">timesteps</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">simulation_length</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_timesteps</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">timesteps</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_timesteps</span>
+        <span class="k">return</span> <span class="n">timesteps</span></div>
+
+
+<div class="viewcode-block" id="BaseUpscaler.get_horizontically_integrated_values">
+<a class="viewcode-back" href="../../../api/pyopmnearwell.ml.upscale.html#pyopmnearwell.ml.upscale.BaseUpscaler.get_horizontically_integrated_values">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_horizontically_integrated_values</span><span class="p">(</span>  <span class="c1"># pylint: disable=too-many-positional-arguments, too-many-arguments</span>
+        <span class="bp">self</span><span class="p">:</span> <span class="n">Upscaler</span><span class="p">,</span>
+        <span class="n">features</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">cell_center_radii</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">cell_boundary_radii</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">feature_index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">disregard_first_xcell</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Integrate a vertically averaged feature into equivalent Cartesian blocks.</span>
+
+<span class="sd">        cartesian block area.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        features : np.ndarray</span>
+<span class="sd">            Ensemble feature array.</span>
+<span class="sd">        cell_center_radii : np.ndarray</span>
+<span class="sd">            Radii at radial-cell centers.</span>
+<span class="sd">        cell_boundary_radii : np.ndarray</span>
+<span class="sd">            Radii at radial-cell boundaries.</span>
+<span class="sd">        feature_index : int</span>
+<span class="sd">            Index of the feature to process.</span>
+<span class="sd">        disregard_first_xcell : bool, optional</span>
+<span class="sd">            Whether to remove the innermost well cell.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Any</span>
+<span class="sd">            Result produced by the operation.</span>
+<span class="sd">        """</span>
+        <span class="c1"># Average along vertical cells in a layer.</span>
+        <span class="n">feature</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">features</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">feature_index</span><span class="p">],</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">2</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">disregard_first_xcell</span><span class="p">:</span>
+            <span class="n">feature</span> <span class="o">=</span> <span class="n">feature</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">:]</span>
+
+        <span class="c1"># Integrate horizontically along layers and divide by equivalent cartesian block</span>
+        <span class="c1"># area.</span>
+        <span class="n">block_sidelengths</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">formulas</span><span class="o">.</span><span class="n">cell_size</span><span class="p">(</span><span class="n">cell_center_radii</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+        <span class="c1"># feature_lst: list[np.ndarray] = []</span>
+        <span class="c1"># for i in range(feature.shape[-1]):</span>
+        <span class="c1">#     feature_lst.append(</span>
+        <span class="c1">#         ensemble.integrate_fine_scale_value(</span>
+        <span class="c1">#             feature[..., : i + 1],</span>
+        <span class="c1">#             cell_boundary_radii[: i + 2],</span>
+        <span class="c1">#             block_sidelengths[: i + 1],</span>
+        <span class="c1">#         )</span>
+        <span class="c1">#         / (block_sidelengths[i] ** 2)</span>
+        <span class="c1">#     )</span>
+        <span class="c1"># averaged_feature: np.ndarray = np.concatenate(feature_lst, axis=-1)</span>
+        <span class="c1"># The horizontal dimension is the last axis of each feature, hence we pass</span>
+        <span class="c1"># ``axis=-1``.</span>
+        <span class="n">integrated_feature</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">integrate_fine_scale_value</span><span class="p">(</span>
+            <span class="n">feature</span><span class="p">,</span> <span class="n">cell_boundary_radii</span><span class="p">,</span> <span class="n">block_sidelengths</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span>
+        <span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">block_sidelengths</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+        <span class="k">assert</span> <span class="n">integrated_feature</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">single_feature_shape</span>
+        <span class="k">return</span> <span class="n">integrated_feature</span></div>
+
+
+<div class="viewcode-block" id="BaseUpscaler.get_homogeneous_values">
+<a class="viewcode-back" href="../../../api/pyopmnearwell.ml.upscale.html#pyopmnearwell.ml.upscale.BaseUpscaler.get_homogeneous_values">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_homogeneous_values</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">:</span> <span class="n">Upscaler</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">feature_index</span><span class="p">,</span> <span class="n">disregard_first_xcell</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Extract a feature that is homogeneous within each layer.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        features : Any</span>
+<span class="sd">            Ensemble feature array.</span>
+<span class="sd">        feature_index : Any</span>
+<span class="sd">            Index of the feature to process.</span>
+<span class="sd">        disregard_first_xcell : bool, optional</span>
+<span class="sd">            Whether to remove the innermost well cell.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Any</span>
+<span class="sd">            Result produced by the operation.</span>
+<span class="sd">        """</span>
+        <span class="c1"># Innermost cells (well cells) get disregarded.</span>
+        <span class="n">feature</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">features</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">feature_index</span><span class="p">][</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:]</span>
+
+        <span class="k">if</span> <span class="n">disregard_first_xcell</span><span class="p">:</span>
+            <span class="n">feature</span> <span class="o">=</span> <span class="n">feature</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">:]</span>
+
+        <span class="k">assert</span> <span class="n">feature</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">single_feature_shape</span>
+        <span class="k">return</span> <span class="n">feature</span></div>
+
+
+<div class="viewcode-block" id="BaseUpscaler.get_analytical_PI">
+<a class="viewcode-back" href="../../../api/pyopmnearwell.ml.upscale.html#pyopmnearwell.ml.upscale.BaseUpscaler.get_analytical_PI">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_analytical_PI</span><span class="p">(</span>  <span class="c1"># pylint: disable=invalid-name</span>
+        <span class="bp">self</span><span class="p">:</span> <span class="n">Upscaler</span><span class="p">,</span>
+        <span class="n">permeabilities</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">cell_heights</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">radii</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">well_radius</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Calculate the single-phase analytical Peaceman productivity index.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        permeabilities : np.ndarray</span>
+<span class="sd">            Permeability values.</span>
+<span class="sd">        cell_heights : np.ndarray</span>
+<span class="sd">            Grid-cell heights.</span>
+<span class="sd">        radii : np.ndarray</span>
+<span class="sd">            Cell radii.</span>
+<span class="sd">        well_radius : float</span>
+<span class="sd">            Wellbore radius.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        np.ndarray</span>
+<span class="sd">            Result produced by the operation.</span>
+<span class="sd">        """</span>
+        <span class="n">analytical_PI</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">formulas</span><span class="o">.</span><span class="n">peaceman_matrix_WI</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
+            <span class="n">k_h</span><span class="o">=</span><span class="n">permeabilities</span> <span class="o">*</span> <span class="n">cell_heights</span><span class="p">,</span>
+            <span class="n">r_e</span><span class="o">=</span><span class="n">radii</span><span class="p">,</span>
+            <span class="n">r_w</span><span class="o">=</span><span class="n">well_radius</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">assert</span> <span class="n">analytical_PI</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">single_feature_shape</span>
+        <span class="k">return</span> <span class="n">analytical_PI</span></div>
+
+
+    <span class="c1"># pylint: disable-next=invalid-name, too-many-positional-arguments, too-many-locals, too-many-arguments</span>
+<div class="viewcode-block" id="BaseUpscaler.get_analytical_WI">
+<a class="viewcode-back" href="../../../api/pyopmnearwell.ml.upscale.html#pyopmnearwell.ml.upscale.BaseUpscaler.get_analytical_WI">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_analytical_WI</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">:</span> <span class="n">Upscaler</span><span class="p">,</span>
+        <span class="n">pressures</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">saturations</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">permeabilities</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">surface_density</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">radii</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">well_radius</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="c1"># pylint: disable-next=invalid-name</span>
+        <span class="n">OPM</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Calculate a two-phase analytical well index from pressure-dependent fluid properties.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        pressures : np.ndarray</span>
+<span class="sd">            Pressure values.</span>
+<span class="sd">        saturations : np.ndarray</span>
+<span class="sd">            Non-wetting saturation values.</span>
+<span class="sd">        permeabilities : np.ndarray</span>
+<span class="sd">            Permeability values.</span>
+<span class="sd">        temperature : float</span>
+<span class="sd">            Fluid temperature.</span>
+<span class="sd">        surface_density : float</span>
+<span class="sd">            Reference surface density.</span>
+<span class="sd">        radii : np.ndarray</span>
+<span class="sd">            Cell radii.</span>
+<span class="sd">        well_radius : float</span>
+<span class="sd">            Wellbore radius.</span>
+<span class="sd">        OPM : pathlib.Path</span>
+<span class="sd">            Path to the OPM installation.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        np.ndarray</span>
+<span class="sd">            Result produced by the operation.</span>
+<span class="sd">        """</span>
+        <span class="n">densities_lst</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">viscosities_lst</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># ``formulas.co2brinepvt`` calls CO2BRINEPVT from OPM Flow for each pressure,</span>
+        <span class="c1"># which is quite inefficient. If tqdm is available, we show a progress bar.</span>
+        <span class="k">if</span> <span class="n">_IS_TQDM_AVAILABLE</span><span class="p">:</span>
+            <span class="n">pressures_bar</span> <span class="o">=</span> <span class="n">tqdm</span><span class="o">.</span><span class="n">tqdm</span><span class="p">(</span><span class="n">pressures</span><span class="o">.</span><span class="n">flatten</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">pressures_bar</span> <span class="o">=</span> <span class="n">pressures</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">pressure</span> <span class="ow">in</span> <span class="n">pressures_bar</span><span class="p">:</span>
+            <span class="c1"># Evaluate density and viscosity.</span>
+            <span class="n">density_tuple</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">viscosity_tuple</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="k">for</span> <span class="n">phase</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"water"</span><span class="p">,</span> <span class="s2">"CO2"</span><span class="p">]:</span>
+                <span class="n">density_tuple</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="n">formulas</span><span class="o">.</span><span class="n">co2brinepvt</span><span class="p">(</span>
+                        <span class="n">pressure</span><span class="o">=</span><span class="n">pressure</span><span class="p">,</span>
+                        <span class="n">temperature</span><span class="o">=</span><span class="n">temperature</span> <span class="o">+</span> <span class="n">units</span><span class="o">.</span><span class="n">CELSIUS_TO_KELVIN</span><span class="p">,</span>
+                        <span class="n">phase_property</span><span class="o">=</span><span class="s2">"density"</span><span class="p">,</span>
+                        <span class="n">phase</span><span class="o">=</span><span class="n">phase</span><span class="p">,</span>  <span class="c1"># type: ignore</span>
+                        <span class="n">OPM</span><span class="o">=</span><span class="n">OPM</span><span class="p">,</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+
+                <span class="n">viscosity_tuple</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="n">formulas</span><span class="o">.</span><span class="n">co2brinepvt</span><span class="p">(</span>
+                        <span class="n">pressure</span><span class="o">=</span><span class="n">pressure</span><span class="p">,</span>
+                        <span class="n">temperature</span><span class="o">=</span><span class="n">temperature</span> <span class="o">+</span> <span class="n">units</span><span class="o">.</span><span class="n">CELSIUS_TO_KELVIN</span><span class="p">,</span>
+                        <span class="n">phase_property</span><span class="o">=</span><span class="s2">"viscosity"</span><span class="p">,</span>
+                        <span class="n">phase</span><span class="o">=</span><span class="n">phase</span><span class="p">,</span>  <span class="c1"># type: ignore</span>
+                        <span class="n">OPM</span><span class="o">=</span><span class="n">OPM</span><span class="p">,</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+            <span class="n">densities_lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">density_tuple</span><span class="p">)</span>
+            <span class="n">viscosities_lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">viscosity_tuple</span><span class="p">)</span>
+
+        <span class="n">densities_shape</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">pressures</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="n">densities_shape</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="mi">2</span><span class="p">])</span>
+        <span class="n">densities</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">densities_lst</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">densities_shape</span><span class="p">)</span>
+        <span class="n">viscosities</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">viscosities_lst</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">densities_shape</span><span class="p">)</span>
+
+        <span class="c1"># Calculate the well index from Peaceman. The analytical well index is in [m*s],</span>
+        <span class="c1"># hence we need to devide by surface density to transform to [m^4*s/kg].</span>
+        <span class="c1"># pylint: disable-next=invalid-name</span>
+        <span class="n">analytical_WI</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="p">(</span>  <span class="c1"># type: ignore</span>
+            <span class="c1"># Ignore unsupported operand types for *. Fixing this would be quite</span>
+            <span class="c1"># complex.</span>
+            <span class="n">formulas</span><span class="o">.</span><span class="n">two_phase_peaceman_WI</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
+                <span class="n">k_h</span><span class="o">=</span><span class="n">permeabilities</span>
+                <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">MILIDARCY_TO_M2</span>
+                <span class="o">*</span> <span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">num_zcells</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_layers</span>
+                <span class="p">),</span>  <span class="c1"># TODO: This is FALSE, it must be height instead!</span>
+                <span class="n">r_e</span><span class="o">=</span><span class="n">radii</span><span class="p">,</span>
+                <span class="n">r_w</span><span class="o">=</span><span class="n">well_radius</span><span class="p">,</span>
+                <span class="n">rho_1</span><span class="o">=</span><span class="n">densities</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                <span class="n">mu_1</span><span class="o">=</span><span class="n">viscosities</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                <span class="n">k_r1</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">saturations</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span>
+                <span class="n">rho_2</span><span class="o">=</span><span class="n">densities</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                <span class="n">mu_2</span><span class="o">=</span><span class="n">viscosities</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                <span class="n">k_r2</span><span class="o">=</span><span class="n">saturations</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="o">/</span> <span class="n">surface_density</span>
+        <span class="p">)</span>
+
+        <span class="c1"># TODO: Add this assert again. It's turned off s.t. the analytical WI can be</span>
+        <span class="c1"># computed after size reduction of features.</span>
+        <span class="c1"># assert analytical_WI.shape == self.single_feature_shape</span>
+        <span class="k">return</span> <span class="n">analytical_WI</span></div>
+
+
+<div class="viewcode-block" id="BaseUpscaler.get_data_WI">
+<a class="viewcode-back" href="../../../api/pyopmnearwell.ml.upscale.html#pyopmnearwell.ml.upscale.BaseUpscaler.get_data_WI">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_data_WI</span><span class="p">(</span>  <span class="c1"># pylint: disable=invalid-name</span>
+        <span class="bp">self</span><span class="p">:</span> <span class="n">Upscaler</span><span class="p">,</span>
+        <span class="n">features</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">pressure_index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">inj_rate_index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">angle</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Calculate a data-driven well index from pressure and injection-rate results.</span>
+
+<span class="sd">        Similar functionality to ``ensemble.calculate_WI``, but can additionally treat</span>
+<span class="sd">        multiple vertical cells in a layer correctly.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        features : np.ndarray</span>
+<span class="sd">            Ensemble feature array.</span>
+<span class="sd">        pressure_index : int</span>
+<span class="sd">            Feature index containing pressure.</span>
+<span class="sd">        inj_rate_index : int</span>
+<span class="sd">            Feature index containing injection rate.</span>
+<span class="sd">        angle : float, optional</span>
+<span class="sd">            Cake-grid angle in radians.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        np.ndarray</span>
+<span class="sd">            Result produced by the operation.</span>
+<span class="sd">        """</span>
+        <span class="c1"># Take the pressure values of the well blocks as bhp. Average along each layer.</span>
+        <span class="n">bhps</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">features</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">pressure_index</span><span class="p">],</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">2</span><span class="p">)[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">][</span>
+            <span class="o">...</span><span class="p">,</span> <span class="kc">None</span>
+        <span class="p">]</span>  <span class="c1"># ``shape = (num_completed_runs, num_timesteps, num_layers, 1)``</span>
+
+        <span class="c1"># Ge the pressure values of all other blocks. Average along each layer.</span>
+        <span class="n">pressures</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">features</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">pressure_index</span><span class="p">],</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">2</span><span class="p">)[</span>
+            <span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="p">]</span>  <span class="c1"># ``shape = (num_completed_runs, num_timesteps, num_layers, num_xcells)``</span>
+
+        <span class="c1"># Get the individual injection rates per second for each layer. Sum across a</span>
+        <span class="c1"># layer to get the rates for a full layer. Multiply by</span>
+        <span class="c1"># ``(math.pi * 2 / angle)`` to transform from a cake of given ``angle`` to a</span>
+        <span class="c1"># full radial model and convert to rate per second.</span>
+        <span class="n">injection_rate_per_second_per_cell</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">features</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">inj_rate_index</span><span class="p">],</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">2</span><span class="p">)[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+            <span class="o">*</span> <span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">angle</span><span class="p">)</span>
+            <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">Q_per_day_to_Q_per_seconds</span>
+        <span class="p">)[</span>
+            <span class="o">...</span><span class="p">,</span> <span class="kc">None</span>
+        <span class="p">]</span>  <span class="c1"># ``shape = (num_completed_runs, num_timesteps, num_layers, 1)``</span>
+
+        <span class="c1"># Check that we do not divide by zero.</span>
+        <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">bhps</span> <span class="o">-</span> <span class="n">pressures</span><span class="p">)</span>
+        <span class="n">WI_data</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">injection_rate_per_second_per_cell</span> <span class="o">/</span> <span class="p">(</span><span class="n">bhps</span> <span class="o">-</span> <span class="n">pressures</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">WI_data</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">single_feature_shape</span>
+        <span class="k">return</span> <span class="n">WI_data</span></div>
+</div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2023-2026, NORCE Research AS.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

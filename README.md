@@ -20,15 +20,13 @@ To install the _pyopmnearwell_ executable from the development version:
 pip install git+https://github.com/cssr-tools/pyopmnearwell.git
 ```
 
-If you are interested in a specific version (e.g., v2026.04) or in modifying the source code, then you can clone the repository and install the Python requirements in a virtual environment with the following commands:
+If you are interested in modifying the source code, then you can clone the repository and install the Python requirements in a virtual environment with the following commands:
 
 ```bash
 # Clone the repo
 git clone https://github.com/cssr-tools/pyopmnearwell.git
 # Get inside the folder
 cd pyopmnearwell
-# For a specific version (e.g., v2026.04), or skip this step (i.e., edge version)
-git checkout v2026.04
 # Create virtual environment
 python3 -m venv vpyopmnearwell
 # Activate virtual environment

@@ -10,7 +10,7 @@ xdim = 10000 #Length [m] (for cartesian/cpg3d/coord3d/tensor3d, Length=Width=2*x
 xcn = [400] #Number of x-cells [-]; coordinates for grid type coord2d/coord3d [m]; numbers of x-cells for grid type tensor2d/tensor3d [-]
 xfac = 7.1 #Exponential factor for the telescopic x-gridding (0 to use an equidistant partition)
 diameter = 0.025 #Well diameter [m]
-pressure = 9.6e1 #Pressure [Bar] on the top 
+pressure = 9.6e1 #Pressure [bar] on the top 
 temperature = [40,40] #Top and bottom temperatures [C]
 initialphase = 0 #Initial phase in the reservoir (0 wetting, 1 non-wetting)
 pvmult = -1 #Pore volume multiplier on the boundary [-] (-1 to ignore; 0 to use well producers instead)
@@ -20,9 +20,9 @@ saltprops = [138,268,2153] #Initial salt concentration [kg/m3], salt solubility 
 #Set the saturation functions
 krw = "((sw - swi) / (1.0 - swi - sni)) ** 4.0" #Wetting rel perm saturation function [-]
 krn = "(1-((sw - swi) / (1.0 - swi - sni)) ** 2.0) * (1-(sw - swi) / (1.0 - swi - sni)) ** 2" #Non-wetting rel perm saturation function [-]
-pcap = "pen * (((sw - swi) / (1. - swi)) ** (-(1./npen)) - 1.) ** (1. - npen)" #Capillary pressure saturation function [Bar]
+pcap = "pen * (np.clip((sw - swi) / (1.0 - swi), 1e-12, 1.0)**(-1.0 / npen) - 1.0)**(1.0 - npen)" #Capillary pressure saturation function [bar]
 
-#Properties sat functions: 1) swi [-], 2) sni [-], 3) krw [-], 4) krn [-], 5) pen [Bar], 6) nkrw [-],
+#Properties sat functions: 1) swi [-], 2) sni [-], 3) krw [-], 4) krn [-], 5) pen [bar], 6) nkrw [-],
 #7) nkrn [-], 8) npen [-], 9) threshold cP evaluation, 10) ignore swi for cP? (sl* for cplog)
 #11) npoints [-] (entry per layer, if hysteresis, additional entries per layer)
 safu = [[0.25,0.05,1,1,1.96e-2,0.487,0.487,0.457,8e-4,0,10000]]
