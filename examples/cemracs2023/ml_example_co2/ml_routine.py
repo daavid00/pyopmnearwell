@@ -110,7 +110,7 @@ pyplot.plot(
 
 )
 pyplot.xlabel(r"Time of one cycle [d]")
-pyplot.ylabel("Maximum Bhp for the injector [Bar]")
+pyplot.ylabel("Maximum Bhp for the injector [bar]")
 pyplot.legend()
 pyplot.savefig("ml_maxwbhp.png", dpi=1200)
 pyplot.show()

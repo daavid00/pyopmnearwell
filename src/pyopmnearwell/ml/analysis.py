@@ -3,10 +3,7 @@
 
 Inspiration taken from
 https://f0nzie.github.io/machine_learning_compilation/sensitivity-analysis-for-a-neural-network.html
-
 """
-
-from __future__ import annotations
 
 import math
 import pathlib
@@ -27,8 +24,7 @@ def sensitivity_analysis(
         Literal["homogeneous", "random_uniform", "random_normal"] | float
     ) = "homogeneous",
 ) -> tuple[np.ndarray, np.ndarray]:
-    """
-    Perform a sensitivity analysis of a neural network.
+    """Perform a sensitivity analysis of a neural network.
 
     For each input variable, vary from a min to a max value and measure how the output
     of the network changes. The other input variables are kept constant meanwhile.
@@ -54,7 +50,6 @@ def sensitivity_analysis(
         First axis is the input variable that is varying, second axis is the variation,
         third axis is the variation for the fixed variables. The input array contains an
         additional axis in case of input dimension > 1.
-
     """
     # Get the number of input variables.
     num_inputs = model.input_shape[1]
@@ -135,8 +130,7 @@ def plot_analysis(
     main_plot: tuple[np.ndarray, np.ndarray] | None = None,
     **kwargs,
 ) -> None:
-    r"""
-    Plot the analysis of the model outputs against inputs.
+    r"""Plot the analysis of the model outputs against inputs.
 
     Args:
         outputs (np.ndarray): The model outputs.
@@ -151,10 +145,6 @@ def plot_analysis(
 
             - legend (bool): Whether to plot a legend. Default
               is True.
-
-    Returns:
-        None
-
     """
     if feature_names is None:
         feature_names = [rf"$x_{{{i}}}$" for i in range(inputs.shape[-1])]

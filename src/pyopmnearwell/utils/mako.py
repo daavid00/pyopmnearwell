@@ -1,34 +1,41 @@
-"""Helper script for Mako templates."""
-
-from __future__ import annotations
+"""Render Mako templates used by pyopmnearwell."""
 
 import pathlib
 
 from mako import exceptions
 from mako.template import Template
 
+from pyopmnearwell.utils.terminal import pyopmnearwell_error
+
 
 def fill_template(
     var: dict, filename: str | pathlib.Path | None = None, text: str | None = None
 ) -> str:
-    """
-    Fill a Mako template with the given variables.
+    """Fill a Mako template with the given variables.
 
-    The template is either loaded from a file or passed as a string. If rendering the
-    template raises an error, render the error s.t. it can be easily debugged.
+    The template is loaded from ``filename`` or supplied directly through ``text``.
+    If rendering fails, the formatted Mako traceback is reported through the
+    pyopmnearwell command-line error helper so the template can be debugged.
 
-    Args:
-        var (dict): A dictionary containing the variables to be used in the template.
-        filename (Optional[str | pathlib.Path], optional): The path to the template
-            file. Defaults to None.
-        text (Optional[str], optional): The text of the template. Defaults to None.
+    Parameters
+    ----------
+    var : dict
+        Variables exposed to the Mako template during rendering.
+    filename : str | pathlib.Path | None, optional
+        Path to the template file. This may be omitted when ``text`` is supplied.
+    text : str | None, optional
+        Template source supplied directly as a string. This may be omitted when
+        ``filename`` is supplied.
 
-    Returns:
-        str: The filled template as a string.
+    Returns
+    -------
+    str
+        Rendered template text.
 
-    Raises:
-        Error: When the template cannot be filled.
-
+    Raises
+    ------
+    SystemExit
+        If the template cannot be rendered.
     """
     # Convert filename to str
     if isinstance(filename, pathlib.Path):
@@ -37,7 +44,6 @@ def fill_template(
     mytemplate: Template = Template(filename=filename, text=text)
     try:
         filledtemplate = mytemplate.render(**var)
-    except Exception:
-        print(exceptions.text_error_template().render())
-        raise
+    except ValueError:
+        pyopmnearwell_error(exceptions.text_error_template().render())
     return filledtemplate

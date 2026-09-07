@@ -104,7 +104,7 @@ axis.plot(
     marker="*",
     markersize=5,
 )
-axis.set_ylabel("Maximum Bhp for the injector [Bar]", fontsize=12)
+axis.set_ylabel("Maximum Bhp for the injector [bar]", fontsize=12)
 axis.set_xlabel(r"Time of one cycle [d]", fontsize=12)
 fig.savefig("maxwbhp.png")
 

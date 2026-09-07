@@ -8,10 +8,7 @@ different from the default one. The lines that need to be changed are marked wit
 
 Deprecated: This module is deprecated in favor of the ``ensemble`` module which can run
 an ensemble of pyopmnearwell decks AND extract data afterwards.
-
 """
-
-from __future__ import annotations
 
 import argparse
 import logging
@@ -44,7 +41,6 @@ class ResDataSet:  # pylint: disable=R0902
         To save the dataset, use
         >>> ds.save(path)
         Afterwards, the ``.UNRST`` files used to generated the dataset can be deleted.
-
     """
 
     # Typing for instance attributes.
@@ -73,24 +69,22 @@ class ResDataSet:  # pylint: disable=R0902
     ) -> None:
         """Initiate the class.
 
-        Parameters:
-            path: _description_
-            input_kws: Keywords for attributes of the ``.UNRST`` file that shall become
-                model input.
-            target_kws: Keywords for attributes of the ``.UNRST`` file that shall become
-                targets for model training.
-            type: _description_. Defaults to ``"resdata"``.
-            read_data_on_init: Reads data from ``.UNRST`` files in ``path`` on
-                instantiation. Disable for testing/debugging. Defaults to ``True``.
-
-
-        Warning:
-            As of now, ``type`` is always assumed to be ``resdata``. ``opm`` is not
-            implemented yet.
-
-        Returns:
-            _description_
-
+        Parameters
+        ----------
+        path : str
+            Directory containing restart files.
+        input_kws : list[str]
+            Restart keywords used as features.
+        target_kws : list[str]
+            Restart keywords used as targets.
+        file_format : Literal['resdata', 'opm'], optional
+            Restart-file reader format.
+        dtype : Any, optional
+            TensorFlow dtype used for generated tensors.
+        shuffle_on_epoch_end : bool, optional
+            Whether to shuffle samples after a complete iteration.
+        read_data_on_init : bool, optional
+            Whether restart files are read during initialization.
         """
         self.path: str = path
         self.input_kws: list[str] = input_kws
@@ -102,7 +96,13 @@ class ResDataSet:  # pylint: disable=R0902
         self.file_format: Literal["resdata", "opm"] = file_format
 
     def read_data(self):
-        """Create a ``tensorflow`` dataset from a folder of ``resdata`` or ``opm`` files."""
+        """Extract configured restart keywords and populate feature and target tensors.
+
+        Returns
+        -------
+        Any
+            Result produced by the operation.
+        """
         logger.info("Generating datapoints...")
         _features_lst: list[tf.Tensor] = []
         _targets_lst: list[tf.Tensor] = []
@@ -147,22 +147,24 @@ class ResDataSet:  # pylint: disable=R0902
     def ResdataFile_to_datapoint(  # pylint: disable= C0103
         self, resdata_file: ResdataFile
     ) -> tuple[tf.Tensor, tf.Tensor]:
-        """Extract values from an ``ResdataFile`` object to form an (input, target)
+        """Convert one restart file into feature and target tensors.
+
         tuple of tensors.
 
-        Args:
-            ecl_file (EclFile): _description_
+        Parameters
+        ----------
+        resdata_file : ResdataFile
+            Opened restart file.
 
-        Raises:
-            KeyError: If ``resdata_file`` does not have either of the keywords in
-                ``self.input_kws`` or ``self.target_kws``
+        Returns
+        -------
+        tuple[tf.Tensor, tf.Tensor]
+            Result produced by the operation.
 
-        Returns:
-            tuple[tf.Tensor, tf.Tensor]: A tuple containing the input and target tensor.
-                The former has shape ``(resdata_file.num_report_steps(), num_cells,
-                len(input_kws))``, while the latter has shape
-                ``(resdata_file.num_report_steps(), num_cells, len(target_kws))``.
-
+        Raises
+        ------
+        KeyError
+            If the documented validation or operation fails.
         """
         # Only add the datapoint if all input features and targets are
         # available.
@@ -196,14 +198,40 @@ class ResDataSet:  # pylint: disable=R0902
         )
 
     def __len__(self):
+        """Return the number of dataset samples.
+
+        Returns
+        -------
+        Any
+            Result produced by the operation.
+        """
         return self.features.shape[0]
 
     def __getitem__(self, idx) -> tuple[tf.Tensor, tf.Tensor]:
+        """Return one feature-target sample by index.
+
+        Parameters
+        ----------
+        idx : Any
+            Sample index.
+
+        Returns
+        -------
+        tuple[tf.Tensor, tf.Tensor]
+            Result produced by the operation.
+        """
         feature = self.features[idx]
         target = self.targets[idx]
         return feature, target
 
     def __call__(self):
+        """Yield all feature-target samples.
+
+        Returns
+        -------
+        Any
+            Result produced by the operation.
+        """
         for i in range(self.__len__()):
             yield self.__getitem__(i)
 
@@ -215,7 +243,6 @@ class ResDataSet:  # pylint: disable=R0902
 
         Warning:
             Using this method might give an error atm.
-
         """
         indices = tf.range(start=0, limit=self.features.shape[0], dtype=tf.int32)
         shuffled_indices = tf.random.shuffle(indices)
@@ -224,7 +251,18 @@ class ResDataSet:  # pylint: disable=R0902
 
 
 def main(args):  # pylint: disable=W0621
-    """Create a dataset from the given arguments and store it"""
+    """Run the module command-line workflow.
+
+    Parameters
+    ----------
+    args : Any
+        Parsed command-line arguments.
+
+    Returns
+    -------
+    Any
+        Result produced by the operation.
+    """
     data = ResDataSet(args.path, args.input_kws, args.target_kws, args.file_format)
     assert len(data) > 0
     dataset = tf.data.Dataset.from_generator(

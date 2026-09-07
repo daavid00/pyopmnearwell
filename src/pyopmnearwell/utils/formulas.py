@@ -4,7 +4,6 @@
 TODO: The typing is off in this module. Instead of returning an ArrayLike, most
 functions should return an np.ndarray, however that does not work when a float is passed
 as then an np.float64 or similar is returned. Not sure how to fix this.
-
 """
 
 import math
@@ -45,35 +44,40 @@ def pyopmnearwell_correction(angle: ArrayLike = math.pi / 3) -> ArrayLike:
 
     Returns:
         ArrayLike: :math:`r_{radial_grid} / x_{triangle_grid}`
-
     """
     angle = np.asarray(angle)
     return 2 * np.tan(angle / 2) / angle
 
 
 def equivalent_well_radius(delta_x: ArrayLike) -> np.ndarray:
-    """Calculate the equivalent well block radius for a given quadratic cell size.
+    """Calculate the equivalent Peaceman well-block radius for square cells.
 
-    Args:
-        delta_x (ArrayLike): _description_
+    Parameters
+    ----------
+    delta_x : ArrayLike
+        Square-cell side length.
 
-    Returns:
-        (ArrayLike): _description_
-
+    Returns
+    -------
+    np.ndarray
+        Result produced by the operation.
     """
     delta_x = np.asarray(delta_x)
     return R_E_RATIO * delta_x
 
 
 def cell_size(radii: ArrayLike) -> ArrayLike:
-    """Calculate the size of a quadratic cell for a given equivalent well block radius.
+    """Calculate square-cell side lengths from equivalent well-block radii.
 
-    Args:
-        delta_x (ArrayLike): _description_
+    Parameters
+    ----------
+    radii : ArrayLike
+        Cell radii.
 
-    Returns:
-        (ArrayLike): _description_
-
+    Returns
+    -------
+    ArrayLike
+        Result produced by the operation.
     """
     radii = np.asarray(radii)
     return radii / R_E_RATIO
@@ -101,7 +105,6 @@ def peaceman_matrix_WI(  # pylint: disable=C0103
     Raises:
         ValueError: If r_w is zero for any point.
         ValueError: If either r_e or r_w contains a negative value
-
     """
     k_h = np.asarray(k_h)
     r_e = np.asarray(r_e)
@@ -134,7 +137,6 @@ def peaceman_WI(  # pylint: disable=C0103
 
     Returns:
         WI (ArrayLike): :math:`WI`. Unit: [m*s].
-
     """
     rho = np.asarray(rho)
     mu = np.asarray(mu)
@@ -161,7 +163,6 @@ def two_phase_peaceman_WI(  # pylint: disable=C0103
     of supercritical geothermal resource utilization” 2022,
     doi: 10.1016/j.geothermics.2022.102516.]
 
-
     .. math::
 
         WI = \frac{2 \pi h \mathbf{k}}{\ln(r_e/r_w)} \left(\frac{k_{r,1}}{\mu_1} +
@@ -185,7 +186,6 @@ def two_phase_peaceman_WI(  # pylint: disable=C0103
 
     Returns:
         WI (ArrayLike): :math:`WI`. Unit: [m*s].
-
     """
     rho_1 = np.asarray(rho_1)
     mu_1 = np.asarray(mu_1)
@@ -224,7 +224,6 @@ def data_WI(
     Raises:
         ValueError: If bottom hole pressure and grid block pressure are equal for any
             point.
-
     """
     q = np.asarray(q)
     p_w = np.asarray(p_w)
@@ -258,7 +257,6 @@ def co2brinepvt(
 
     Returns:
         quantity (float): Density (unit: [kg/m^3]) or viscosity (unit: [Pa*s])
-
     """
     CO2BRINEPVT: pathlib.Path = pathlib.Path(OPM) / "build/opm-common/bin/co2brinepvt"
     with subprocess.Popen(
@@ -281,12 +279,11 @@ def hydrostatic_fluid(
     height: ArrayLike,
     gravity: ArrayLike = units.GRAVITATIONAL_ACCELERATION,
 ) -> ArrayLike:
-    r"""
-    Calculate the pressure due to hydrostatic fluid.
+    r"""Calculate the pressure due to hydrostatic fluid.
 
     This function calculates the pressure due to hydrostatic fluid using the formula:
 
-    ..math::
+    .. math::
 
         P = rho * g * h,
 
@@ -307,7 +304,6 @@ def hydrostatic_fluid(
     Examples:
         >>> hydrostatic_fluid(1000, 10)
         98067.0
-
     """
     # Convert to arrays to allow broadcasting
     rho = np.asarray(rho)
@@ -334,13 +330,12 @@ def hydrostatic_gas(
     molecule_mass: ArrayLike,
     gravity: ArrayLike = units.GRAVITATIONAL_ACCELERATION,
 ) -> ArrayLike:
-    r"""
-    Calculate the pressure due to a column of gas in hydrostatic equilibrium.
+    r"""Calculate the pressure due to a column of gas in hydrostatic equilibrium.
 
     This function calculates the pressure due to a column of gas in hydrostatic equilibrium
     using the ideal gas law and the hydrostatic equilibrium formula. The formula is:
 
-    ..math::
+    .. math::
 
         P = P_0 * e^((-m * g * h) / (R^* * T)),
 
@@ -367,7 +362,6 @@ def hydrostatic_gas(
     Examples:
         >>> hydrostatic_gas(101325, 5000, 300, 0.029, 9.81)
         75819.90376642203
-
     """
     # Convert to arrays to allow broadcasting
     reference_pressure = np.asarray(reference_pressure)
@@ -399,8 +393,7 @@ def hydrostatic_gas(
 
 
 def area_squaredcircle(radius: ArrayLike, sidelength: ArrayLike) -> ArrayLike:
-    """
-    Calculate the area that lies both inside a circle and inside a square centered at
+    """Calculate the area that lies both inside a circle and inside a square centered at
     the origin.
 
     Args:
@@ -422,7 +415,6 @@ def area_squaredcircle(radius: ArrayLike, sidelength: ArrayLike) -> ArrayLike:
 
         >>> area_squaredcircle(2.0, 3.0)
         6.283185307179586  # Area inside a  2.0
-
     """
     # Convert to arrays to allow broadcasting
     radius = np.asarray(radius)

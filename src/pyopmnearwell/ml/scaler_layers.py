@@ -6,8 +6,6 @@ Warning: Tensorflow 2.17 and Keras 3.0 introduce many pylint errors, hence we di
 linting completely. It is possible that the module is not functional at the moment.
 """
 
-from __future__ import annotations
-
 from collections.abc import Sequence
 
 import keras
@@ -31,6 +29,19 @@ class ScalerLayer(keras.layers.Layer):
         feature_range: Sequence[float] | np.ndarray | tf.Tensor = (0, 1),
         **kwargs,  # pylint: disable=W0613
     ) -> None:
+        """init  .
+
+        Parameters
+        ----------
+        data_min : float | ArrayLike | None, optional
+            Value used by the operation.
+        data_max : float | ArrayLike | None, optional
+            Value used by the operation.
+        feature_range : Sequence[float] | np.ndarray | tf.Tensor, optional
+            Value used by the operation.
+        **kwargs : Any
+            Additional options forwarded to the underlying operation.
+        """
         super().__init__(**kwargs)
         if isinstance(feature_range, tuple):
             # One feature range for all features
@@ -63,12 +74,14 @@ class ScalerLayer(keras.layers.Layer):
             self._adapt()
 
     def build(self, input_shape: tuple[int, ...]) -> None:
-        """Initialize ``data_min`` and ``data_max`` with the default values if they have
+        """Initialize scaling bounds when the layer is built.
+
         not been initialized yet.
 
-        Args:
-            input_shape (tuple[int, ...]): _description_
-
+        Parameters
+        ----------
+        input_shape : tuple[int, ...]
+            Shape of input tensors presented to the layer.
         """
         if not self._is_adapted:
             is_adapted = True
@@ -87,7 +100,6 @@ class ScalerLayer(keras.layers.Layer):
         Returns:
             list[ArrayLike]: List with three elements in the following order:
             ``self.data_min_``, ``self.data_max_``, ``self.feature_range_``
-
         """
         return [self.data_min_, self.data_max_, self.feature_range_]
 
@@ -100,7 +112,6 @@ class ScalerLayer(keras.layers.Layer):
 
         Raises:
             ValueError: If ``feature_range[0] >= feature_range[1]``.
-
         """
         self.feature_range_ = tf.convert_to_tensor(weights[2], dtype=tf.float32)
         if self.feature_range_[0] >= self.feature_range_[1]:
@@ -109,16 +120,14 @@ class ScalerLayer(keras.layers.Layer):
         self.data_max_ = tf.convert_to_tensor(weights[1], dtype=tf.float32)
 
     def adapt(self, data: ArrayLike) -> None:
-        """Fit the layer to the min and max of the data. This is done individually for
+        """Fit scaling bounds independently for each input feature.
+
         each input feature.
 
-        Note:
-            So far, this is only tested for 1 dimensional input and output. For higher
-            dimensional input and output some functionality might need to be added.
-
-        Args:
-            data: _description_
-
+        Parameters
+        ----------
+        data : ArrayLike
+            Values used to fit the scaling extrema.
         """
         data = tf.convert_to_tensor(data, dtype=tf.float32)
         self.data_min_ = tf.math.reduce_min(data, axis=0)
@@ -126,6 +135,7 @@ class ScalerLayer(keras.layers.Layer):
         self._adapt()
 
     def _adapt(self) -> None:
+        """Derive scaling offsets and ranges from the configured extrema."""
         if tf.math.reduce_any(self.data_min_ > self.data_max_):
             raise RuntimeError(
                 f"""self.data_min_ {self.data_min_} cannot be larger than self.data_max_
@@ -145,18 +155,46 @@ class ScalerLayer(keras.layers.Layer):
 
     @property
     def is_adapted(self):
+        """Return whether the scaling parameters have been initialized.
+
+        Returns
+        -------
+        Any
+            Result produced by the operation.
+        """
         return self._is_adapted
 
     @property
     def feature_range(self):
+        """Return the target interval for each scaled feature.
+
+        Returns
+        -------
+        Any
+            Result produced by the operation.
+        """
         return self.feature_range_
 
     @property
     def data_min(self):
+        """Return the observed minimum for each feature.
+
+        Returns
+        -------
+        Any
+            Result produced by the operation.
+        """
         return self.data_min_
 
     @property
     def data_max(self):
+        """Return the observed maximum for each feature.
+
+        Returns
+        -------
+        Any
+            Result produced by the operation.
+        """
         return self.data_max_
 
 
@@ -168,7 +206,6 @@ class MinMaxScalerLayer(
     See
     https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.MinMaxScaler.html
     for an explanation of the transform.
-
     """
 
     def __init__(
@@ -178,6 +215,19 @@ class MinMaxScalerLayer(
         feature_range: Sequence[float] | np.ndarray | tf.Tensor = (0, 1),
         **kwargs,  # pylint: disable=W0613
     ) -> None:
+        """init  .
+
+        Parameters
+        ----------
+        data_min : float | ArrayLike | None, optional
+            Value used by the operation.
+        data_max : float | ArrayLike | None, optional
+            Value used by the operation.
+        feature_range : Sequence[float] | np.ndarray | tf.Tensor, optional
+            Value used by the operation.
+        **kwargs : Any
+            Additional options forwarded to the underlying operation.
+        """
         super().__init__(data_min, data_max, feature_range, **kwargs)
         self.name: str = "MinMaxScalerLayer"
 
@@ -187,6 +237,18 @@ class MinMaxScalerLayer(
     # Ignore pylint complaining about a missing docstring. Also ignore
     # "variadics removed ...".
     def call(self, inputs: tf.Tensor) -> tf.Tensor:  # pylint: disable=C0116, W0221
+        """Apply the layer transformation to an input tensor.
+
+        Parameters
+        ----------
+        inputs : tf.Tensor
+            Tensor values transformed by the layer.
+
+        Returns
+        -------
+        tf.Tensor
+            Result produced by the operation.
+        """
         if not super().is_adapted:
             raise RuntimeError(
                 """The layer has not been adapted correctly. Call ``adapt`` before using
@@ -210,11 +272,28 @@ class MinMaxScalerLayer(
         ) + self.feature_range_[:, 0]
 
     def compute_output_shape(self, input_shape):
-        """Calculate the output shape."""
+        """Return the unchanged output shape of the elementwise transformation.
+
+        Parameters
+        ----------
+        input_shape : Any
+            Shape of input tensors presented to the layer.
+
+        Returns
+        -------
+        Any
+            Result produced by the operation.
+        """
         return input_shape  # The output shape is the same as the input shape
 
     def get_config(self):
-        """Return the config for serialization."""
+        """Return a serializable Keras layer configuration.
+
+        Returns
+        -------
+        Any
+            Result produced by the operation.
+        """
         config = super().get_config()
         config.update(
             {
@@ -235,7 +314,18 @@ class MinMaxScalerLayer(
 
     @classmethod
     def from_config(cls, config):
-        """Reconstruct the layer from its config."""
+        """Reconstruct a scaler layer from serialized configuration.
+
+        Parameters
+        ----------
+        config : Any
+            Serialized Keras layer configuration.
+
+        Returns
+        -------
+        Any
+            Result produced by the operation.
+        """
         data_min = config.pop("data_min", None)
         data_max = config.pop("data_max", None)
         feature_range = config.pop("feature_range", (0, 1))
@@ -254,7 +344,6 @@ class MinMaxUnScalerLayer(ScalerLayer, tf.keras.layers.Layer):
     See
     https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.MinMaxScaler.html
     for an explanation of the transformation.
-
     """
 
     def __init__(
@@ -264,6 +353,19 @@ class MinMaxUnScalerLayer(ScalerLayer, tf.keras.layers.Layer):
         feature_range: Sequence[float] | np.ndarray | tf.Tensor = (0, 1),
         **kwargs,  # pylint: disable=W0613
     ) -> None:
+        """init  .
+
+        Parameters
+        ----------
+        data_min : float | ArrayLike | None, optional
+            Value used by the operation.
+        data_max : float | ArrayLike | None, optional
+            Value used by the operation.
+        feature_range : Sequence[float] | np.ndarray | tf.Tensor, optional
+            Value used by the operation.
+        **kwargs : Any
+            Additional options forwarded to the underlying operation.
+        """
         super().__init__(data_min, data_max, feature_range, **kwargs)
         self._name: str = "MinMaxUnScalerLayer"
         if data_min is not None and data_max is not None:
@@ -272,6 +374,18 @@ class MinMaxUnScalerLayer(ScalerLayer, tf.keras.layers.Layer):
     def call(
         self, inputs: tf.Tensor
     ) -> tf.Tensor:  # pylint: disable=missing-function-docstring
+        """Apply the layer transformation to an input tensor.
+
+        Parameters
+        ----------
+        inputs : tf.Tensor
+            Tensor values transformed by the layer.
+
+        Returns
+        -------
+        tf.Tensor
+            Result produced by the operation.
+        """
         if not super().is_adapted:
             raise RuntimeError(
                 """The layer has not been adapted correctly. Call ``adapt`` before using
@@ -293,11 +407,28 @@ class MinMaxUnScalerLayer(ScalerLayer, tf.keras.layers.Layer):
         return unscaled_data * self.scalar + self.min
 
     def compute_output_shape(self, input_shape):
-        """Calculate the output shape."""
+        """Return the unchanged output shape of the elementwise transformation.
+
+        Parameters
+        ----------
+        input_shape : Any
+            Shape of input tensors presented to the layer.
+
+        Returns
+        -------
+        Any
+            Result produced by the operation.
+        """
         return input_shape  # The output shape is the same as the input shape
 
     def get_config(self):
-        """Return the config for serialization."""
+        """Return a serializable Keras layer configuration.
+
+        Returns
+        -------
+        Any
+            Result produced by the operation.
+        """
         config = super().get_config()
         config.update(
             {
@@ -318,7 +449,18 @@ class MinMaxUnScalerLayer(ScalerLayer, tf.keras.layers.Layer):
 
     @classmethod
     def from_config(cls, config):
-        """Reconstruct the layer from its config."""
+        """Reconstruct a scaler layer from serialized configuration.
+
+        Parameters
+        ----------
+        config : Any
+            Serialized Keras layer configuration.
+
+        Returns
+        -------
+        Any
+            Result produced by the operation.
+        """
         data_min = config.pop("data_min", None)
         data_max = config.pop("data_max", None)
         feature_range = config.pop("feature_range", (0, 1))

@@ -2,9 +2,12 @@
 # SPDX-License-Identifier: GPL-3.0
 # pylint: disable=R0912,R0914,R0915,C0302
 
-"""Utility functions for necessary files and variables to run OPM Flow"""
+"""Generate OPM Flow decks, include files, grids, and property tables.
 
-from __future__ import annotations
+The module derives grid coordinates and layer metadata, evaluates validated
+saturation and porosity-permeability expressions, renders model templates, and
+writes the files required by OPM Flow.
+"""
 
 import os
 import pathlib
@@ -23,40 +26,54 @@ HEADER = (
 def reservoir_files(
     dic,
     **kwargs,
-):
-    """Write OPM-related files by running Mako templates.
+) -> list[str]:
+    """Write the OPM Flow deck and its required include files.
 
-    Args:
-        dic (dict): Global dictionary with required parameters
-        **kwargs: Possible kwargs are:
+    The generated files depend on the selected physical model, template, grid,
+    and optional recalculation controls. When ``flow`` is omitted, the function
+    generates property tables only.
 
-            - recalc_grid (bool): Whether to recalculate the ``GRID.INC`` file. Intended
-              for ensemble runs, where the saturation functions/geography/etc. do not
-              need to be recalculated for each ensemble member. Defaults to True.
-            - recalc_tables (bool): Whether to recalculate the ``TABLES.INC`` file.
-              Defaults to True.
-            - recalc_sections (bool): Whether to recalculate the ``GEOLOGY.INC`` and
-              ``FLUXNUM.INC`` files. Defaults to True.
-            - inc_folder (pathlib.Path): If any of the mentioned files is not
-              recalculated, they are taken from this folder. Defaults to
-              ``pathlib.Path("")``.
+    Parameters
+    ----------
+    dic : dict
+        Shared pyopmnearwell configuration dictionary containing the validated
+        model, grid, property, output, and template settings.
+    **kwargs
+        Optional file-reuse controls.
 
-    Note:
-        - All of the ``recalc_*`` options only work for
-          ``co2store no_disgas_no_diffusion`` on a ``cake`` grid so far.
-        - For other models or grids there will be errors.
+    Other Parameters
+    ----------------
+    recalc_grid : bool, optional
+        Recalculate grid include files. The default is ``True``.
+    recalc_tables : bool, optional
+        Recalculate ``TABLES.INC``. The default is ``True``.
+    recalc_sections : bool, optional
+        Recalculate geology, region, and boundary-property include files. The
+        default is ``True``.
+    inc_folder : pathlib.Path, optional
+        Directory containing previously generated include files that should be
+        reused. The default is ``pathlib.Path("")``.
 
-    Returns:
-        dic (dict): Global dictionary with new added parameters
+    Returns
+    -------
+    list[str]
+        Names of the generated ``.DATA`` and ``.INC`` files.
 
+    Notes
+    -----
+    The recalculation controls currently support the ``co2store`` model with the
+    ``no_disgas_no_diffusion`` template on a ``cake`` grid. Other model, template,
+    or grid combinations may not support reuse of previously generated files.
     """
+    generated_files = [f"{dic['runname'].upper()}.DATA"]
     if "flow" not in dic:
         # We generate only the tables
         if "poroperm" in dic:
-            generate_permfact_pcfact(dic)
+            generated_files.extend(generate_permfact_pcfact(dic))
         if "krw" in dic:
             manage_tables(dic)
-        return
+            generated_files.append("TABLES.INC")
+        return generated_files
     inc_folder = pathlib.Path(kwargs.get("inc_folder", pathlib.Path("")))
     recalc_grid = kwargs.get("recalc_grid", True)
     recalc_tables = kwargs.get("recalc_tables", True)
@@ -113,7 +130,7 @@ def reservoir_files(
         if grid == "core":
             handle_core(dic)
         else:
-            manage_grid(dic)
+            generated_files += manage_grid(dic)
     else:
         dic.update(
             {
@@ -166,12 +183,25 @@ def reservoir_files(
     if dic["model"] not in ["co2eor", "foam"]:
         if recalc_tables:
             manage_tables(dic)
+            generated_files.append("TABLES.INC")
         if recalc_sections:
-            manage_sections(dic)
+            generated_files.extend(manage_sections(dic))
+    return generated_files
 
 
 def generate_fluxnum(dic):
-    "Write fluxnum.inc"
+    """Generate the FLUXNUM include-file contents.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared pyopmnearwell configuration dictionary.
+
+    Returns
+    -------
+    Any
+        Generated OPM keyword text.
+    """
     output = ""
     n = 1
     val = dic["layers"][0] + 1
@@ -217,7 +247,18 @@ def generate_fluxnum(dic):
 
 
 def generate_multpv(dic):
-    "Write multpv.inc"
+    """Generate boundary pore-volume multiplier contents.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared pyopmnearwell configuration dictionary.
+
+    Returns
+    -------
+    Any
+        Generated OPM keyword text.
+    """
     output = ""
 
     if dic["grid"] == "core":
@@ -247,6 +288,12 @@ def generate_multpv(dic):
         xcorc = dic["xcorc"]
 
         def multpv_block():
+            """Generate one MULTPV boundary block.
+
+            Returns
+            -------
+            Any
+                Result produced by the operation."""
             block = ""
             for k in range(nocells[2]):
                 for i in range(nocells[0]):
@@ -274,7 +321,18 @@ def generate_multpv(dic):
 
 
 def generate_geology(dic):
-    "Write geology.inc"
+    """Generate grid geometry and rock-property keyword contents.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared pyopmnearwell configuration dictionary.
+
+    Returns
+    -------
+    Any
+        Generated OPM keyword text.
+    """
     output = ""
 
     nocells = dic["nocells"]
@@ -399,7 +457,18 @@ def generate_geology(dic):
 
 
 def manage_sections(dic):
-    """Write the include files in the input deck"""
+    """Write geology, region, pore-volume, and porosity-permeability include files.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared pyopmnearwell configuration dictionary.
+
+    Returns
+    -------
+    Any
+        Result produced by the operation.
+    """
     get_spaces(dic)
     fprep = dic["fprep"]
     result = generate_geology(dic)
@@ -410,6 +479,7 @@ def manage_sections(dic):
     ) as f:
         f.write(HEADER)
         f.write(result)
+    generated_files = ["GEOLOGY.INC"]
     if dic["fluxnum"]:
         result = generate_fluxnum(dic)
         with open(
@@ -419,6 +489,7 @@ def manage_sections(dic):
         ) as f:
             f.write(HEADER)
             f.write(result)
+        generated_files.append("FLUXNUM.INC")
     if dic["pvmult"] > 0:
         result = generate_multpv(dic)
         with open(
@@ -428,13 +499,26 @@ def manage_sections(dic):
         ) as f:
             f.write(HEADER)
             f.write(result)
+        generated_files.append("MULTPV.INC")
 
     if dic["model"] in ["saltprec"] or dic["template"] in ["biofilm"]:
-        generate_permfact_pcfact(dic)
+        generated_files.extend(generate_permfact_pcfact(dic))
+    return generated_files
 
 
 def generate_permfact_pcfact(dic):
-    "Generate both permfact and pcfact"
+    """Write PERMFACT and optional PCFACT include files.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared pyopmnearwell configuration dictionary.
+
+    Returns
+    -------
+    Any
+        Result produced by the operation.
+    """
     fprep = dic["fprep"]
     result = generate_permfact(dic)
     with open(
@@ -444,6 +528,7 @@ def generate_permfact_pcfact(dic):
     ) as f:
         f.writelines(HEADER)
         f.writelines(result)
+    generated_files = ["PERMFACT.INC"]
     if dic["pcfact"] != 0:
         result = generate_pcfact(dic)
         with open(
@@ -453,10 +538,23 @@ def generate_permfact_pcfact(dic):
         ) as f:
             f.writelines(HEADER)
             f.writelines(result)
+        generated_files.append("PCFACT.INC")
+    return generated_files
 
 
 def generate_pcfact(dic):
-    "Write pcfact.inc"
+    """Generate capillary-pressure multiplier table lines.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared pyopmnearwell configuration dictionary.
+
+    Returns
+    -------
+    Any
+        Formatted lines for the generated include file.
+    """
 
     names = [val[0] for val in dic["popevals"][0] if val[0] not in ["npoints"]]
     poro = compile(dic["poroperm"].strip(), "<string>", "eval")
@@ -502,7 +600,18 @@ def generate_pcfact(dic):
 
 
 def generate_permfact(dic):
-    "Write permfact.inc"
+    """Generate porosity-permeability multiplier table lines.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared pyopmnearwell configuration dictionary.
+
+    Returns
+    -------
+    Any
+        Formatted lines for the generated include file.
+    """
 
     names = [val[0] for val in dic["popevals"][0] if val[0] not in ["npoints"]]
     poro = compile(dic["poroperm"].strip(), "<string>", "eval")
@@ -546,7 +655,18 @@ def generate_permfact(dic):
 
 
 def get_spaces(dic):
-    """Improve the format of the files by aligning the values"""
+    """Calculate field widths used to align generated deck values.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared pyopmnearwell configuration dictionary.
+
+    Returns
+    -------
+    Any
+        Result produced by the operation.
+    """
     dic["whsp"], dic["whnz"] = 0, 0
     if not dic["fluxnum"]:
         return
@@ -559,7 +679,18 @@ def get_spaces(dic):
 
 
 def manage_tables(dic):
-    """Write the saturation function tables"""
+    """Select and write the saturation-table format required by the model.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared pyopmnearwell configuration dictionary.
+
+    Returns
+    -------
+    Any
+        Result produced by the operation.
+    """
     model = dic["model"]
     template = dic["template"].lower()
     if model in ["h2store"] and template != "h2ch4":
@@ -573,7 +704,18 @@ def manage_tables(dic):
 
 
 def generate_saturation_functions_gsf_wsf(dic):
-    "Using GSF and WSF"
+    """Generate separate gas and water saturation-function tables.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared pyopmnearwell configuration dictionary.
+
+    Returns
+    -------
+    Any
+        Lines forming the generated saturation tables.
+    """
     krw_code = compile(dic["krw"].strip(), "<string>", "eval")
     krn_code = compile(dic["krn"].strip(), "<string>", "eval")
     pcap_code = compile(dic["pcap"].strip(), "<string>", "eval")
@@ -670,7 +812,18 @@ def generate_saturation_functions_gsf_wsf(dic):
 
 
 def generate_saturation_functions_format_2(dic):
-    "Using SGFN and SWFN"
+    """Generate SGFN and SWFN saturation-function tables.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared pyopmnearwell configuration dictionary.
+
+    Returns
+    -------
+    Any
+        Lines forming the generated saturation tables.
+    """
 
     krw_code = compile(dic["krw"].strip(), "<string>", "eval")
     krn_code = compile(dic["krn"].strip(), "<string>", "eval")
@@ -875,7 +1028,18 @@ def generate_saturation_functions_format_2(dic):
 
 
 def generate_saturation_functions_format_1(dic):
-    "Using SGOF"
+    """Generate an SGOF saturation-function table.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared pyopmnearwell configuration dictionary.
+
+    Returns
+    -------
+    Any
+        Lines forming the generated saturation tables.
+    """
 
     krw_code = compile(dic["krw"].strip(), "<string>", "eval")
     krn_code = compile(dic["krn"].strip(), "<string>", "eval")
@@ -966,9 +1130,21 @@ def generate_saturation_functions_format_1(dic):
 
 
 def manage_grid(dic):
-    """Handle the grid"""
+    """Generate grid include files for the selected grid type.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared pyopmnearwell configuration dictionary.
+
+    Returns
+    -------
+    Any
+        Result produced by the operation.
+    """
     grid = dic["grid"]
     nocells = dic["nocells"]
+    grid_file = []
     if grid == "cartesian2d":
         dxarray = np.diff(dic["xcor"])
         dxarray = np.tile(dxarray, nocells[2])
@@ -981,6 +1157,7 @@ def manage_grid(dic):
             encoding="utf8",
         ) as file:
             file.write("".join(dxarray))
+        grid_file = ["DX.INC"]
     elif grid == "radial":
         dxarray = compact_format(np.diff(dic["xcor"]))
         dxarray.insert(0, "DRV\n")
@@ -991,9 +1168,11 @@ def manage_grid(dic):
             encoding="utf8",
         ) as file:
             file.write("".join(dxarray))
+        grid_file = ["DRV.INC"]
     elif grid in ["cake", "tensor2d", "coord2d"]:
         dic["slope"] = np.tan(0.5 * dic["dims"][1] * np.pi / 180)
         get_2dgrid(dic)
+        grid_file = ["GRID.INC"]
     else:
         if grid == "coord3d":
             dic["xcorc"] = dic["xcn"]
@@ -1006,16 +1185,39 @@ def manage_grid(dic):
         dxarray = np.diff(dic["xcorc"])
         nocells[0] = len(dic["xcorc"]) - 1
         nocells[1] = nocells[0]
-        d3_grids(dic, dxarray)
+        grid_file.extend(d3_grids(dic, dxarray))
+    return grid_file
 
 
 def round_like_e(v: NDArray) -> NDArray:
-    """Keep only 8 significant digits to reduce size of created files"""
+    """Round numeric values to the precision used by scientific notation.
+
+    Parameters
+    ----------
+    v : NDArray
+        Numeric values to format.
+
+    Returns
+    -------
+    NDArray
+        Result produced by the operation.
+    """
     return np.asarray([float(f"{x:E}") for x in v])
 
 
 def get_2dgrid(dic):
-    """Create the 2D corner-point grid"""
+    """Generate a two-dimensional corner-point grid include file.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared pyopmnearwell configuration dictionary.
+
+    Returns
+    -------
+    Any
+        Result produced by the operation.
+    """
     grid = []
     xcor = dic["xcor"]
     slope = dic["slope"]
@@ -1078,7 +1280,18 @@ def get_2dgrid(dic):
 
 
 def compact_format(v: NDArray) -> list[str]:
-    "To 'n*x' notation"
+    """Convert repeated numeric values to OPM compact ``n*value`` notation.
+
+    Parameters
+    ----------
+    v : NDArray
+        Numeric values to format.
+
+    Returns
+    -------
+    list[str]
+        Formatted lines for the generated include file.
+    """
     v = np.array(v)
     change_idx = np.flatnonzero(np.diff(v, prepend=v[0] - 1))
     counts = np.diff(np.append(change_idx, v.size))
@@ -1092,7 +1305,18 @@ def compact_format(v: NDArray) -> list[str]:
 
 
 def handle_core(dic):
-    """Handle the core geometry"""
+    """Derive active cells and geometry for a cylindrical core model.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared pyopmnearwell configuration dictionary.
+
+    Returns
+    -------
+    Any
+        Result produced by the operation.
+    """
     nocells = dic["nocells"]
     dims = dic["dims"]
     xcenters = (np.arange(nocells[0]) + 0.5) * dims[0] / nocells[0]
@@ -1119,8 +1343,22 @@ def handle_core(dic):
 
 
 def d3_grids(dic, dxarray):
-    """Handle the second part of the 3d grids"""
+    """Generate the second stage of three-dimensional grid include files.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared pyopmnearwell configuration dictionary.
+    dxarray : Any
+        Cell widths along the x direction.
+
+    Returns
+    -------
+    Any
+        Result produced by the operation.
+    """
     grid_name = dic["grid"]
+    grid_file = []
     if grid_name == "cpg3d":
         grid = []
         xcorc = dic["xcorc"]
@@ -1143,6 +1381,19 @@ def d3_grids(dic, dxarray):
         mainfold_code = compile(dic["zxy"], "<string>", "eval")
 
         def mainfold(x, y):
+            """Evaluate the configured reservoir-surface expression.
+
+            Parameters
+            ----------
+            x : Any
+                x coordinates.
+            y : Any
+                y coordinates.
+
+            Returns
+            -------
+            Any
+                Result produced by the operation."""
             return eval(  # pylint: disable=eval-used
                 mainfold_code,
                 {"__builtins__": {}, "np": np},
@@ -1185,9 +1436,10 @@ def d3_grids(dic, dxarray):
             f.write(HEADER)
             f.write("".join(grid))
             f.write("/\n")
+        grid_file = ["GRID.INC"]
     else:
         if dic["model"] in ["co2eor", "foam"]:
-            return
+            return grid_file
         nocells = dic["nocells"]
         dxarray = np.asarray(dxarray)
         dyarray = np.repeat(dxarray[: nocells[1]], nocells[1])
@@ -1213,10 +1465,23 @@ def d3_grids(dic, dxarray):
             f.write("DY\n")
             f.write("".join(compact_format(dyarray)))
             f.write("/\n")
+        grid_file = ["DX.INC", "DY.INC"]
+    return grid_file
 
 
 def create_3dgrid(dic):
-    """Handle the first part of the 3d grids"""
+    """Create initial three-dimensional grid coordinates.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared pyopmnearwell configuration dictionary.
+
+    Returns
+    -------
+    Any
+        Result produced by the operation.
+    """
     xfac = dic["xfac"]
     dims = dic["dims"]
     nocells = dic["nocells"]

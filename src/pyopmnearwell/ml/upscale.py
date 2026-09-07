@@ -6,7 +6,6 @@ Note: pylint: no-member is disabled, because it complains about the ``BaseUpscal
 missing instance attributes, which are taken care of by the ``Upscaler`` protocol.
 pylint: pointless-string-statement is disabled, as it complains an attribute docstring
 in the ``Upscaler`` protocol.
-
 """
 
 import math
@@ -51,32 +50,67 @@ class Upscaler(Protocol):
         annotated with ``Upscaler``. In future python versions it should be possible to
         use ``class BaseUpscaler[Upscaler](ABC):...`` instead and remove these
         annotations.
-
     """
 
     @property
     def num_timesteps(self) -> int:
-        pass
+        """Return the number of simulation time steps.
+
+        Returns
+        -------
+        int
+            Result produced by the operation.
+        """
 
     @property
     def num_layers(self) -> int:
-        pass
+        """Return the number of geological layers.
+
+        Returns
+        -------
+        int
+            Result produced by the operation.
+        """
 
     @property
     def num_zcells(self) -> int:
-        pass
+        """Return the number of vertical grid cells.
+
+        Returns
+        -------
+        int
+            Result produced by the operation.
+        """
 
     @property
     def num_xcells(self) -> int:
-        pass
+        """Return the number of radial grid cells.
+
+        Returns
+        -------
+        int
+            Result produced by the operation.
+        """
 
     @property
     def single_feature_shape(self) -> tuple:
-        pass
+        """Return the expected shape of one upscaled feature.
+
+        Returns
+        -------
+        tuple
+            Result produced by the operation.
+        """
 
     @property
     def angle(self) -> float:
-        pass
+        """Return the angular extent of the cake grid in radians.
+
+        Returns
+        -------
+        float
+            Result produced by the operation.
+        """
 
     """Angle of the cake radial grid. Default is 60°."""
 
@@ -104,15 +138,28 @@ class BaseUpscaler(ABC):
 
     Note: All methods assume that all cells have the same height. if this is not the
         case, the methods must be overridden.
-
     """
 
     @abstractmethod
     def __init__(self: Upscaler):  # pylint: disable=missing-function-docstring
+        """init  .
+
+        Returns
+        -------
+        Any
+            Result produced by the operation.
+        """
         return
 
     @abstractmethod
     def create_ds(self: Upscaler):  # pylint: disable=missing-function-docstring
+        """Create the upscaled feature and target dataset.
+
+        Returns
+        -------
+        Any
+            Result produced by the operation.
+        """
         return
 
     def reduce_data_size(
@@ -134,7 +181,6 @@ class BaseUpscaler(ABC):
 
         Returns:
             np.ndarray: The reduced feature array.
-
         """
         # TODO: Add option to have a random selection of elements for each member,
         # instead of a fixed stepsize. This needs to be the same for each feature, hence
@@ -149,17 +195,21 @@ class BaseUpscaler(ABC):
         feature_index,
         disregard_first_xcell: bool = True,
     ) -> np.ndarray:
-        """Average features vertically inside each layer.
+        """Average a selected feature over vertical cells within each layer.
 
-        Args:
-            features (np.ndarray): _description_
-            feature_index (int): _description_.
-            disregard_first_xcell (bool): __description__. Default is True.
+        Parameters
+        ----------
+        features : np.ndarray
+            Ensemble feature array.
+        feature_index : Any
+            Index of the feature to process.
+        disregard_first_xcell : bool, optional
+            Whether to remove the innermost well cell.
 
-        Returns:
-            np.ndarray:
-                ``shape = (num_ensemble_runs, num_timesteps, num_layers, num_xcells)``
-
+        Returns
+        -------
+        np.ndarray
+            Result produced by the operation.
         """
         # Innermost cells (well cells) get disregarded.
         feature: np.ndarray = np.average(features[..., feature_index], axis=-2)
@@ -177,7 +227,18 @@ class BaseUpscaler(ABC):
     def get_radii(
         self: Upscaler, radii_file: pathlib.Path
     ) -> tuple[np.ndarray, np.ndarray]:
-        """Get full list of cell radii."""
+        """Read radial-cell centers and boundaries for upscaling.
+
+        Parameters
+        ----------
+        radii_file : pathlib.Path
+            Grid-coordinate file containing radial boundaries.
+
+        Returns
+        -------
+        tuple[np.ndarray, np.ndarray]
+            Result produced by the operation.
+        """
         cell_center_radii, inner_radii, outer_radii = ensemble.calculate_radii(
             radii_file,
             num_cells=self.num_xcells + 1,
@@ -199,10 +260,17 @@ class BaseUpscaler(ABC):
         return cell_center_radii, cell_boundary_radii
 
     def get_timesteps(self: Upscaler, simulation_length: float) -> np.ndarray:
-        """_summary_
+        """Create uniformly spaced simulation times.
 
-        Returns:
-            np.ndarray: Array with ``shape = (num_timesteps,) and Unit [d]``.
+        Parameters
+        ----------
+        simulation_length : float
+            Total simulation duration in days.
+
+        Returns
+        -------
+        np.ndarray
+            Result produced by the operation.
         """
         timesteps: np.ndarray = np.linspace(0, simulation_length, self.num_timesteps)
         assert timesteps.shape == self.num_timesteps
@@ -216,27 +284,27 @@ class BaseUpscaler(ABC):
         feature_index: int,
         disregard_first_xcell: bool = True,
     ):
-        """Integrate feature horizontically along layers and divide by equivalent
+        """Integrate a vertically averaged feature into equivalent Cartesian blocks.
+
         cartesian block area.
 
-        Note:
+        Parameters
+        ----------
+        features : np.ndarray
+            Ensemble feature array.
+        cell_center_radii : np.ndarray
+            Radii at radial-cell centers.
+        cell_boundary_radii : np.ndarray
+            Radii at radial-cell boundaries.
+        feature_index : int
+            Index of the feature to process.
+        disregard_first_xcell : bool, optional
+            Whether to remove the innermost well cell.
 
-            - Before integrating, the feature is averaged vertically inside each layer.
-            - As the feature is averaged and not summed, the integration takes place in
-              2D with vertically averaged values. Hence it suffices to divide by area
-              and not by  volume.
-
-        Args:
-            features (np.ndarray): _description_
-            cell_center_radii (np.ndarray):
-            cell_boundary_radii (np.ndarray):
-            feature_index (int): _description_. Default is 1.
-            disregard_first_xcell (bool): __description__. Default is True.
-
-        Returns:
-            np.ndarray (``shape = (num_ensemble_runs, num_timesteps, num_layers, num_xcells)``):
-                Features values average for each cell.
-
+        Returns
+        -------
+        Any
+            Result produced by the operation.
         """
         # Average along vertical cells in a layer.
         feature: np.ndarray = np.average(features[..., feature_index], axis=-2)
@@ -270,19 +338,21 @@ class BaseUpscaler(ABC):
     def get_homogeneous_values(
         self: Upscaler, features, feature_index, disregard_first_xcell: bool = True
     ):
-        """Get a feature that is homogeneous inside a layer.
+        """Extract a feature that is homogeneous within each layer.
 
-        Note: Since the feature is equal inside a layer, this method takes the first
-        value for each layer.
+        Parameters
+        ----------
+        features : Any
+            Ensemble feature array.
+        feature_index : Any
+            Index of the feature to process.
+        disregard_first_xcell : bool, optional
+            Whether to remove the innermost well cell.
 
-        Args:
-            features (np.ndarray): _description_
-            feature_index (int): _description_.
-            disregard_first_xcell (bool): __description__. Default is True.
-
-        Returns:
-            np.ndarray (``shape = (num_ensemble_runs, num_timesteps, num_layers, num_xcells)``)
-
+        Returns
+        -------
+        Any
+            Result produced by the operation.
         """
         # Innermost cells (well cells) get disregarded.
         feature: np.ndarray = features[..., feature_index][..., 0, :]
@@ -300,18 +370,23 @@ class BaseUpscaler(ABC):
         radii: np.ndarray,
         well_radius: float,
     ) -> np.ndarray:
-        """_summary_
+        """Calculate the single-phase analytical Peaceman productivity index.
 
-        _extended_summary_
+        Parameters
+        ----------
+        permeabilities : np.ndarray
+            Permeability values.
+        cell_heights : np.ndarray
+            Grid-cell heights.
+        radii : np.ndarray
+            Cell radii.
+        well_radius : float
+            Wellbore radius.
 
-        Args:
-            permeabilities (np.ndarray): Unit has to be [m^2]!
-            cell_heights (np.ndarray): Unit [m].
-            radii (np.ndarray): _description_
-            well_radius (float): _description_
-
-        Returns:
-            np.ndarray: _description_
+        Returns
+        -------
+        np.ndarray
+            Result produced by the operation.
         """
         analytical_PI: np.ndarray = formulas.peaceman_matrix_WI(  # type: ignore
             k_h=permeabilities * cell_heights,
@@ -334,23 +409,31 @@ class BaseUpscaler(ABC):
         # pylint: disable-next=invalid-name
         OPM: pathlib.Path,
     ) -> np.ndarray:
-        """_summary_
+        """Calculate a two-phase analytical well index from pressure-dependent fluid properties.
 
-        _extended_summary_
+        Parameters
+        ----------
+        pressures : np.ndarray
+            Pressure values.
+        saturations : np.ndarray
+            Non-wetting saturation values.
+        permeabilities : np.ndarray
+            Permeability values.
+        temperature : float
+            Fluid temperature.
+        surface_density : float
+            Reference surface density.
+        radii : np.ndarray
+            Cell radii.
+        well_radius : float
+            Wellbore radius.
+        OPM : pathlib.Path
+            Path to the OPM installation.
 
-        Args:
-            pressures (np.ndarray): _description_
-            saturations (np.ndarray): _description_
-            permeabilities (np.ndarray): Unit has to be [mD]!
-            temperature (float): _description_
-            surface_density (float): _description_
-            radii (np.ndarray): _description_
-            well_radius (float): _description_
-            OPM (pathlib.Path): _description_
-
-        Returns:
-            np.ndarray: _description_
-
+        Returns
+        -------
+        np.ndarray
+            Result produced by the operation.
         """
         densities_lst: list[list[float]] = []
         viscosities_lst: list[list[float]] = []
@@ -430,28 +513,26 @@ class BaseUpscaler(ABC):
         inj_rate_index: int,
         angle: float = math.pi / 3,
     ) -> np.ndarray:
-        """Calculate data-driven WI from pressure and flow rate.
+        """Calculate a data-driven well index from pressure and injection-rate results.
 
         Similar functionality to ``ensemble.calculate_WI``, but can additionally treat
         multiple vertical cells in a layer correctly.
 
-        Note:
-            - Pressures get averaged over each layer, injection rates get summed over
-              each layer.
-            - The method automatically scales the near-well injection rate from the cake
-              grid with angle ``angle`` to a 360° well. Furthermore, the rate is scaled
-              from rate-per-day (which the results are in) to rate-per-second, which OPM
-              Flow uses internally for the WI.
+        Parameters
+        ----------
+        features : np.ndarray
+            Ensemble feature array.
+        pressure_index : int
+            Feature index containing pressure.
+        inj_rate_index : int
+            Feature index containing injection rate.
+        angle : float, optional
+            Cake-grid angle in radians.
 
-
-        Args:
-            features (np.ndarray): _description_
-            pressure_index (int): _description_
-            inj_rate_index (int): _description_
-
-        Returns:
-            np.ndarray: _description_
-
+        Returns
+        -------
+        np.ndarray
+            Result produced by the operation.
         """
         # Take the pressure values of the well blocks as bhp. Average along each layer.
         bhps: np.ndarray = np.average(features[..., pressure_index], axis=-2)[..., 0][

@@ -1,52 +1,98 @@
-============
+.. _introduction:
+
 Introduction
 ============
 
-.. image:: ./figs/saturation.gif
-    :scale: 50%
+.. image:: figs/saturation.gif
+   :alt: Near-well gas-saturation simulation generated with pyopmnearwell
+   :align: center
+   :width: 65%
 
-This documentation describes the **pyopmnearwell** package hosted in `https://github.com/cssr-tools/pyopmnearwell <https://github.com/cssr-tools/pyopmnearwell>`_.
+**pyopmnearwell** is a flexible framework for generating and running near-well
+models with the `OPM Flow simulator <https://opm-project.org/?page_id=19>`_. A
+:doc:`configuration file <configuration_file>` selects the physical model,
+template, grid, properties, and operational schedule.
 
-Concept
--------
-Simplified and flexible testing framework for near-well simulations via a
-:doc:`configuration file <./configuration_file>` using the `OPM Flow simulator <https://opm-project.org/?page_id=19>`_:
+Core workflow
+-------------
 
-- Set the physical model (current ones are co2store, co2eor, h2store, saltprec, co2eor, and foam).
-- Choose a `specific template <https://github.com/cssr-tools/pyopmnearwell/blob/main/src/pyopmnearwell/templates>`_ inside the folder for the chosen physical model.
-- Define the grid refinement in the x/y and z directions.
-- Define the number of different rocks along the z direction.
-- Define the number of layers (heterogeneity around the well) and its length.
-- Set the rock and fluid properties.
-- Define the injection schedule.
-- Run the simulations.
+#. Select a physical model and compatible Mako template.
+#. Choose a radial, Cartesian, tensor, coordinate, core, or corner-point grid.
+#. Define x, y, and z refinement and near-well geometry.
+#. Define vertical rock layers, permeability, porosity, and saturation functions.
+#. Configure perforations, boundary behavior, and the injection schedule.
+#. Generate the OPM Flow deck and include files.
+#. Run OPM Flow and inspect the generated vectors with external tools.
 
-Overview
---------
+Physical models
+---------------
 
-The current implementation supports the following executable with the argument options:
+The current validator accepts ``co2store``, ``co2eor``, ``foam``, ``h2store``,
+and ``saltprec``. Model-specific templates are stored under
+``src/pyopmnearwell/templates``. Requirements differ by model and template, as
+described in :doc:`configuration_file`.
 
-.. code-block:: bash
+Core workflows
+--------------
 
-    pyopmnearwell -i configuration_file.toml
+* Generate only the deck and include files.
+* Run OPM Flow from previously generated files.
+* Generate and run using separate preprocessing and output directories.
+* Generate and run in one output directory.
+* Write EGRID, INIT, and UNRST cell vectors when requested.
+* Generate saturation and porosity-permeability tables without running Flow.
 
-where 
+Basic usage
+-----------
 
--i  The base name of the :doc:`configuration file <./configuration_file>` ('input.toml' by default).
--o  The base name of the :doc:`output folder <./output_folder>` ('output' by default).
--m  Run the whole framework ('all'), only generate the deck ('deck'), or only run flow ('flow'), or generate the deck and run flow in the same output folder ('single') ('all' by default). 
--v  Write cell values, i.e., EGRID, INIT, UNRST ('1' by default).
--w  Set to 1 to print warnings ('0' by default).
+.. code-block:: console
 
-.. tip::
-    The plotting functionality in **pyopmnearwell** has been retired in the release 2025.04. Instead, to generate
-    PNGs and GIFs of the simulation results, you could use `plopm <https://github.com/cssr-tools/plopm>`_, where previous functionality in
-    the plotting routines in **pyopmnearwell** has been implemented such as distance of a variable (e.g., gas saturation) to the model boundaries, 
-    variable values along a given layer in the model, etc.
+   pyopmnearwell -i examples/co2.toml -o co2
+   pyopmnearwell -i examples/co2.toml -o co2 -m deck
+   pyopmnearwell -i examples/co2.toml -o co2 -m single
+
+Use :doc:`command-line` for exact syntax and :doc:`examples` for complete workflows.
+
+Visualization
+-------------
+
+The built-in plotting functionality was retired in release 2025.04. Use
+`plopm <https://github.com/cssr-tools/plopm>`_ or
+`ResInsight <https://resinsight.org>`_ for PNGs, GIFs, variable profiles, and
+distance-to-boundary visualizations. ParaView can be used when Flow is run with
+``--enable-vtk-output=true``.
+
+Development limitations
+-----------------------
 
 .. warning::
-    The H2CH4 template in the h2store model folder is under development and it is based on an input deck available in 
-    `opm-tests <https://github.com/OPM/opm-tests/blob/master/diffusion/BO_DIFFUSE_CASE1.DATA>`_. In addition, the templates 
-    in the co2eor/foam model are based on an input deck available in `opm-publications <https://github.com/OPM/opm-publications/blob/master/dynamic_blackoil/SPE5.BASE>`_. 
-    Currently the PVT tables in those examples are used, limiting the range of reservoir pressure and temperature, it is in the TODO list to extend
-    this.
+
+   The ``H2CH4`` template under ``h2store`` remains under development and is
+   based on ``BO_DIFFUSE_CASE1.DATA`` from ``opm-tests``. The ``co2eor`` and
+   ``foam`` templates are based on ``SPE5.BASE`` from ``opm-publications``.
+   Their current PVT data limit the usable pressure and temperature ranges.
+
+About the project
+-----------------
+
+.. image:: figs/graphical.png
+   :alt: pyopmnearwell graphical project overview
+   :align: center
+   :width: 80%
+
+**pyopmnearwell** is funded by the `HPC Simulation Software for the Gigatonne
+Storage Challenge project <https://www.norceresearch.no/en/projects/hpc-simulation-software-for-the-gigatonne-storage-challenge>`_
+(project 622059) and the `Center for Sustainable Subsurface Resources
+<https://cssr.no>`_ (project 331841).
+
+Where to continue
+-----------------
+
+* Complete the :doc:`installation` and verify pyopmnearwell and OPM Flow.
+* Use :doc:`configuration_file` for models, grids, properties, schedules, and tables.
+* Browse :doc:`examples` for water injection, cyclic CO2, ML, and publication studies.
+* Use :doc:`command-line` for exact modes, defaults, and vector output controls.
+* Review :doc:`output_folder` for mode-dependent file layouts.
+* Browse :doc:`api` for Python modules and functions.
+* See :doc:`contributing` to report issues or contribute.
+* Explore :doc:`related` for complementary tools.
